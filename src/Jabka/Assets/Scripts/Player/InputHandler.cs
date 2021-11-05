@@ -18,7 +18,7 @@ public class InputHandler : MonoBehaviour
     private void OnFingerUpdate(LeanFinger finger)
     {
         //работает только с одним пальцем
-        if (finger.Index != 0 || finger.Index != -1) return;
+        if (finger.Index != 0 && finger.Index != -1) return;
 
         SwipeDeltaChanged?.Invoke(finger.SwipeScreenDelta);
     }
