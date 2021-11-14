@@ -20,8 +20,8 @@ public class PlayerInstaller : MonoInstaller
     public override void InstallBindings()
     {
         GameObject player = Container.InstantiatePrefab(_player, _spawnPoint.position, Quaternion.identity, null);
-        Container.Bind<PlayerTransformController>().FromNewComponentOn(player).AsSingle();
-        Container.Bind<PlayerRotation>().FromNewComponentOn(player).AsSingle();
+        Container.Bind<PlayerTransformController>().FromNewComponentOn(player).AsSingle().NonLazy();
+        Container.Bind<PlayerRotation>().FromNewComponentOn(player).AsSingle().NonLazy();
         Container.Bind<InputHandler>().FromComponentsInNewPrefab(_inputHandler).AsSingle().NonLazy();
         Container.Bind<PlayerCamera>().FromComponentsInNewPrefab(_playerCamera).AsSingle().NonLazy();
     }

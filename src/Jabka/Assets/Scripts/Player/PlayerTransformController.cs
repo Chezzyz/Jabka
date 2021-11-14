@@ -13,7 +13,7 @@ public class PlayerTransformController : MonoBehaviour
 
     public void SetRotationY(float y)
     {
-        transform.rotation = Quaternion.Euler(transform.rotation.x, y, transform.rotation.z);
+        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, y, transform.localEulerAngles.z);
     }
 }
 
