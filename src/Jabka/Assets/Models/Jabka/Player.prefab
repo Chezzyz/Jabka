@@ -11,6 +11,10 @@ GameObject:
   - component: {fileID: 1995607629592704458}
   - component: {fileID: 1995607629592704461}
   - component: {fileID: 1995607629592704460}
+  - component: {fileID: 2071944910033248134}
+  - component: {fileID: -352742710711870093}
+  - component: {fileID: 1266546345081406949}
+  - component: {fileID: 7407397076881580382}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -81,3 +85,84 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2071944910033248134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995607629592704462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da35877aa98fb3f44a5ab330ec56c758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sensetivity: 0.1
+--- !u!114 &-352742710711870093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995607629592704462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2ca1bdd855730447995c3c709b94c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1266546345081406949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995607629592704462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 980416d704e533845ae76d789214ba45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpYCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: -0.00019283313
+      inSlope: -5.1612782
+      outSlope: -5.1612782
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.049936056
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _sensetivity: 1
+  _maxHeight: 5
+  _maxLength: 5
+  _minLength: 1
+  _maxDuration: 2
+  _minDuration: 1
+  _minHeightThreshold: 100
+  _maxHeightThreshold: 500
+--- !u!114 &7407397076881580382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995607629592704462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a0aed6fb93972649ae348a24a5a18c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
