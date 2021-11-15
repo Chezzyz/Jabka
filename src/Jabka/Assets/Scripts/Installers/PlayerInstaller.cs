@@ -12,9 +12,6 @@ public class PlayerInstaller : MonoInstaller
     private PlayerData _playerPrefab;
 
     [SerializeField]
-    private Transform _spawnPoint;
-
-    [SerializeField]
     private PlayerCamera _playerCamera;
 
     public override void InstallBindings()
@@ -22,5 +19,6 @@ public class PlayerInstaller : MonoInstaller
         Container.Bind<InputHandler>().FromComponentsInNewPrefab(_inputHandler).AsSingle().NonLazy();
         Container.Bind<PlayerCamera>().FromComponentsInNewPrefab(_playerCamera).AsSingle().NonLazy();
         Container.Bind<PlayerTransformController>().FromComponentsInNewPrefab(_playerPrefab).AsSingle().NonLazy();
+
     }
 }

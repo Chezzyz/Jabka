@@ -6,13 +6,13 @@ public class PlayerRotation : MonoBehaviour
     [SerializeField]
     private float _sensetivity = 0.1f;
 
-    private PlayerTransformController _transformController;
+    private PlayerTransformController _playerTransformController;
     private float _originRotationY;
 
     [Inject]
     public void Construct(PlayerTransformController transformController)
     {
-        _transformController = transformController;
+        _playerTransformController = transformController;
     }
 
     private void OnEnable()
@@ -23,12 +23,12 @@ public class PlayerRotation : MonoBehaviour
 
     private void OnFingerDown(Vector2 screenPosition)
     {
-        _originRotationY = _transformController.transform.localEulerAngles.y;
+        _originRotationY = _playerTransformController.GetRotation().y;
     }
 
     private void OnSwipeX(Vector2 delta)
     {
         //при движении пальца вправо, камера поворачивается влево и наоборот.
-        _transformController.SetRotationY(_originRotationY + (-1 * _sensetivity * delta.x));
+        _playerTransformController.SetRotationY(_originRotationY + (-1 * _sensetivity * delta.x));
     }
 }

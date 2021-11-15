@@ -3,12 +3,11 @@ using System.Collections;
 using UnityEngine;
 using Zenject;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerJump : MonoBehaviour
 {
     [SerializeField]
     private AnimationCurve _jumpYCurve;
-    [SerializeField]
-    private float _sensetivity;
     [SerializeField]
     private float _maxHeight;
     [SerializeField]
@@ -26,7 +25,7 @@ public class PlayerJump : MonoBehaviour
 
     private PlayerTransformController _playerTransformController;
     private float _currentForcePercent;
-    private Vector3 _originPosition;
+    
     private bool _isInJump = false;
 
     [Inject]
@@ -39,32 +38,36 @@ public class PlayerJump : MonoBehaviour
     {
         InputHandler.SwipeDeltaChanged += OnSwipeY;
         InputHandler.FingerUp += OnFingerUp;
-        InputHandler.FingerDown += OnFingerDown;
     }
 
-    private void OnFingerDown(Vector2 fingerPosition)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (_isInJump == false)
-        {
-            _originPosition = _playerTransformController.transform.position;
-        }
+        StopCoroutine(nameof(Jump));
+        //StopAllCoroutines();
     }
 
     private void OnFingerUp(Vector2 fingerPosition)
     {
         if (_currentForcePercent > 0 && _isInJump == false)
         {
-            StartCoroutine(Jump(_currentForcePercent, _originPosition));
+            Vector3 originPosition = _playerTransformController.transform.position;
+            Vector3 originDirection = _playerTransformController.transform.forward;
+
+            StartCoroutine(Jump(_currentForcePercent, originPosition, originDirection));
+            
             _currentForcePercent = 0;
         }
     }
 
     private void OnSwipeY(Vector2 delta)
     {
-        //Свайп вниз
-        if (delta.y < -_minHeightThreshold)
+        //длина свайпа вниз в процентах от экрана
+        float deltaYPercent = delta.y / Screen.height;
+
+        //сравниваем так, так как delta приходит отрицательная, если свайп сделан вниз
+        if (-deltaYPercent > _minHeightThreshold)
         {
-            _currentForcePercent = CalculateForceInPercent(delta.y);
+            _currentForcePercent = CalculateForceInPercent(deltaYPercent);
         }
     }
 
@@ -74,7 +77,7 @@ public class PlayerJump : MonoBehaviour
         return deltaY / -(_maxHeightThreshold - _minHeightThreshold);
     }
 
-    private IEnumerator Jump(float forcePercent, Vector3 originPosition)
+    private IEnumerator Jump(float forcePercent, Vector3 originPosition, Vector3 originDirection)
     {
         _isInJump = true;
 
@@ -82,7 +85,7 @@ public class PlayerJump : MonoBehaviour
 
         float duration = _minDuration + (_maxDuration - _minDuration) * forcePercent;
         float progress = expiredTime / duration;
-
+        
         while (progress < 1) 
         {
             expiredTime += Time.deltaTime;
@@ -91,14 +94,10 @@ public class PlayerJump : MonoBehaviour
             float currentHeight = (_maxHeight * forcePercent) * _jumpYCurve.Evaluate(progress);
             float currentLength = (_minLength + (_maxLength - _minLength) * forcePercent) * progress;
 
-            Vector3 playerForward = _playerTransformController.transform.forward;
-
-            _playerTransformController.SetPosition(originPosition + new Vector3((playerForward * currentLength).x, currentHeight, (playerForward * currentLength).z));
-            yield return null;
+            _playerTransformController.SetPosition(originPosition + new Vector3((originDirection * currentLength).x, currentHeight, (originDirection * currentLength).z));
+            yield return new WaitForFixedUpdate();
         } 
-
+        
         _isInJump = false;
     }
-
-    
 }

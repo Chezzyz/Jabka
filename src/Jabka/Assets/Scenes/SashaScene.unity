@@ -211,7 +211,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputHandler: {fileID: 790016892153716700, guid: 4b56bbd479da49546a8958eb3a318af1, type: 3}
   _playerPrefab: {fileID: 7407397076881580382, guid: 22ed6136f376e564694cce57f8719cf1, type: 3}
-  _spawnPoint: {fileID: 1675584673}
   _playerCamera: {fileID: 687462376065534447, guid: 1c9d1fb3cf740584aaacaf489947c13b, type: 3}
 --- !u!114 &649547347
 MonoBehaviour:
@@ -271,6 +270,7 @@ GameObject:
   - component: {fileID: 658908493}
   - component: {fileID: 658908492}
   - component: {fileID: 658908491}
+  - component: {fileID: 658908495}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -310,7 +310,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 13ada404b65b344479824199d78fa695, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -348,12 +348,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658908490}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.41, y: 1.3217201, z: -0.05}
-  m_LocalScale: {x: 1, y: 3.8168, z: 7.9032}
+  m_LocalPosition: {x: -1.41, y: 0.66, z: -0.05}
+  m_LocalScale: {x: 3.8625, y: 1.3748114, z: 7.9032}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &658908495
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658908490}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1216856743
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +488,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 76d5d23ded1e98344b4a989a60efb204, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -620,6 +636,7 @@ GameObject:
   - component: {fileID: 1675584673}
   - component: {fileID: 1675584675}
   - component: {fileID: 1675584674}
+  - component: {fileID: 1675584676}
   m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: Untagged
@@ -635,8 +652,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675584672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.381, y: 0.293, z: 0.03}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 3.76, y: 0.5, z: 0.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -690,6 +707,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1675584676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675584672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eebe93d17235df449873edacde135c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1784520072
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,6 +731,7 @@ GameObject:
   - component: {fileID: 1784520074}
   - component: {fileID: 1784520073}
   - component: {fileID: 1784520076}
+  - component: {fileID: 1784520077}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -808,3 +838,35 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1784520077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784520072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
