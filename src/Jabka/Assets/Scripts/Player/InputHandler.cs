@@ -6,7 +6,7 @@ public class InputHandler : MonoBehaviour
 {
     public static event System.Action<Vector2> SwipeDeltaChanged;
     public static event System.Action<Vector2> FingerDown;
-    public static event System.Action<Vector2> FingerUp;
+    public static event System.Action<Vector2, float> FingerUp;
 
     private void OnEnable()
     {
@@ -23,7 +23,7 @@ public class InputHandler : MonoBehaviour
 
     private void OnFingerUp(LeanFinger finger)
     {
-        FingerUp?.Invoke(finger.ScreenPosition);
+        FingerUp?.Invoke(finger.ScreenPosition, finger.Age);
     }
 
     private void OnFingerDown(LeanFinger finger)

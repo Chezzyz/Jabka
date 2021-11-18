@@ -28,20 +28,17 @@ public class PlayerTransformController : MonoBehaviour
     public void SetRotation(Vector3 rotation)
     {
         _playerRigidbody.rotation = Quaternion.Euler(rotation);
-        //transform.rotation = Quaternion.Euler(rotation);
     }
 
     public void SetRotationY(float y)
     {
         Vector3 rot = _playerRigidbody.rotation.eulerAngles;
         _playerRigidbody.MoveRotation(Quaternion.Euler(rot.x, y, rot.z));
-        //transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, y, transform.localEulerAngles.z);
     }
 
     public void SetPosition(Vector3 position)
     {
         _playerRigidbody.MovePosition(position);
-        //transform.position = position;
     }
 
     public Vector3 GetRotation()

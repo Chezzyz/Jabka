@@ -149,7 +149,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _fallSpeed: 0.1
   _maxHeight: 3
   _maxLength: 8
   _minLength: 0.5
@@ -157,6 +156,8 @@ MonoBehaviour:
   _minDuration: 0.4
   _minHeightThreshold: 0.075
   _maxHeightThreshold: 0.375
+  _superJumpTimeTreshold: 0.3
+  _superJumpForcePercentTreshold: 0.5
 --- !u!114 &7407397076881580382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,10 +178,10 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1995607629592704462}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 500
   m_Drag: 0
   m_AngularDrag: 0
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80

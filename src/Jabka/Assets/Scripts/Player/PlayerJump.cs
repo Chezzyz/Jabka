@@ -9,8 +9,6 @@ public class PlayerJump : MonoBehaviour
     [SerializeField]
     private AnimationCurve _jumpYCurve;
     [SerializeField]
-    private float _fallSpeed;
-    [SerializeField]
     private float _maxHeight;
     [SerializeField]
     private float _maxLength;
@@ -24,6 +22,10 @@ public class PlayerJump : MonoBehaviour
     private float _minHeightThreshold;
     [SerializeField]
     private float _maxHeightThreshold;
+    [SerializeField]
+    private float _superJumpTimeTreshold;
+    [SerializeField]
+    private float _superJumpForcePercentTreshold;
 
     private PlayerTransformController _playerTransformController;
     private float _currentForcePercent;
@@ -33,6 +35,8 @@ public class PlayerJump : MonoBehaviour
     private bool _isInFall = false;
 
     private Coroutine _currentJump;
+
+    private ISuperJump _superJump;
 
     [Inject]
     public void Construct(PlayerTransformController playerTransformController)
@@ -52,24 +56,28 @@ public class PlayerJump : MonoBehaviour
         {
             if (_playerTransformController.IsOnHorizontalSurface(collision))
             {
-                _playerTransformController.SetIsGrounded(true);
                 _isInJump = false;
                 _isInFall = false;
-                _playerTransformController.SetVelocity(Vector3.zero);
             }
             else
             {
                 _isInJump = false;
-                StartCoroutine(Fall(_fallSpeed));
             }
         }
     }
 
-    private void OnFingerUp(Vector2 fingerPosition)
+    private void OnFingerUp(Vector2 fingerPosition, float swipeTime)
     {
         if (_currentForcePercent > 0 && _isInJump == false)
         {
-            _currentJump = StartJump(_playerTransformController.GetPosition(), _playerTransformController.transform.forward, _currentForcePercent);
+            if (swipeTime <= _superJumpTimeTreshold && _currentForcePercent >= _superJumpForcePercentTreshold)
+            {
+                _superJump.SuperJump();
+            }
+            else
+            {
+                _currentJump = StartJump(_playerTransformController.GetPosition(), _playerTransformController.transform.forward, _currentForcePercent);
+            }
         }
     }
 
@@ -130,19 +138,7 @@ public class PlayerJump : MonoBehaviour
 
         if (_playerTransformController.IsGrounded == false)
         {
-            StartCoroutine(Fall(_fallSpeed));
-        }
-    }
-
-    private IEnumerator Fall(float fallSpeed) {
-        _isInFall = true;
-
-        while (_isInFall)
-        {
-            yield return new WaitForFixedUpdate();
-            Vector3 currentPos = _playerTransformController.GetPosition();
-            Vector3 nextPos = new Vector3(currentPos.x, currentPos.y - fallSpeed, currentPos.z);
-            _playerTransformController.SetPosition(nextPos);
+            _isInFall = true;
         }
     }
 }
