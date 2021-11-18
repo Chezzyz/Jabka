@@ -1,12 +1,19 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(BoxCollider))]
 public class PlayerTransformController : MonoBehaviour
 {
     private Rigidbody _rigidbody;
 
-    public Rigidbody PlayerRigidbody {
-        private set { _rigidbody = value; }
+    public bool IsGrounded { get; private set; }
+
+    [SerializeField]
+    [Tooltip("Угол на который можно отклониться находясь на поверхности")]
+    private float _degreeToBeGrounded;
+
+    private Rigidbody _playerRigidbody {
+        set { _rigidbody = value; }
         get
         {
             if (_rigidbody == null)
@@ -20,26 +27,50 @@ public class PlayerTransformController : MonoBehaviour
 
     public void SetRotation(Vector3 rotation)
     {
-        PlayerRigidbody.rotation = Quaternion.Euler(rotation);
+        _playerRigidbody.rotation = Quaternion.Euler(rotation);
         //transform.rotation = Quaternion.Euler(rotation);
     }
 
     public void SetRotationY(float y)
     {
-        Vector3 rot = PlayerRigidbody.rotation.eulerAngles;
-        PlayerRigidbody.MoveRotation(Quaternion.Euler(rot.x, y, rot.z));
+        Vector3 rot = _playerRigidbody.rotation.eulerAngles;
+        _playerRigidbody.MoveRotation(Quaternion.Euler(rot.x, y, rot.z));
         //transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, y, transform.localEulerAngles.z);
     }
 
     public void SetPosition(Vector3 position)
     {
-        PlayerRigidbody.MovePosition(position);
+        _playerRigidbody.MovePosition(position);
         //transform.position = position;
     }
 
     public Vector3 GetRotation()
     {
-        return PlayerRigidbody.rotation.eulerAngles;
+        return _playerRigidbody.rotation.eulerAngles;
+    }
+
+    public Vector3 GetPosition()
+    {
+        return _playerRigidbody.position;
+    }
+
+    public bool IsOnHorizontalSurface(Collision collision)
+    {
+        //смотрим косинус между векторами нормали контакта коллайдеров и осью Y
+        float cosBetweenVectors = Vector3.Dot(collision.GetContact(0).normal.normalized, Vector3.up);
+        float limitCos = Mathf.Cos(Mathf.Deg2Rad * _degreeToBeGrounded);
+
+        return cosBetweenVectors >= limitCos;
+    }
+
+    public void SetIsGrounded(bool value)
+    {
+        IsGrounded = value;
+    }
+
+    public void SetVelocity(Vector3 value)
+    {
+        _playerRigidbody.velocity = value;
     }
 }
 

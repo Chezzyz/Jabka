@@ -9,6 +9,8 @@ public class PlayerJump : MonoBehaviour
     [SerializeField]
     private AnimationCurve _jumpYCurve;
     [SerializeField]
+    private float _fallSpeed;
+    [SerializeField]
     private float _maxHeight;
     [SerializeField]
     private float _maxLength;
@@ -28,6 +30,10 @@ public class PlayerJump : MonoBehaviour
     
     private bool _isInJump = false;
 
+    private bool _isInFall = false;
+
+    private Coroutine _currentJump;
+
     [Inject]
     public void Construct(PlayerTransformController playerTransformController)
     {
@@ -42,52 +48,75 @@ public class PlayerJump : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        StopCoroutine(nameof(Jump));
-        //StopAllCoroutines();
+        if (_isInJump || _isInFall)
+        {
+            if (_playerTransformController.IsOnHorizontalSurface(collision))
+            {
+                _playerTransformController.SetIsGrounded(true);
+                _isInJump = false;
+                _isInFall = false;
+                _playerTransformController.SetVelocity(Vector3.zero);
+            }
+            else
+            {
+                _isInJump = false;
+                StartCoroutine(Fall(_fallSpeed));
+            }
+        }
     }
 
     private void OnFingerUp(Vector2 fingerPosition)
     {
         if (_currentForcePercent > 0 && _isInJump == false)
         {
-            Vector3 originPosition = _playerTransformController.transform.position;
-            Vector3 originDirection = _playerTransformController.transform.forward;
-
-            StartCoroutine(Jump(_currentForcePercent, originPosition, originDirection));
-            
-            _currentForcePercent = 0;
+            _currentJump = StartJump(_playerTransformController.GetPosition(), _playerTransformController.transform.forward, _currentForcePercent);
         }
     }
 
     private void OnSwipeY(Vector2 delta)
     {
-        //длина свайпа вниз в процентах от экрана
-        float deltaYPercent = delta.y / Screen.height;
-
-        //сравниваем так, так как delta приходит отрицательная, если свайп сделан вниз
-        if (-deltaYPercent > _minHeightThreshold)
-        {
-            _currentForcePercent = CalculateForceInPercent(deltaYPercent);
-        }
+        //длина свайпа вниз в процентах от экрана, когда свайп сделан вниз delta приходит отрицательная
+        _currentForcePercent = CalculateForceInPercent(-delta, _minHeightThreshold, _maxHeightThreshold);
     }
 
-    private float CalculateForceInPercent(float deltaY)
+    private Coroutine StartJump(Vector3 originPosition, Vector3 originDirection, float forcePercent)
     {
-        deltaY = Mathf.Clamp(deltaY, -_maxHeightThreshold, -_minHeightThreshold);
-        return deltaY / -(_maxHeightThreshold - _minHeightThreshold);
+        Coroutine jump = StartCoroutine(Jump(forcePercent, originPosition, originDirection));
+
+        _playerTransformController.SetIsGrounded(false);
+        _currentForcePercent = 0;
+
+        return jump;
+    }
+
+    private float CalculateForceInPercent(Vector3 delta, float minTreshold, float maxTreshold)
+    {
+        float deltaYPercent = delta.y / Screen.height;
+
+        if (deltaYPercent > minTreshold)
+        {
+            deltaYPercent = Mathf.Clamp(deltaYPercent, minTreshold, maxTreshold);
+        }
+        else
+        {
+            return 0;
+        }
+        
+        return (deltaYPercent - minTreshold) / (maxTreshold - minTreshold);
     }
 
     private IEnumerator Jump(float forcePercent, Vector3 originPosition, Vector3 originDirection)
     {
         _isInJump = true;
-
+        
         float expiredTime = 0.0f;
 
         float duration = _minDuration + (_maxDuration - _minDuration) * forcePercent;
         float progress = expiredTime / duration;
         
-        while (progress < 1) 
+        while (progress < 1 && _isInJump) 
         {
+            yield return new WaitForFixedUpdate();
             expiredTime += Time.deltaTime;
             progress = Mathf.Clamp01(expiredTime / duration);
 
@@ -95,9 +124,25 @@ public class PlayerJump : MonoBehaviour
             float currentLength = (_minLength + (_maxLength - _minLength) * forcePercent) * progress;
 
             _playerTransformController.SetPosition(originPosition + new Vector3((originDirection * currentLength).x, currentHeight, (originDirection * currentLength).z));
-            yield return new WaitForFixedUpdate();
-        } 
-        
+        }
+
         _isInJump = false;
+
+        if (_playerTransformController.IsGrounded == false)
+        {
+            StartCoroutine(Fall(_fallSpeed));
+        }
+    }
+
+    private IEnumerator Fall(float fallSpeed) {
+        _isInFall = true;
+
+        while (_isInFall)
+        {
+            yield return new WaitForFixedUpdate();
+            Vector3 currentPos = _playerTransformController.GetPosition();
+            Vector3 nextPos = new Vector3(currentPos.x, currentPos.y - fallSpeed, currentPos.z);
+            _playerTransformController.SetPosition(nextPos);
+        }
     }
 }
