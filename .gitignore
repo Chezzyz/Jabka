@@ -51,5 +51,3 @@ src/*/Assets/UserWorkspace/*
 # ================= #
 src/*/Builds
 src/Jabka/ProjectSettings/ProjectVersion.txt
-src/Jabka/Packages/packages-lock.json
-src/Jabka/Packages/manifest.json
