@@ -51,6 +51,11 @@ public class PlayerTransformController : MonoBehaviour
         return _playerRigidbody.position;
     }
 
+    public Vector3 GetForwardDirection()
+    {
+        return transform.forward;
+    }
+
     public bool IsOnHorizontalSurface(Collision collision)
     {
         //смотрим косинус между векторами нормали контакта коллайдеров и осью Y

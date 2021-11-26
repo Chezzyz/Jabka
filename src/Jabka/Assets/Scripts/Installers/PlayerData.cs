@@ -2,7 +2,7 @@
 
 [RequireComponent(typeof(PlayerRotation))]
 [RequireComponent(typeof(PlayerTransformController))]
-[RequireComponent(typeof(PlayerJump))]
+[RequireComponent(typeof(SimpleJump))]
 public class PlayerData : MonoBehaviour
 { 
 
