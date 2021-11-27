@@ -19,24 +19,28 @@ public class JumpController : MonoBehaviour
 
     private SimpleJump _simpleJump;
 
+    private SuperJumpPicker _superJumpPicker;
+
     private ISuperJump _currentSuperJump;
 
     [Inject]
-    public void Construct(SimpleJump simpleJump, PlayerTransformController playerTransformController)
+    public void Construct(SimpleJump simpleJump, PlayerTransformController playerTransformController, SuperJumpPicker superJumpPicker)
     {
         _simpleJump = simpleJump;
         _playerTransformController = playerTransformController;
+        _superJumpPicker = superJumpPicker;
     }
 
     private void OnEnable()
     {
         InputHandler.SwipeDeltaChanged += OnSwipeY;
         InputHandler.FingerUp += OnFingerUp;
+        SuperJumpPicker.SuperJumpPicked += SetSuperJump;
     }
 
     private void Start()
     {
-        _currentSuperJump
+        _currentSuperJump = _superJumpPicker.GetDefaultSuperJump();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -85,5 +89,17 @@ public class JumpController : MonoBehaviour
         }
 
         return (deltaYPercent - minHeightTreshold) / (maxHeightTreshold - minHeightTreshold);
+    }
+
+    private void SetSuperJump(ISuperJump superJump)
+    {
+        _currentSuperJump = superJump;
+    }
+
+    private void OnDisable()
+    {
+        InputHandler.SwipeDeltaChanged -= OnSwipeY;
+        InputHandler.FingerUp -= OnFingerUp;
+        SuperJumpPicker.SuperJumpPicked -= SetSuperJump;
     }
 }
