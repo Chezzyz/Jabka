@@ -187,6 +187,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3169281608148144210, guid: 35194cdd96ff658458f508d953c801d1, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3169281608148144210, guid: 35194cdd96ff658458f508d953c801d1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3169281608148144211, guid: 35194cdd96ff658458f508d953c801d1, type: 3}
+      propertyPath: _defaultSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9150d7e95bbb6664f9003b200188f544, type: 3}
+    - target: {fileID: 3169281608148144211, guid: 35194cdd96ff658458f508d953c801d1, type: 3}
+      propertyPath: _selectedSprite
+      value: 
+      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 3169281608148144214, guid: 35194cdd96ff658458f508d953c801d1, type: 3}
       propertyPath: m_Name
       value: LongJumpButton (4)
@@ -280,6 +296,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3169281608148144210, guid: 35194cdd96ff658458f508d953c801d1, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3169281608148144210, guid: 35194cdd96ff658458f508d953c801d1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3169281608148144211, guid: 35194cdd96ff658458f508d953c801d1, type: 3}
+      propertyPath: _defaultSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9150d7e95bbb6664f9003b200188f544, type: 3}
+    - target: {fileID: 3169281608148144211, guid: 35194cdd96ff658458f508d953c801d1, type: 3}
+      propertyPath: _selectedSprite
+      value: 
+      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 3169281608148144214, guid: 35194cdd96ff658458f508d953c801d1, type: 3}
       propertyPath: m_Name
       value: LongJumpButton (2)
@@ -387,11 +419,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2427015801087307003, guid: dbb5b3c2c914b544d9be6f97c906e71e, type: 3}
       propertyPath: _showAnimationDuration
-      value: 0.75
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 2427015801087307003, guid: dbb5b3c2c914b544d9be6f97c906e71e, type: 3}
       propertyPath: _closeAnimationDuration
-      value: 0.6
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2427015801087307004, guid: dbb5b3c2c914b544d9be6f97c906e71e, type: 3}
       propertyPath: m_Sprite
@@ -409,6 +441,22 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 2427015801487743254, guid: dbb5b3c2c914b544d9be6f97c906e71e, type: 3}
+      propertyPath: _defaultSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9150d7e95bbb6664f9003b200188f544, type: 3}
+    - target: {fileID: 2427015801487743254, guid: dbb5b3c2c914b544d9be6f97c906e71e, type: 3}
+      propertyPath: _selectedSprite
+      value: 
+      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 2427015801487743255, guid: dbb5b3c2c914b544d9be6f97c906e71e, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2427015801487743255, guid: dbb5b3c2c914b544d9be6f97c906e71e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5194818090619806756, guid: dbb5b3c2c914b544d9be6f97c906e71e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 200
@@ -417,6 +465,22 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 5194818090619806758, guid: dbb5b3c2c914b544d9be6f97c906e71e, type: 3}
+      propertyPath: _defaultSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9150d7e95bbb6664f9003b200188f544, type: 3}
+    - target: {fileID: 5194818090619806758, guid: dbb5b3c2c914b544d9be6f97c906e71e, type: 3}
+      propertyPath: _selectedSprite
+      value: 
+      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 5194818090619806759, guid: dbb5b3c2c914b544d9be6f97c906e71e, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5194818090619806759, guid: dbb5b3c2c914b544d9be6f97c906e71e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbb5b3c2c914b544d9be6f97c906e71e, type: 3}
 --- !u!224 &8079669236863010750 stripped
@@ -512,9 +576,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3169281608148144210, guid: 35194cdd96ff658458f508d953c801d1, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3169281608148144210, guid: 35194cdd96ff658458f508d953c801d1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3169281608148144210, guid: 35194cdd96ff658458f508d953c801d1, type: 3}
       propertyPath: m_PreserveAspect
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3169281608148144211, guid: 35194cdd96ff658458f508d953c801d1, type: 3}
+      propertyPath: _defaultSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9150d7e95bbb6664f9003b200188f544, type: 3}
+    - target: {fileID: 3169281608148144211, guid: 35194cdd96ff658458f508d953c801d1, type: 3}
+      propertyPath: _selectedSprite
+      value: 
+      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 3169281608148144214, guid: 35194cdd96ff658458f508d953c801d1, type: 3}
       propertyPath: m_Name
       value: LongJumpButton (3)

@@ -8,13 +8,17 @@ using UnityEngine.UI;
 public class SuperJumpButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
-    private Sprite _selectedImage;
-
-    private Sprite _defaultImage;
+    private Sprite _selectedSprite;
+    [SerializeField]
+    private Sprite _defaultSprite;
 
     private ISuperJump _superJump;
 
+    private Image _currentImage;
+
     private bool _isSelectable = false;
+
+    private bool _isLocked = true;
 
     public static event System.Action<ISuperJump, Sprite> SuperJumpSelected;
     public static event System.Action SuperJumpUnselected;
@@ -22,21 +26,30 @@ public class SuperJumpButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private void OnEnable()
     {
         SuperJumpSelected += OnSelect;
-    }
-
-    private void Start()
-    {
-        _defaultImage = GetComponent<Image>().sprite;
-
-        if(TryGetComponent(out _superJump) == false)
+        SuperJumpUnlocker.SuperJumpUnlocked += UnlockButton;
+        _currentImage = GetComponent<Image>();
+        if (TryGetComponent(out _superJump) == false)
         {
             Debug.Log($"button {gameObject.name} doesn't have ISuperJump field");
         }
     }
 
+    private void UnlockButton(ISuperJump unlockedSuperJump)
+    {
+        if(_superJump.GetJumpName() == unlockedSuperJump.GetJumpName())
+        {
+            _isLocked = false;
+            _currentImage.sprite = _defaultSprite;
+        }
+    }
+
     public void SetIsSelectable(bool value)
     {
-        _isSelectable = value;
+        if (_isLocked == false)
+        {
+            _isSelectable = value;
+        }
+        StopAllCoroutines();
     }
 
     public void SetIsSelectable(bool value, float delay)
@@ -63,13 +76,13 @@ public class SuperJumpButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
         if (_isSelectable)
         {
             SetSelectImageActive(true);
-            SuperJumpSelected?.Invoke(_superJump, _defaultImage);
+            SuperJumpSelected?.Invoke(_superJump, _defaultSprite);
         }
     }
 
     private void OnSelect(ISuperJump selected, Sprite sprite)
     {
-        if(_superJump != selected)
+        if(_superJump.GetJumpName() != selected.GetJumpName())
         {
             SetSelectImageActive(false);
         }
@@ -77,6 +90,6 @@ public class SuperJumpButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     private void SetSelectImageActive(bool isSelected)
     {
-        GetComponent<Image>().sprite = isSelected ? _selectedImage : _defaultImage;
+        GetComponent<Image>().sprite = isSelected ? _selectedSprite : _defaultSprite;
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
@@ -23,11 +24,13 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     [SerializeField]
     Ease _closeEase;
 
-    private Image _currentJumpSprite;
+    private Image _currentJumpImage;
     
     private Sprite _selectedJumpSprite;
 
     public static event System.Action<ISuperJump> SuperJumpPicked;
+
+    public static event System.Action<bool> SuperJumpMenuStateChanged;
 
     private SuperJumpButton[] _buttons;
 
@@ -38,12 +41,15 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     {
         SuperJumpButton.SuperJumpSelected += SetSelectedSuperJump;
         SuperJumpButton.SuperJumpUnselected += UnsetSuperJump;
+    }
 
+    private void Start()
+    {
         _buttons = GetComponentsInChildren<SuperJumpButton>();
-        _currentJumpSprite = GetComponent<Image>();
-        _currentJumpSprite.sprite = _defaultSuperJump.GetComponent<Image>().sprite;
+        _currentJumpImage = GetComponent<Image>();
+        _currentJumpImage.sprite = _defaultSuperJump.GetComponent<Image>().sprite;
         //делаю полупрозрачной
-        _currentJumpSprite.color = new Color(1, 1, 1, _unselectedAlpha);
+        _currentJumpImage.color = new Color(1, 1, 1, _unselectedAlpha);
     }
 
     public ISuperJump GetDefaultSuperJump()
@@ -60,6 +66,7 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public void OnPointerDown(PointerEventData eventData)
     {
         ShowPickerMenu(_buttons, _showAnimationDuration, _menuRadius, _showEase);
+        SuperJumpMenuStateChanged?.Invoke(true);
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -70,12 +77,13 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         }
 
         ClosePickerMenu(_buttons, _closeAnimationDuration, _closeEase);
+        SuperJumpMenuStateChanged?.Invoke(false);
     }
 
     private void PickSuperJump(ISuperJump pickedJump, Sprite pickedSprite)
     {
         SuperJumpPicked?.Invoke(pickedJump);
-        GetComponent<Image>().sprite = pickedSprite;
+        _currentJumpImage.sprite = pickedSprite;
         _selectedJumpSprite = null;
         _selectedJump = null;
     }
@@ -93,10 +101,14 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             float x = Mathf.Cos(angle * Mathf.Deg2Rad);
             float y = Mathf.Sin(angle * Mathf.Deg2Rad);
 
+            Image buttonImage = button.GetComponent<Image>();
+
+            StopTweensOfObjects(button.transform, buttonImage, _currentJumpImage);
+
             button.transform.DOLocalMove(new Vector3(x * radius, y * radius, 0), duration).SetEase(ease)
                 .OnStart(() => button.SetIsSelectable(true, duration/2));
-            button.GetComponent<Image>().DOFade(1, duration);
-            _currentJumpSprite.DOFade(1, duration);
+            buttonImage.DOFade(1, duration);
+            _currentJumpImage.DOFade(1, duration);
         }
     }
 
@@ -107,11 +119,22 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         {
             SuperJumpButton button = buttons[i];
 
+            Image buttonImage = button.GetComponent<Image>();
+
+            StopTweensOfObjects(button.transform, buttonImage, _currentJumpImage);
+
             button.transform.DOLocalMove(Vector3.zero, duration).SetEase(ease)
                 .OnStart(() => button.SetIsSelectable(false)); ;
-            button.GetComponent<Image>().DOFade(0, duration);
-            _currentJumpSprite.DOFade(_unselectedAlpha, duration);
+            buttonImage.DOFade(0, duration);
+            _currentJumpImage.DOFade(_unselectedAlpha, duration);
         }
+    }
+
+    private int StopTweensOfObjects(params Component[] components)
+    {
+        int killed = 0;
+        components.ToList().ForEach(component => killed += component.DOKill());
+        return killed;
     }
 
     private void SetSelectedSuperJump(ISuperJump superJump, Sprite sprite)

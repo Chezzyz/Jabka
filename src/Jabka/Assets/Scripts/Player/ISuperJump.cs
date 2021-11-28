@@ -4,5 +4,5 @@
 
     public bool IsInJump();
 
-    public void SetIsInJump(bool value);
+    public string GetJumpName();
 }

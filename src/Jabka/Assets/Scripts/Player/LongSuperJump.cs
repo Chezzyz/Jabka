@@ -28,7 +28,12 @@ public class LongSuperJump : MonoBehaviour, ISuperJump
         return _isInJump;
     }
 
-    public void SetIsInJump(bool value)
+    public string GetJumpName()
+    {
+        return "Long";
+    }
+
+    private void SetIsInJump(bool value)
     {
         _isInJump = value;
     }
