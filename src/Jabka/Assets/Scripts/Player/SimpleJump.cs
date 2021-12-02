@@ -3,10 +3,10 @@ using System.Collections;
 using UnityEngine;
 using Zenject;
 
-public class SimpleJump : MonoBehaviour
+public class SimpleJump : AbstractJump
 {
     [SerializeField]
-    private AnimationCurve _jumpYCurve;
+    private AnimationCurve _jumpCurve;
     [SerializeField]
     private float _maxHeight;
     [SerializeField]
@@ -19,10 +19,13 @@ public class SimpleJump : MonoBehaviour
     private float _minDuration;
 
     private float _currentForcePercent;
-    
-    public bool IsInJump { get; private set; }
 
     public bool IsInFall { get; private set; }
+
+    private void OnEnable()
+    {
+        PlayerTransformController.Collided += StopCurrentJump;
+    }
 
     public void SetCurrentForcePercent(float value)
     {
@@ -34,44 +37,30 @@ public class SimpleJump : MonoBehaviour
         return _currentForcePercent;
     }
 
-    public void SetIsInJump(bool value)
+    public Coroutine DoSimpleJump(PlayerTransformController playerTransformController, float forcePercent)
     {
-        IsInJump = value;
-    }
+        float duration = _minDuration + (_maxDuration - _minDuration) * forcePercent;
+        float height = (_maxHeight * forcePercent);
+        float length = (_minLength + (_maxLength - _minLength) * forcePercent);
 
-    public Coroutine StartJump(PlayerTransformController playerTransformController, float forcePercent)
-    {
-        Coroutine jump = StartCoroutine(Jump(playerTransformController, forcePercent, _jumpYCurve));
+        Coroutine jump = StartCoroutine(JumpCoroutine(playerTransformController, duration, height, length, _jumpCurve));
 
         playerTransformController.SetIsGrounded(false);
 
         return jump;
     }
 
-    private IEnumerator Jump(PlayerTransformController playerTransformController, float forcePercent, AnimationCurve curve)
+    private void StopCurrentJump(Collision collision)
     {
-        SetIsInJump(true);
-        
-        float expiredTime = 0.0f;
-
-        float duration = _minDuration + (_maxDuration - _minDuration) * forcePercent;
-        float progress = expiredTime / duration;
-
-        Vector3 originPosition = playerTransformController.GetPosition();
-        Vector3 originDirection = playerTransformController.GetForwardDirection();
-        
-        while (progress < 1 && IsInJump) 
+        //избавляемся от ложных вызовов 
+        if (IsInJump())
         {
-            yield return new WaitForFixedUpdate();
-            expiredTime += Time.deltaTime;
-            progress = Mathf.Clamp01(expiredTime / duration);
-
-            float currentHeight = (_maxHeight * forcePercent) * curve.Evaluate(progress);
-            float currentLength = (_minLength + (_maxLength - _minLength) * forcePercent) * progress;
-
-            playerTransformController.SetPosition(originPosition + new Vector3((originDirection * currentLength).x, currentHeight, (originDirection * currentLength).z));
+            SetIsInJump(false);
         }
+    }
 
-        SetIsInJump(false);
+    private void OnDisable()
+    {
+        PlayerTransformController.Collided -= StopCurrentJump;
     }
 }

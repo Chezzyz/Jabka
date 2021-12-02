@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LongSuperJump : MonoBehaviour, ISuperJump
+public class LongSuperJump : AbstractJump, ISuperJump
 {
     [SerializeField]
     private AnimationCurve _jumpCurve;
@@ -13,19 +13,16 @@ public class LongSuperJump : MonoBehaviour, ISuperJump
     [SerializeField]
     private float _duration;
 
-    private bool _isInJump;
+    private Coroutine _currentJump;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnEnable()
     {
-        if (IsInJump())
-        {
-           SetIsInJump(false);
-        }
+        PlayerTransformController.Collided += StopCurrentSuperJump;
     }
 
-    public bool IsInJump()
+    public void SuperJump(PlayerTransformController playerTransformController)
     {
-        return _isInJump;
+        _currentJump = StartCoroutine(JumpCoroutine(playerTransformController, _duration, _height, _length, _jumpCurve));
     }
 
     public string GetJumpName()
@@ -33,39 +30,16 @@ public class LongSuperJump : MonoBehaviour, ISuperJump
         return "Long";
     }
 
-    private void SetIsInJump(bool value)
+    private void StopCurrentSuperJump(Collision collision)
     {
-        _isInJump = value;
-    }
-
-    public void SuperJump(PlayerTransformController playerTransformController)
-    {
-        Coroutine jump = StartCoroutine(SuperJumpUpdate(playerTransformController, _length, _height, _duration, _jumpCurve));
-    }
-
-    private IEnumerator SuperJumpUpdate(PlayerTransformController playerTransformController, float length, float height, float duration, AnimationCurve curve)
-    {
-        SetIsInJump(true);
-
-        float expiredTime = 0.0f;
-
-        float progress = expiredTime / duration;
-
-        Vector3 originPosition = playerTransformController.GetPosition();
-        Vector3 originDirection = playerTransformController.GetForwardDirection();
-
-        while (progress < 1 && IsInJump())
+        if (IsInJump())
         {
-            yield return new WaitForFixedUpdate();
-            expiredTime += Time.deltaTime;
-            progress = Mathf.Clamp01(expiredTime / duration);
-
-            float currentHeight = height * curve.Evaluate(progress);
-            float currentLength = length * progress;
-
-            playerTransformController.SetPosition(originPosition + new Vector3((originDirection * currentLength).x, currentHeight, (originDirection * currentLength).z));
+            SetIsInJump(false);
         }
+    }
 
-        SetIsInJump(false);
+    private void OnDisable()
+    {
+        PlayerTransformController.Collided -= StopCurrentSuperJump;
     }
 }

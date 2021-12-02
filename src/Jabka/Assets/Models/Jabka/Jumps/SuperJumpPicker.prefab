@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -890}
+  m_AnchoredPosition: {x: 0, y: -815}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2427015801087307003
@@ -54,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _defaultSuperJump: {fileID: 2427015801487743251}
   _menuRadius: 500
+  _unselectedAlpha: 0
   _showAnimationDuration: 1
   _closeAnimationDuration: 1
   _showEase: 9

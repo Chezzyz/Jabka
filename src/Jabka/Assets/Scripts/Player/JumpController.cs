@@ -43,19 +43,11 @@ public class JumpController : MonoBehaviour
         _currentSuperJump = _superJumpPicker.GetDefaultSuperJump();
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (_simpleJump.IsInJump)
-        {
-            _simpleJump.SetIsInJump(false);
-        }
-    }
-
     private void OnFingerUp(Vector2 fingerPosition, float swipeTime)
     {
         float currentForcePercent = _simpleJump.GetCurrentForcePercent();
 
-        if (currentForcePercent > 0 && _simpleJump.IsInJump == false)
+        if (currentForcePercent > 0 && _simpleJump.IsInJump() == false)
         {
             if (swipeTime <= _superJumpTimeTreshold && currentForcePercent >= _superJumpForcePercentTreshold)
             {
@@ -63,7 +55,7 @@ public class JumpController : MonoBehaviour
             }
             else
             {
-                _simpleJump.StartJump(_playerTransformController, currentForcePercent);
+                _simpleJump.DoSimpleJump(_playerTransformController, currentForcePercent);
                 _simpleJump.SetCurrentForcePercent(0);
             }
         }

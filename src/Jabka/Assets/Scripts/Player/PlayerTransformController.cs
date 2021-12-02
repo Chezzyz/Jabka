@@ -6,13 +6,15 @@ public class PlayerTransformController : MonoBehaviour
 {
     private Rigidbody _rigidbody;
 
+    public static event System.Action<Collision> Collided;
+
     public bool IsGrounded { get; private set; }
 
     [SerializeField]
     [Tooltip("Угол на который можно отклониться находясь на поверхности")]
     private float _degreeToBeGrounded;
 
-    private Rigidbody _playerRigidbody {
+    private Rigidbody PlayerRigidbody {
         set { _rigidbody = value; }
         get
         {
@@ -25,30 +27,40 @@ public class PlayerTransformController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Collided?.Invoke(collision);
+    }
+
     public void SetRotation(Vector3 rotation)
     {
-        _playerRigidbody.rotation = Quaternion.Euler(rotation);
+        PlayerRigidbody.rotation = Quaternion.Euler(rotation);
     }
 
     public void SetRotationY(float y)
     {
-        Vector3 rot = _playerRigidbody.rotation.eulerAngles;
-        _playerRigidbody.MoveRotation(Quaternion.Euler(rot.x, y, rot.z));
+        Vector3 rot = PlayerRigidbody.rotation.eulerAngles;
+        PlayerRigidbody.MoveRotation(Quaternion.Euler(rot.x, y, rot.z));
     }
 
     public void SetPosition(Vector3 position)
     {
-        _playerRigidbody.MovePosition(position);
+        PlayerRigidbody.MovePosition(position);
     }
 
     public Vector3 GetRotation()
     {
-        return _playerRigidbody.rotation.eulerAngles;
+        return PlayerRigidbody.rotation.eulerAngles;
+    }
+
+    public Quaternion GetQuaternion()
+    {
+        return PlayerRigidbody.rotation;
     }
 
     public Vector3 GetPosition()
     {
-        return _playerRigidbody.position;
+        return PlayerRigidbody.position;
     }
 
     public Vector3 GetForwardDirection()
@@ -72,7 +84,17 @@ public class PlayerTransformController : MonoBehaviour
 
     public void SetVelocity(Vector3 value)
     {
-        _playerRigidbody.velocity = value;
+        PlayerRigidbody.velocity = value;
+    }
+
+    public Vector3 GetVelocity()
+    {
+        return PlayerRigidbody.velocity;
+    }
+
+    public Vector3 GetBoxColliderSize()
+    {
+        return GetComponent<BoxCollider>().size;
     }
 }
 
