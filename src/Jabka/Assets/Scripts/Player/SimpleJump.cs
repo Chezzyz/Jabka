@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Zenject;
 
-public class SimpleJump : AbstractJump
+public class SimpleJump : BaseJump
 {
     [SerializeField]
     private AnimationCurve _jumpCurve;
@@ -18,23 +18,13 @@ public class SimpleJump : AbstractJump
     [SerializeField]
     private float _minDuration;
 
-    private float _currentForcePercent;
-
+    public SimpleJumpData JumpData { get; private set; }
     public bool IsInFall { get; private set; }
 
     private void OnEnable()
     {
         PlayerTransformController.Collided += StopCurrentJump;
-    }
-
-    public void SetCurrentForcePercent(float value)
-    {
-        _currentForcePercent = value;
-    }
-
-    public float GetCurrentForcePercent()
-    {
-        return _currentForcePercent;
+        JumpData = new SimpleJumpData(_jumpCurve, _maxHeight, _minLength, _maxLength);
     }
 
     public Coroutine DoSimpleJump(PlayerTransformController playerTransformController, float forcePercent)
@@ -63,4 +53,22 @@ public class SimpleJump : AbstractJump
     {
         PlayerTransformController.Collided -= StopCurrentJump;
     }
+
 }
+
+public struct SimpleJumpData
+{
+    public SimpleJumpData(AnimationCurve jumpCurve, float maxHeight, float minLength, float maxLength)
+    {
+        JumpCurve = jumpCurve;
+        MaxHeight = maxHeight;
+        MinLength = minLength;
+        MaxLength = maxLength;
+    }
+
+    public AnimationCurve JumpCurve { get; private set; }
+    public float MaxHeight { get; private set; }
+    public float MaxLength { get; private set; }
+    public float MinLength { get; private set; }
+}
+

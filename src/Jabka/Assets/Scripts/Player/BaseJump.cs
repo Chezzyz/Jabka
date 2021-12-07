@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbstractJump : MonoBehaviour
+public class BaseJump : MonoBehaviour
 {
     private bool _isInJump;
 
@@ -36,10 +36,10 @@ public class AbstractJump : MonoBehaviour
         Vector3 originDirection = playerTransformController.GetForwardDirection();
         Vector3 colliderSize = playerTransformController.GetBoxColliderSize();
 
-        while (progress < 1 && IsInJump())
+        while (IsInJump())
         {
             expiredTime += Time.deltaTime;
-            progress = Mathf.Clamp01(expiredTime / duration);
+            progress = expiredTime / duration;
 
             float nextHeight = height * curve.Evaluate(progress);
             float nextLength = length * progress;

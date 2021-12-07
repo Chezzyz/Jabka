@@ -15,6 +15,9 @@ public class JumpController : MonoBehaviour
     [SerializeField]
     private float _superJumpForcePercentTreshold;
 
+    public static event System.Action<SimpleJumpData, Vector3, Vector3, float> ForceChanged;
+    public static event System.Action<float, ISuperJump> JumpStarted;
+
     private PlayerTransformController _playerTransformController;
 
     private SimpleJump _simpleJump;
@@ -22,6 +25,8 @@ public class JumpController : MonoBehaviour
     private SuperJumpPicker _superJumpPicker;
 
     private ISuperJump _currentSuperJump;
+
+    private float _currentForcePercent;
 
     [Inject]
     public void Construct(SimpleJump simpleJump, PlayerTransformController playerTransformController, SuperJumpPicker superJumpPicker)
@@ -45,18 +50,19 @@ public class JumpController : MonoBehaviour
 
     private void OnFingerUp(Vector2 fingerPosition, float swipeTime)
     {
-        float currentForcePercent = _simpleJump.GetCurrentForcePercent();
-
-        if (currentForcePercent > 0 && _simpleJump.IsInJump() == false)
+        if (_currentForcePercent > 0 && _simpleJump.IsInJump() == false)
         {
-            if (swipeTime <= _superJumpTimeTreshold && currentForcePercent >= _superJumpForcePercentTreshold)
+
+            if (swipeTime <= _superJumpTimeTreshold && _currentForcePercent >= _superJumpForcePercentTreshold)
             {
                 _currentSuperJump.SuperJump(_playerTransformController);
+                JumpStarted?.Invoke(_currentForcePercent, _currentSuperJump);
             }
             else
             {
-                _simpleJump.DoSimpleJump(_playerTransformController, currentForcePercent);
-                _simpleJump.SetCurrentForcePercent(0);
+                _simpleJump.DoSimpleJump(_playerTransformController, _currentForcePercent);
+                JumpStarted?.Invoke(_currentForcePercent, null);
+                _currentForcePercent = 0;
             }
         }
     }
@@ -64,7 +70,12 @@ public class JumpController : MonoBehaviour
     private void OnSwipeY(Vector2 delta)
     {
         //длина свайпа вниз в процентах от экрана, когда свайп сделан вниз delta приходит отрицательная
-        _simpleJump.SetCurrentForcePercent(CalculateSwipeLengthInPercent(-delta, _minScreenHeightThreshold, _maxScreenHeightThreshold));
+        _currentForcePercent = CalculateSwipeLengthInPercent(-delta, _minScreenHeightThreshold, _maxScreenHeightThreshold);
+
+        ForceChanged?.Invoke(_simpleJump.JumpData, 
+            _playerTransformController.GetPosition(),
+            _playerTransformController.GetForwardDirection(),
+            _currentForcePercent);
     }
 
     private float CalculateSwipeLengthInPercent(Vector3 delta, float minHeightTreshold, float maxHeightTreshold)
@@ -80,7 +91,8 @@ public class JumpController : MonoBehaviour
             return 0;
         }
 
-        return (deltaYPercent - minHeightTreshold) / (maxHeightTreshold - minHeightTreshold);
+        float forcePercent = (deltaYPercent - minHeightTreshold) / (maxHeightTreshold - minHeightTreshold);
+        return forcePercent;
     }
 
     private void SetSuperJump(ISuperJump superJump)

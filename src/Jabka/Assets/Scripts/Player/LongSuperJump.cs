@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LongSuperJump : AbstractJump, ISuperJump
+public class LongSuperJump : BaseJump, ISuperJump
 {
     [SerializeField]
     private AnimationCurve _jumpCurve;
