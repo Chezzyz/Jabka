@@ -13,13 +13,6 @@ public class LongSuperJump : BaseJump, ISuperJump
     [SerializeField]
     private float _duration;
 
-    private Coroutine _currentJump;
-
-    private void OnEnable()
-    {
-        PlayerTransformController.Collided += StopCurrentSuperJump;
-    }
-
     public void SuperJump(PlayerTransformController playerTransformController)
     {
         _currentJump = StartCoroutine(JumpCoroutine(playerTransformController, _duration, _height, _length, _jumpCurve));
@@ -28,18 +21,5 @@ public class LongSuperJump : BaseJump, ISuperJump
     public string GetJumpName()
     {
         return "Long";
-    }
-
-    private void StopCurrentSuperJump(Collision collision)
-    {
-        if (IsInJump())
-        {
-            SetIsInJump(false);
-        }
-    }
-
-    private void OnDisable()
-    {
-        PlayerTransformController.Collided -= StopCurrentSuperJump;
     }
 }

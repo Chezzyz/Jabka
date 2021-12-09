@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3169281608148144214
+--- !u!1 &2860129536949746691
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,25 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3169281608148144209}
-  - component: {fileID: 3169281608148144221}
-  - component: {fileID: 3169281608148144210}
-  - component: {fileID: 3169281608148144211}
-  - component: {fileID: 3169281608148144208}
+  - component: {fileID: 2860129536949746692}
+  - component: {fileID: 2860129536949746696}
+  - component: {fileID: 2860129536949746695}
+  - component: {fileID: 2860129536949746694}
+  - component: {fileID: 1018505874346493065}
   m_Layer: 5
-  m_Name: LongJumpButton
+  m_Name: DashSuperJumpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &3169281608148144209
+--- !u!224 &2860129536949746692
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3169281608148144214}
+  m_GameObject: {fileID: 2860129536949746691}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -36,24 +36,24 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 30}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &3169281608148144221
+--- !u!222 &2860129536949746696
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3169281608148144214}
+  m_GameObject: {fileID: 2860129536949746691}
   m_CullTransparentMesh: 1
---- !u!114 &3169281608148144210
+--- !u!114 &2860129536949746695
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3169281608148144214}
+  m_GameObject: {fileID: 2860129536949746691}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -67,8 +67,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9150d7e95bbb6664f9003b200188f544, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: acc73d9fcd4c1f1418c2e41248a0bc6b, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -77,30 +77,30 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3169281608148144211
+--- !u!114 &2860129536949746694
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3169281608148144214}
+  m_GameObject: {fileID: 2860129536949746691}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6fae4a2f21b4ca409d29fccce88af6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selectedSprite: {fileID: 0}
-  _defaultSprite: {fileID: 0}
---- !u!114 &3169281608148144208
+  _selectedSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  _defaultSprite: {fileID: 21300000, guid: f57dfffc64d3e8040812ea901d65b96f, type: 3}
+--- !u!114 &1018505874346493065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3169281608148144214}
+  m_GameObject: {fileID: 2860129536949746691}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8028d274107794548a6ac15052f520ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ab691bb938a19f479781395c592c362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpCurve:
@@ -117,16 +117,70 @@ MonoBehaviour:
       outWeight: 0.0267123
     - serializedVersion: 3
       time: 1
-      value: -0.00019283313
-      inSlope: -3.9131827
-      outSlope: -3.9131827
+      value: 0
+      inSlope: -3.894346
+      outSlope: -3.894346
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.026431441
+      inWeight: 0.034770668
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3
+      value: -20
+      inSlope: -10
+      outSlope: -0.90980625
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.62727135
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _length: 12
-  _height: 1.75
-  _duration: 1
+  _length: 6
+  _height: 2
+  _duration: 0.75
+  _dashCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.087826945
+      outSlope: -0.087826945
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.2334518
+    - serializedVersion: 3
+      time: 0.79736656
+      value: -0.19081418
+      inSlope: -0.8654659
+      outSlope: -0.8654659
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.4222154
+    - serializedVersion: 3
+      time: 1
+      value: -1
+      inSlope: -6.77778
+      outSlope: -6.77778
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.13859558
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3
+      value: -20
+      inSlope: -9.5
+      outSlope: -0.90980625
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.62727135
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _dashLength: 6
+  _dashHeight: 1
+  _dashDuration: 0.75

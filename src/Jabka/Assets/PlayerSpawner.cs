@@ -9,5 +9,6 @@ public class PlayerSpawner : MonoBehaviour
     public void Construct(PlayerTransformController playerTransform)
     {
         playerTransform.SetPosition(transform.position);
+        playerTransform.SetRotation(transform.rotation.eulerAngles);
     }
 }

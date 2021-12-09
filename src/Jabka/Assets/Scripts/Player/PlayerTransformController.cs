@@ -6,7 +6,9 @@ public class PlayerTransformController : MonoBehaviour
 {
     private Rigidbody _rigidbody;
 
-    public static event System.Action<Collision> Collided;
+    public static event System.Action<Collision, PlayerTransformController> Collided;
+
+    public const int playerLayerMask = 3; 
 
     public bool IsGrounded { get; private set; }
 
@@ -29,7 +31,12 @@ public class PlayerTransformController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Collided?.Invoke(collision);
+        Collided?.Invoke(collision, this);
+    }
+
+    public Rigidbody GetRigidbody()
+    {
+        return PlayerRigidbody;
     }
 
     public void SetRotation(Vector3 rotation)
@@ -61,6 +68,11 @@ public class PlayerTransformController : MonoBehaviour
     public Vector3 GetPosition()
     {
         return PlayerRigidbody.position;
+    }
+
+    public Vector3 GetTransformPosition()
+    {
+        return transform.position;
     }
 
     public Vector3 GetForwardDirection()
@@ -95,6 +107,11 @@ public class PlayerTransformController : MonoBehaviour
     public Vector3 GetBoxColliderSize()
     {
         return GetComponent<BoxCollider>().size;
+    }
+
+    public void SetGravityAffection(bool value)
+    {
+        PlayerRigidbody.useGravity = value;
     }
 }
 

@@ -17,12 +17,15 @@ public class PlayerInstaller : MonoInstaller
     private PlayerCamera _playerCamera;
     [SerializeField]
     private Canvas _canvas;
+    [SerializeField]
+    private Trajectory _trajectory;
 
     public override void InstallBindings()
     {
         Container.Bind<InputHandler>().FromComponentInNewPrefab(_inputHandler).AsSingle().NonLazy();
         Container.Bind<PlayerCamera>().FromComponentInNewPrefab(_playerCamera).AsSingle().NonLazy();
         Container.Bind<SuperJumpUnlocker>().FromComponentInNewPrefab(_superJumpUnlocker).AsSingle().NonLazy();
+        Container.Bind<Trajectory>().FromComponentInNewPrefab(_trajectory).AsSingle().NonLazy();
         Container.Bind<LevelMetaData>().FromScriptableObject(_levelMetaData).AsSingle().NonLazy();
 
         //делаем так, потому что нужно чтобы пикер был внутри канваса

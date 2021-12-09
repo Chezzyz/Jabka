@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BaseJump : MonoBehaviour
 {
     private bool _isInJump;
+
+    protected Coroutine _currentJump;
 
     public bool IsInJump()
     {
@@ -16,13 +19,18 @@ public class BaseJump : MonoBehaviour
         _isInJump = value;
     }
 
-    virtual protected IEnumerator JumpCoroutine(
+    protected virtual void OnEnable()
+    {
+        PlayerTransformController.Collided += OnCollision;
+    }
+
+    protected virtual IEnumerator JumpCoroutine(
         PlayerTransformController playerTransformController,
         float duration,
         float height,
         float length,
         AnimationCurve curve,
-        int layerToMask = 3)
+        int layerToMask = PlayerTransformController.playerLayerMask)
     {
         SetIsInJump(true);
 
@@ -30,22 +38,24 @@ public class BaseJump : MonoBehaviour
 
         float expiredTime = 0.0f;
 
-        float progress = expiredTime / duration;
-
         Vector3 originPosition = playerTransformController.GetPosition();
         Vector3 originDirection = playerTransformController.GetForwardDirection();
         Vector3 colliderSize = playerTransformController.GetBoxColliderSize();
 
-        while (IsInJump())
+        float progress = 0;
+        float maxProgress = curve.keys[curve.keys.Length - 1].time;
+
+        while (IsInJump() && (progress < maxProgress))
         {
             expiredTime += Time.deltaTime;
+            //когда прогресс больше единицы, значит происходит падение, все нормально
             progress = expiredTime / duration;
 
             float nextHeight = height * curve.Evaluate(progress);
             float nextLength = length * progress;
             Vector3 nextPosition = originPosition + new Vector3((originDirection * nextLength).x, nextHeight, (originDirection * nextLength).z);
 
-            if (IsCollideWithSomething(nextPosition, colliderSize, playerTransformController.GetQuaternion(), layerToMask) == false)
+            if (!IsCollideWithSomething(nextPosition, colliderSize, playerTransformController.GetQuaternion(), layerToMask))
             {
                 playerTransformController.SetPosition(nextPosition);
             }
@@ -60,9 +70,23 @@ public class BaseJump : MonoBehaviour
         SetIsInJump(false);
     }
 
-    private bool IsCollideWithSomething(Vector3 pos, Vector3 size, Quaternion rot, int layerToMask)
+    public static bool IsCollideWithSomething(Vector3 pos, Vector3 size, Quaternion rot, params int[] layersToMask)
     {
-        int layerMask = ~(1 << layerToMask);
+        //исключаем из проверки все передаваемые слои
+        int layerMask = ~layersToMask.Select(layer => (1 << layer)).Sum();
         return Physics.CheckBox(pos, size / 2, rot, layerMask);
+    }
+
+    protected virtual void OnCollision(Collision collision, PlayerTransformController playerTransformController)
+    {
+        if (IsInJump())
+        {
+            SetIsInJump(false);
+        }
+    }
+
+    protected virtual void OnDisable()
+    {
+        PlayerTransformController.Collided -= OnCollision;
     }
 }

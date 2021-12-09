@@ -23,33 +23,57 @@ public class Trajectory : MonoBehaviour
         ClearTrajectory();
     }
 
-    private void OnForceChanged(SimpleJumpData jumpData, Vector3 originPosition, Vector3 direction, float forcePercent)
+    private void OnForceChanged(SimpleJumpData jumpData, PlayerTransformController playerTransformController, float forcePercent)
     {
-        Vector3[] points = new Vector3[_pointsCountPerLenght];
+        StartCoroutine(CalculateTrajectoryAndShow(jumpData, playerTransformController, forcePercent));
+    }
+
+    private IEnumerator CalculateTrajectoryAndShow(SimpleJumpData jumpData, PlayerTransformController playerTransformController, float forcePercent)
+    {
+        if (forcePercent == 0)
+        {
+            ClearTrajectory();
+            yield break;
+        }
+
+        Vector3 originPosition = playerTransformController.GetTransformPosition();
+        Vector3 direction = playerTransformController.GetForwardDirection();
 
         float height = (jumpData.MaxHeight * forcePercent);
         float length = (jumpData.MinLength + (jumpData.MaxLength - jumpData.MinLength) * forcePercent);
 
-        float lastKeyX = jumpData.JumpCurve.keys[jumpData.JumpCurve.length - 1].time;
-        float pointsCount = _pointsCountPerLenght * lastKeyX;
+        float time = jumpData.JumpCurve.keys[jumpData.JumpCurve.length - 1].time;
+        int pointsCount = (int)Mathf.Round(_pointsCountPerLenght * time);
 
-        for (int i = 0; i < pointsCount; i++)
+
+        List<Vector3> points = new List<Vector3>();
+
+        for (int i = 1; i < pointsCount; i++)
         {
             float progress = (float)i / _pointsCountPerLenght;
             float nextHeight = height * jumpData.JumpCurve.Evaluate(progress);
             float nextLength = length * (progress);
             Vector3 nextPosition = originPosition + new Vector3((direction * nextLength).x, nextHeight, (direction * nextLength).z);
 
-            points[i] = nextPosition;
+            if (BaseJump.IsCollideWithSomething(nextPosition,
+                playerTransformController.GetBoxColliderSize(),
+                playerTransformController.GetQuaternion(),
+                PlayerTransformController.playerLayerMask))
+            {
+                break;
+            }
+
+            points.Add(nextPosition);
         }
 
-        ShowTrajectory(points);
+        ShowTrajectory(points.ToArray());
+        yield return new WaitForFixedUpdate();
     }
 
     private void ShowTrajectory(Vector3[] points)
     {
         _lineRenderer.positionCount = points.Length;
-
+        
         _lineRenderer.SetPositions(points);
     }
 

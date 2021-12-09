@@ -21,9 +21,9 @@ public class SimpleJump : BaseJump
     public SimpleJumpData JumpData { get; private set; }
     public bool IsInFall { get; private set; }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        PlayerTransformController.Collided += StopCurrentJump;
+        base.OnEnable();
         JumpData = new SimpleJumpData(_jumpCurve, _maxHeight, _minLength, _maxLength);
     }
 
@@ -39,21 +39,6 @@ public class SimpleJump : BaseJump
 
         return jump;
     }
-
-    private void StopCurrentJump(Collision collision)
-    {
-        //избавляемся от ложных вызовов 
-        if (IsInJump())
-        {
-            SetIsInJump(false);
-        }
-    }
-
-    private void OnDisable()
-    {
-        PlayerTransformController.Collided -= StopCurrentJump;
-    }
-
 }
 
 public struct SimpleJumpData

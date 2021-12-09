@@ -4,9 +4,9 @@ using System;
 
 public class InputHandler : MonoBehaviour
 {
-    public static event System.Action<Vector2> SwipeDeltaChanged;
-    public static event System.Action<Vector2> FingerDown;
-    public static event System.Action<Vector2, float> FingerUp;
+    public static event Action<Vector2> SwipeDeltaChanged;
+    public static event Action<Vector2> FingerDown;
+    public static event Action<Vector2, float> FingerUp;
 
     private void OnEnable()
     {

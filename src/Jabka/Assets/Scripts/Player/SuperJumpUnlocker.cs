@@ -26,7 +26,12 @@ public class SuperJumpUnlocker : MonoBehaviour
         int stage = _currentLevelMeta.GetStageNumber();
         int level = _currentLevelMeta.GetLevelNumber();
         //stage = -1 если сцена тестовая
-        if (stage == -1 || (stage == 1 && level >=2) || stage > 1)
+        if(stage == -1)
+        {
+            UnlockLongSuperJump();
+            UnlockDashSuperJump();
+        }
+        if ((stage == 1 && level >=2) || stage > 1)
         {
             UnlockLongSuperJump();
         }
@@ -35,5 +40,10 @@ public class SuperJumpUnlocker : MonoBehaviour
     private void UnlockLongSuperJump()
     {
         SuperJumpUnlocked?.Invoke(_longSuperJump.GetComponent<ISuperJump>());
+    }
+
+    private void UnlockDashSuperJump()
+    {
+        SuperJumpUnlocked?.Invoke(_dashSuperJump.GetComponent<ISuperJump>());
     }
 }

@@ -15,7 +15,7 @@ public class JumpController : MonoBehaviour
     [SerializeField]
     private float _superJumpForcePercentTreshold;
 
-    public static event System.Action<SimpleJumpData, Vector3, Vector3, float> ForceChanged;
+    public static event System.Action<SimpleJumpData, PlayerTransformController, float> ForceChanged;
     public static event System.Action<float, ISuperJump> JumpStarted;
 
     private PlayerTransformController _playerTransformController;
@@ -50,9 +50,8 @@ public class JumpController : MonoBehaviour
 
     private void OnFingerUp(Vector2 fingerPosition, float swipeTime)
     {
-        if (_currentForcePercent > 0 && _simpleJump.IsInJump() == false)
+        if (_currentForcePercent > 0 && !_simpleJump.IsInJump() && !_currentSuperJump.IsInJump())
         {
-
             if (swipeTime <= _superJumpTimeTreshold && _currentForcePercent >= _superJumpForcePercentTreshold)
             {
                 _currentSuperJump.SuperJump(_playerTransformController);
@@ -62,8 +61,12 @@ public class JumpController : MonoBehaviour
             {
                 _simpleJump.DoSimpleJump(_playerTransformController, _currentForcePercent);
                 JumpStarted?.Invoke(_currentForcePercent, null);
-                _currentForcePercent = 0;
             }
+            _currentForcePercent = 0;
+        }
+        else
+        {
+            JumpStarted?.Invoke(0, null);
         }
     }
 
@@ -73,8 +76,7 @@ public class JumpController : MonoBehaviour
         _currentForcePercent = CalculateSwipeLengthInPercent(-delta, _minScreenHeightThreshold, _maxScreenHeightThreshold);
 
         ForceChanged?.Invoke(_simpleJump.JumpData, 
-            _playerTransformController.GetPosition(),
-            _playerTransformController.GetForwardDirection(),
+            _playerTransformController,
             _currentForcePercent);
     }
 
