@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SashaScene.unity
+    guid: a879e4b5d1747a2439428050a6229d51
   m_configObjects: {}

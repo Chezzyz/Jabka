@@ -40,9 +40,9 @@ LineRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9122828653286803899}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -142,4 +142,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68183de493767541aa45a55813649c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointsCountPerLenght: 100
+  _pointsCountPerLenght: 40

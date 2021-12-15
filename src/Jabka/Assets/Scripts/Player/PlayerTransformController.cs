@@ -46,13 +46,13 @@ public class PlayerTransformController : MonoBehaviour
 
     public void SetRotationY(float y)
     {
-        Vector3 rot = PlayerRigidbody.rotation.eulerAngles;
-        PlayerRigidbody.MoveRotation(Quaternion.Euler(rot.x, y, rot.z));
+        Vector3 rot = transform.rotation.eulerAngles;
+        transform.rotation = Quaternion.Euler(rot.x, y, rot.z);
     }
 
     public void SetPosition(Vector3 position)
     {
-        PlayerRigidbody.MovePosition(position);
+        transform.position = position;
     }
 
     public Vector3 GetRotation()
@@ -65,7 +65,7 @@ public class PlayerTransformController : MonoBehaviour
         return PlayerRigidbody.rotation;
     }
 
-    public Vector3 GetPosition()
+    public Vector3 GetRigidbodyPosition()
     {
         return PlayerRigidbody.position;
     }

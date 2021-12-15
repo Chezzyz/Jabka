@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,38 +12,42 @@ public class Trajectory : MonoBehaviour
 
     private LineRenderer _lineRenderer;
 
+    private Action<float, ISuperJump> OnJumpStartedDelegate;
+
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
-        JumpController.ForceChanged += OnForceChanged;
-        JumpController.JumpStarted += OnJumpStarted;
+        OnJumpStartedDelegate = (num, sj) => OnJumpStarted();
+
+        JumpController.ForceChanged += OnTrajectoryChanged;
+        DashSuperJump.DashJumpPreparing += OnTrajectoryChanged;
+        JumpController.JumpStarted += OnJumpStartedDelegate;
+        DashSuperJump.DashJumpDashed += OnJumpStarted;
     }
 
-    private void OnJumpStarted(float forcePercent, ISuperJump superJump)
+    private void OnJumpStarted()
     {
         ClearTrajectory();
     }
 
-    private void OnForceChanged(SimpleJumpData jumpData, PlayerTransformController playerTransformController, float forcePercent)
+    private void OnTrajectoryChanged(JumpData jumpData, PlayerTransformController playerTransformController)
     {
-        StartCoroutine(CalculateTrajectoryAndShow(jumpData, playerTransformController, forcePercent));
+        StartCoroutine(CalculateTrajectoryAndShow(jumpData, playerTransformController));
     }
 
-    private IEnumerator CalculateTrajectoryAndShow(SimpleJumpData jumpData, PlayerTransformController playerTransformController, float forcePercent)
+    private IEnumerator CalculateTrajectoryAndShow(JumpData jumpData, PlayerTransformController playerTransformController)
     {
-        if (forcePercent == 0)
+        if (jumpData.ForcePercent == 0)
         {
             ClearTrajectory();
             yield break;
         }
+        
 
         Vector3 originPosition = playerTransformController.GetTransformPosition();
         Vector3 direction = playerTransformController.GetForwardDirection();
 
-        float height = (jumpData.MaxHeight * forcePercent);
-        float length = (jumpData.MinLength + (jumpData.MaxLength - jumpData.MinLength) * forcePercent);
-
-        float time = jumpData.JumpCurve.keys[jumpData.JumpCurve.length - 1].time;
+        float time = jumpData.JumpCurve.keys.Last().time;
         int pointsCount = (int)Mathf.Round(_pointsCountPerLenght * time);
 
 
@@ -51,8 +56,8 @@ public class Trajectory : MonoBehaviour
         for (int i = 1; i < pointsCount; i++)
         {
             float progress = (float)i / _pointsCountPerLenght;
-            float nextHeight = height * jumpData.JumpCurve.Evaluate(progress);
-            float nextLength = length * (progress);
+            float nextHeight = jumpData.Height * jumpData.JumpCurve.Evaluate(progress);
+            float nextLength = jumpData.Length * progress;
             Vector3 nextPosition = originPosition + new Vector3((direction * nextLength).x, nextHeight, (direction * nextLength).z);
 
             if (BaseJump.IsCollideWithSomething(nextPosition,
@@ -67,7 +72,7 @@ public class Trajectory : MonoBehaviour
         }
 
         ShowTrajectory(points.ToArray());
-        yield return new WaitForFixedUpdate();
+        yield return null;
     }
 
     private void ShowTrajectory(Vector3[] points)
@@ -84,7 +89,9 @@ public class Trajectory : MonoBehaviour
 
     private void OnDestroy()
     {
-        JumpController.ForceChanged -= OnForceChanged;
-        JumpController.JumpStarted -= OnJumpStarted;
+        DashSuperJump.DashJumpPreparing -= OnTrajectoryChanged;
+        JumpController.ForceChanged -= OnTrajectoryChanged;
+        JumpController.JumpStarted -= OnJumpStartedDelegate;
+        DashSuperJump.DashJumpDashed -= OnJumpStarted;
     }
 }

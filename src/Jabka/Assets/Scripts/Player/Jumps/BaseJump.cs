@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using UnityEngine;
 
 public class BaseJump : MonoBehaviour
@@ -14,7 +15,7 @@ public class BaseJump : MonoBehaviour
         return _isInJump;
     }
 
-    public void SetIsInJump(bool value)
+    public virtual void SetIsInJump(bool value)
     {
         _isInJump = value;
     }
@@ -29,7 +30,9 @@ public class BaseJump : MonoBehaviour
         float duration,
         float height,
         float length,
-        AnimationCurve curve,
+        float maxProgress,
+        AnimationCurve heightCurve,
+        AnimationCurve lengthCurve,
         int layerToMask = PlayerTransformController.playerLayerMask)
     {
         SetIsInJump(true);
@@ -38,21 +41,21 @@ public class BaseJump : MonoBehaviour
 
         float expiredTime = 0.0f;
 
-        Vector3 originPosition = playerTransformController.GetPosition();
+        Vector3 originPosition = playerTransformController.GetRigidbodyPosition();
         Vector3 originDirection = playerTransformController.GetForwardDirection();
         Vector3 colliderSize = playerTransformController.GetBoxColliderSize();
 
         float progress = 0;
-        float maxProgress = curve.keys[curve.keys.Length - 1].time;
 
         while (IsInJump() && (progress < maxProgress))
         {
             expiredTime += Time.deltaTime;
+            
             //когда прогресс больше единицы, значит происходит падение, все нормально
             progress = expiredTime / duration;
 
-            float nextHeight = height * curve.Evaluate(progress);
-            float nextLength = length * progress;
+            float nextHeight = height * heightCurve.Evaluate(progress);
+            float nextLength = length * lengthCurve.Evaluate(progress);
             Vector3 nextPosition = originPosition + new Vector3((originDirection * nextLength).x, nextHeight, (originDirection * nextLength).z);
 
             if (!IsCollideWithSomething(nextPosition, colliderSize, playerTransformController.GetQuaternion(), layerToMask))
@@ -63,8 +66,7 @@ public class BaseJump : MonoBehaviour
             {
                 break;
             }
-
-            yield return wait;
+            yield return null;
         }
 
         SetIsInJump(false);

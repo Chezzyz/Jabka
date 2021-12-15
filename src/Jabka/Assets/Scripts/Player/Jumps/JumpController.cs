@@ -15,7 +15,7 @@ public class JumpController : MonoBehaviour
     [SerializeField]
     private float _superJumpForcePercentTreshold;
 
-    public static event System.Action<SimpleJumpData, PlayerTransformController, float> ForceChanged;
+    public static event System.Action<JumpData, PlayerTransformController> ForceChanged;
     public static event System.Action<float, ISuperJump> JumpStarted;
 
     private PlayerTransformController _playerTransformController;
@@ -50,8 +50,10 @@ public class JumpController : MonoBehaviour
 
     private void OnFingerUp(Vector2 fingerPosition, float swipeTime)
     {
+        //если сила больше 0 и мы не впрыжке, то можем прыгать
         if (_currentForcePercent > 0 && !_simpleJump.IsInJump() && !_currentSuperJump.IsInJump())
         {
+            //если преодалеваем трешхолды по силе и времени, то делаем супер-прыжок, иначе обычный 
             if (swipeTime <= _superJumpTimeTreshold && _currentForcePercent >= _superJumpForcePercentTreshold)
             {
                 _currentSuperJump.SuperJump(_playerTransformController);
@@ -73,14 +75,22 @@ public class JumpController : MonoBehaviour
     private void OnSwipeY(Vector2 delta)
     {
         //длина свайпа вниз в процентах от экрана, когда свайп сделан вниз delta приходит отрицательная
-        _currentForcePercent = CalculateSwipeLengthInPercent(-delta, _minScreenHeightThreshold, _maxScreenHeightThreshold);
+        _currentForcePercent = CalculateForcePercent(-delta, _minScreenHeightThreshold, _maxScreenHeightThreshold);
 
-        ForceChanged?.Invoke(_simpleJump.JumpData, 
-            _playerTransformController,
-            _currentForcePercent);
+        ForceChanged?.Invoke(
+            GetSimpleJumpData(_currentForcePercent),
+            _playerTransformController);
     }
 
-    private float CalculateSwipeLengthInPercent(Vector3 delta, float minHeightTreshold, float maxHeightTreshold)
+    private JumpData GetSimpleJumpData(float forcePercent)
+    {
+        return new JumpData(_simpleJump.CalculateHeight(forcePercent),
+            _simpleJump.CalculateLength(forcePercent),
+            forcePercent,
+            _simpleJump.GetAnimationCurve());
+    }
+
+    private float CalculateForcePercent(Vector3 delta, float minHeightTreshold, float maxHeightTreshold)
     {
         float deltaYPercent = delta.y / Screen.height;
 

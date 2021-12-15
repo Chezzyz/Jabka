@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.Linq;
 using UnityEngine;
 
 public class LongSuperJump : BaseJump, ISuperJump
@@ -15,7 +17,10 @@ public class LongSuperJump : BaseJump, ISuperJump
 
     public void SuperJump(PlayerTransformController playerTransformController)
     {
-        _currentJump = StartCoroutine(JumpCoroutine(playerTransformController, _duration, _height, _length, _jumpCurve));
+        float maxProgress = _jumpCurve.keys.Last().time;
+        AnimationCurve lengthCurve = AnimationCurve.Linear(0, 0, maxProgress, maxProgress);
+
+        _currentJump = StartCoroutine(JumpCoroutine(playerTransformController, _duration, _height, _length, maxProgress, _jumpCurve, lengthCurve));
     }
 
     public string GetJumpName()
