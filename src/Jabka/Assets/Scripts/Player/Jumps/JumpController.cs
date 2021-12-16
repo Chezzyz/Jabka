@@ -77,9 +77,11 @@ public class JumpController : MonoBehaviour
         //длина свайпа вниз в процентах от экрана, когда свайп сделан вниз delta приходит отрицательная
         _currentForcePercent = CalculateForcePercent(-delta, _minScreenHeightThreshold, _maxScreenHeightThreshold);
 
-        ForceChanged?.Invoke(
-            GetSimpleJumpData(_currentForcePercent),
-            _playerTransformController);
+        if (!(_simpleJump.IsInJump() || _currentSuperJump.IsInJump())){
+            ForceChanged?.Invoke(
+                GetSimpleJumpData(_currentForcePercent),
+                _playerTransformController);
+        }
     }
 
     private JumpData GetSimpleJumpData(float forcePercent)
