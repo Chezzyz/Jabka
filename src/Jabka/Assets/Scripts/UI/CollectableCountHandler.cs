@@ -23,6 +23,16 @@ public class CollectableCountHandler : MonoBehaviour
         _countText.text = $"{_currentCount}/{_countOfCollectables}";
     }
 
+    public int GetCountOfCollectables()
+    {
+        return _countOfCollectables;
+    }
+
+    public int GetCurrentCountOfCollectables()
+    {
+        return _currentCount;
+    }
+
     private void OnCollected(Collectable collectable)
     {
         _currentCount++;

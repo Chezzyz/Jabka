@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57e385b2ab6962d4dbf6d05b3fb828b2, type: 3}
-  m_Name: SashaSceneLevel
+  m_Script: {fileID: 11500000, guid: 25ef2fa1bd0d0e843a4ca1ad02e9c6fb, type: 3}
+  m_Name: TestQuest
   m_EditorClassIdentifier: 
-  _stageNumber: -1
-  _levelNumber: 0
-  _levelName: SashaScene
-  _levelQuests:
-  - {fileID: 11400000, guid: 80b1891cb23574243a63e5f6115df8cc, type: 2}
+  _id: -1:1
+  _questDescription: "\u0421\u043E\u0431\u0435\u0440\u0438 1 \u043A\u0443\u0431\u0438\u043A"
+  _goalCount: 1
