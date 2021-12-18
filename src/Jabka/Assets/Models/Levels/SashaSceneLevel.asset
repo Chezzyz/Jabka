@@ -17,3 +17,4 @@ MonoBehaviour:
   _levelName: SashaScene
   _levelQuests:
   - {fileID: 11400000, guid: 80b1891cb23574243a63e5f6115df8cc, type: 2}
+  - {fileID: 11400000, guid: e089ff075567ff84bb10c8e84b611ad3, type: 2}

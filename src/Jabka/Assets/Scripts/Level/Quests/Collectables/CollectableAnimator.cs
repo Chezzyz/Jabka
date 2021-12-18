@@ -15,6 +15,8 @@ public class CollectableAnimator : MonoBehaviour
     [SerializeField]
     private Ease _collectedColorAnimationEase;
 
+    private DG.Tweening.Core.TweenerCore<Quaternion, Vector3, DG.Tweening.Plugins.Options.QuaternionOptions> _rotating;
+
     private void OnEnable()
     {
         Collectable.Collected += OnCollected;
@@ -22,14 +24,14 @@ public class CollectableAnimator : MonoBehaviour
 
     private void Start()
     {
-        transform.DOLocalRotate(new Vector3(0, 180, 0), _rotateLoopDuration).SetLoops(-1, LoopType.Incremental).SetEase(Ease.Linear);
+        _rotating = transform.DOLocalRotate(new Vector3(0, 180, 0), _rotateLoopDuration).SetLoops(-1, LoopType.Incremental).SetEase(Ease.Linear);
     }
 
     private void OnCollected(Collectable collectable)
     {
         SetOffCollider(collectable);
-        StartRiseAnimation(collectable, _collectedAnimationHeight, _collectedAnimationHeight, _collectedAnimationEase);
         StartFadeAnimation(collectable, _collectedAnimationDuration, _collectedColorAnimationEase);
+        StartRiseAnimation(collectable, _collectedAnimationHeight, _collectedAnimationDuration, _collectedAnimationEase);
     }
 
     private void SetOffCollider(Collectable collectable)
@@ -50,6 +52,6 @@ public class CollectableAnimator : MonoBehaviour
 
     private void StartRiseAnimation(Collectable collectable, float height, float duration, Ease ease)
     {
-        collectable.transform.DOLocalMoveY(_collectedAnimationHeight, _collectedAnimationDuration).SetEase(_collectedAnimationEase).OnComplete(() => collectable.SelfDestroy());
+        collectable.transform.DOLocalMoveY(height, duration).SetEase(ease).OnKill(() => { _rotating.Kill(); collectable.SelfDestroy(); });
     }
 }

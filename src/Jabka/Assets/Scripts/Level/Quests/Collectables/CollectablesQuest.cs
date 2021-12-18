@@ -9,18 +9,19 @@ public class CollectablesQuest : BaseQuest
     [SerializeField]
     private int _goalCount;
 
-    private CollectableCountHandler _collectableCountHandler;
+    private int _currentCount;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         Collectable.Collected += OnCollected;
-        _collectableCountHandler = FindObjectOfType<CollectableCountHandler>();
-        var gavno = FindObjectOfType<Canvas>();
+        _currentCount = 0;
     }
 
     private void OnCollected(Collectable collectable)
     {
-        if(_collectableCountHandler.GetCurrentCountOfCollectables() == _goalCount)
+        _currentCount++;
+        if (_currentCount == _goalCount)
         {
             Complete();
         }
