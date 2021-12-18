@@ -11,6 +11,8 @@ public class LevelMetaData : ScriptableObject
     private int _levelNumber;
     [SerializeField]
     private string _levelName;
+    [SerializeField]
+    private List<BaseQuest> _levelQuests;
 
     public int GetStageNumber()
     {

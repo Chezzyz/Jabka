@@ -42,7 +42,6 @@ public class Trajectory : MonoBehaviour
             ClearTrajectory();
             yield break;
         }
-        
 
         Vector3 originPosition = playerTransformController.GetTransformPosition();
         Vector3 direction = playerTransformController.GetForwardDirection();
@@ -72,7 +71,6 @@ public class Trajectory : MonoBehaviour
         }
 
         ShowTrajectory(points.ToArray());
-        yield return null;
     }
 
     private void ShowTrajectory(Vector3[] points)
