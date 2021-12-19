@@ -19,7 +19,7 @@ public class DashSuperJump : BaseJump, ISuperJump
 
     [Header("DashPart")]
     [SerializeField]
-    private AnimationCurve _dashCurve;
+    private AnimationCurve _dashHeightCurve;
     [SerializeField]
     private AnimationCurve _dashLengthCurve;
     [SerializeField]
@@ -84,13 +84,13 @@ public class DashSuperJump : BaseJump, ISuperJump
             StopCoroutine(_currentJump);
             SetTimeScale(1);
 
-            float maxProgress = _dashCurve.keys.Last().time;
+            float maxProgress = _dashHeightCurve.keys.Last().time;
 
             _isInDash = true;
             _isInPrepare = false;
 
             DashJumpDashed?.Invoke();
-            StartCoroutine(JumpCoroutine(_playerTransformController, _dashDuration, _dashHeight, _dashLength, maxProgress, _dashCurve, _dashLengthCurve));
+            StartCoroutine(JumpCoroutine(_playerTransformController, _dashDuration, _dashHeight, _dashLength, maxProgress, _dashHeightCurve, _dashLengthCurve));
         }
     }
 
@@ -101,7 +101,7 @@ public class DashSuperJump : BaseJump, ISuperJump
             _isInPrepare = true;
             SetTimeScale(_timeScale);
 
-            var jumpData = new JumpData(_height, _length, 1, _dashCurve);
+            var jumpData = new JumpData(_height, _length, 1, _dashHeightCurve);
             StartCoroutine(PreparingForDash(jumpData, _playerTransformController));
             StartCoroutine(OffPrepareAfterDelay(_slowMoDuration));
         }

@@ -16,17 +16,9 @@ public class PlayerTransformController : MonoBehaviour
     [Tooltip("Угол на который можно отклониться находясь на поверхности")]
     private float _degreeToBeGrounded;
 
-    private Rigidbody PlayerRigidbody {
-        set { _rigidbody = value; }
-        get
-        {
-            if (_rigidbody == null)
-            {
-                _rigidbody = GetComponent<Rigidbody>();
-            }
-
-            return _rigidbody;
-        }
+    private void OnEnable()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -34,14 +26,9 @@ public class PlayerTransformController : MonoBehaviour
         Collided?.Invoke(collision, this);
     }
 
-    public Rigidbody GetRigidbody()
-    {
-        return PlayerRigidbody;
-    }
-
     public void SetRotation(Vector3 rotation)
     {
-        PlayerRigidbody.rotation = Quaternion.Euler(rotation);
+        _rigidbody.rotation = Quaternion.Euler(rotation);
     }
 
     public void SetRotationY(float y)
@@ -55,19 +42,24 @@ public class PlayerTransformController : MonoBehaviour
         transform.position = position;
     }
 
+    public void SetTransformParent(Transform parent)
+    {
+        transform.parent = parent;
+    }
+
     public Vector3 GetRotation()
     {
-        return PlayerRigidbody.rotation.eulerAngles;
+        return transform.rotation.eulerAngles;
     }
 
     public Quaternion GetQuaternion()
     {
-        return PlayerRigidbody.rotation;
+        return transform.rotation;
     }
 
     public Vector3 GetRigidbodyPosition()
     {
-        return PlayerRigidbody.position;
+        return _rigidbody.position;
     }
 
     public Vector3 GetTransformPosition()
@@ -80,10 +72,10 @@ public class PlayerTransformController : MonoBehaviour
         return transform.forward;
     }
 
-    public bool IsOnHorizontalSurface(Collision collision)
+    public bool IsOnHorizontalSurface(Vector3 normal)
     {
         //смотрим косинус между векторами нормали контакта коллайдеров и осью Y
-        float cosBetweenVectors = Vector3.Dot(collision.GetContact(0).normal.normalized, Vector3.up);
+        float cosBetweenVectors = Vector3.Dot(normal.normalized, Vector3.up);
         float limitCos = Mathf.Cos(Mathf.Deg2Rad * _degreeToBeGrounded);
 
         return cosBetweenVectors >= limitCos;
@@ -96,12 +88,12 @@ public class PlayerTransformController : MonoBehaviour
 
     public void SetVelocity(Vector3 value)
     {
-        PlayerRigidbody.velocity = value;
+        _rigidbody.velocity = value;
     }
 
     public Vector3 GetVelocity()
     {
-        return PlayerRigidbody.velocity;
+        return _rigidbody.velocity;
     }
 
     public Vector3 GetBoxColliderSize()
@@ -111,7 +103,7 @@ public class PlayerTransformController : MonoBehaviour
 
     public void SetGravityAffection(bool value)
     {
-        PlayerRigidbody.useGravity = value;
+        _rigidbody.useGravity = value;
     }
 }
 

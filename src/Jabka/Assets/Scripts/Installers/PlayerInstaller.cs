@@ -10,13 +10,9 @@ public class PlayerInstaller : MonoInstaller
     [SerializeField]
     private PlayerData _playerPrefab;
     [SerializeField]
-    private LevelMetaData _levelMetaData;
-    [SerializeField]
     private SuperJumpUnlocker _superJumpUnlocker;
     [SerializeField]
     private PlayerCamera _playerCamera;
-    [SerializeField]
-    private Canvas _canvas;
     [SerializeField]
     private Trajectory _trajectory;
 
@@ -26,13 +22,10 @@ public class PlayerInstaller : MonoInstaller
         Container.Bind<PlayerCamera>().FromComponentInNewPrefab(_playerCamera).AsSingle().NonLazy();
         Container.Bind<SuperJumpUnlocker>().FromComponentInNewPrefab(_superJumpUnlocker).AsSingle().NonLazy();
         Container.Bind<Trajectory>().FromComponentInNewPrefab(_trajectory).AsSingle().NonLazy();
-        Container.Bind<LevelMetaData>().FromScriptableObject(_levelMetaData).AsSingle().NonLazy();
 
-        //делаем так, потому что нужно чтобы пикер был внутри канваса
-        GameObject canvas = Container.InstantiatePrefab(_canvas);
-        Container.Bind<SuperJumpPicker>().FromInstance(canvas.GetComponentInChildren<SuperJumpPicker>()).AsSingle().NonLazy();
+        
 
-        Container.Bind(typeof(PlayerTransformController), typeof(SimpleJump), typeof(PlayerRotation))
+        Container.Bind(typeof(PlayerTransformController), typeof(SimpleJump), typeof(PlayerRotation), typeof(JumpController))
             .FromComponentInNewPrefab(_playerPrefab).AsSingle().NonLazy();
     }
 }

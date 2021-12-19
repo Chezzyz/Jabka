@@ -41,7 +41,7 @@ public class BaseJump : MonoBehaviour
 
         float expiredTime = 0.0f;
 
-        Vector3 originPosition = playerTransformController.GetRigidbodyPosition();
+        Vector3 originPosition = playerTransformController.GetTransformPosition();
         Vector3 originDirection = playerTransformController.GetForwardDirection();
         Vector3 colliderSize = playerTransformController.GetBoxColliderSize();
 
