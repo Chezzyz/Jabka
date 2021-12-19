@@ -10,6 +10,8 @@ public class BaseJump : MonoBehaviour
 
     protected Coroutine _currentJump;
 
+    public static event Action JumpEnded;
+
     public bool IsInJump()
     {
         return _isInJump;
@@ -69,6 +71,7 @@ public class BaseJump : MonoBehaviour
             yield return null;
         }
 
+        JumpEnded?.Invoke();
         SetIsInJump(false);
     }
 
