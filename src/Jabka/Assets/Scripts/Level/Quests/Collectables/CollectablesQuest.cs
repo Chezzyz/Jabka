@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-[CreateAssetMenu(fileName = "CollectableQuest", menuName = "ScriptableObjects/Quest/CollectableQuest", order = 1)]
+[CreateAssetMenu(fileName = "CollectableQuest", menuName = "ScriptableObjects/Quest/CollectableQuest", order = 2)]
 public class CollectablesQuest : BaseQuest
 {
     [SerializeField]
@@ -20,10 +20,13 @@ public class CollectablesQuest : BaseQuest
 
     private void OnCollected(Collectable collectable)
     {
-        _currentCount++;
-        if (_currentCount == _goalCount)
+        if (_id == collectable.GetQuestId())
         {
-            Complete();
+            _currentCount++;
+            if (_currentCount == _goalCount)
+            {
+                Complete();
+            }
         }
     }
 

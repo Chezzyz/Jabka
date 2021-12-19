@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DestinationQuest", menuName = "ScriptableObjects/Quest/DestinationQuest", order = 2)]
+[CreateAssetMenu(fileName = "DestinationQuest", menuName = "ScriptableObjects/Quest/DestinationQuest", order = 3)]
 public class DestinationQuest : BaseQuest
 {
     [SerializeField]
@@ -19,11 +19,14 @@ public class DestinationQuest : BaseQuest
 
     private void OnDestinated(Destination destination)
     {
-        _currentCount++;
-        if(_currentCount == _goalCount)
+        if (_id == destination.GetQuestId())
         {
-            Complete();
-            destination.GetComponent<BoxCollider>().enabled = false;
+            _currentCount++;
+            if (_currentCount == _goalCount)
+            {
+                Complete();
+                destination.GetComponent<BoxCollider>().enabled = false;
+            }
         }
     }
 

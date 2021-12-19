@@ -29,9 +29,12 @@ public class CollectableAnimator : MonoBehaviour
 
     private void OnCollected(Collectable collectable)
     {
-        SetOffCollider(collectable);
-        StartFadeAnimation(collectable, _collectedAnimationDuration, _collectedColorAnimationEase);
-        StartRiseAnimation(collectable, _collectedAnimationHeight, _collectedAnimationDuration, _collectedAnimationEase);
+        if (gameObject != null && GetComponent<Collectable>() == collectable)
+        {
+            SetOffCollider(collectable);
+            StartFadeAnimation(collectable, _collectedAnimationDuration, _collectedColorAnimationEase);
+            StartRiseAnimation(collectable, _collectedAnimationHeight, _collectedAnimationDuration, _collectedAnimationEase);
+        }
     }
 
     private void SetOffCollider(Collectable collectable)
@@ -53,5 +56,10 @@ public class CollectableAnimator : MonoBehaviour
     private void StartRiseAnimation(Collectable collectable, float height, float duration, Ease ease)
     {
         collectable.transform.DOLocalMoveY(height, duration).SetEase(ease).OnKill(() => { _rotating.Kill(); collectable.SelfDestroy(); });
+    }
+
+    private void OnDisable()
+    {
+        Collectable.Collected -= OnCollected;
     }
 }
