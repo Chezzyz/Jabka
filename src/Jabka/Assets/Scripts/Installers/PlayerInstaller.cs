@@ -25,7 +25,7 @@ public class PlayerInstaller : MonoInstaller
 
         
 
-        Container.Bind(typeof(PlayerTransformController), typeof(SimpleJump), typeof(PlayerRotation))
+        Container.Bind(typeof(PlayerTransformController), typeof(SimpleJump), typeof(PlayerRotation), typeof(JumpController))
             .FromComponentInNewPrefab(_playerPrefab).AsSingle().NonLazy();
     }
 }

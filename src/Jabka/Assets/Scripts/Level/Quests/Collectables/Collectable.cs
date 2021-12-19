@@ -2,21 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
-public class Collectable : MonoBehaviour
+public class Collectable : BaseQuestItem
 {
     public static event System.Action<Collectable> Collected;
 
-    private void OnTriggerEnter(Collider collider)
+    protected override void SendEvent()
     {
-        if(collider.gameObject.TryGetComponent<PlayerTransformController>(out var player))
-        {
-            Collected?.Invoke(this);
-        }
-    }
-
-    public void SelfDestroy()
-    {
-        Destroy(gameObject);
+        Collected?.Invoke(this);
+        Debug.Log($"Collectable for quest {_questId} collected");
     }
 }

@@ -2,21 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
-public class Destination : MonoBehaviour
+public class Destination : BaseQuestItem
 {
     public static event System.Action<Destination> Destinated;
 
-    private void OnTriggerEnter(Collider collider)
+    protected override void SendEvent()
     {
-        if (collider.gameObject.TryGetComponent<PlayerTransformController>(out var player))
-        {
-            Destinated?.Invoke(this);
-        }
-    }
-
-    public void SelfDestroy()
-    {
-        Destroy(gameObject);
+        Destinated?.Invoke(this);
+        Debug.Log($"Destination for quest {_questId} destinated");
     }
 }

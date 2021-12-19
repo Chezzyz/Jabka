@@ -24,6 +24,8 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     [SerializeField]
     Ease _closeEase;
 
+    private JumpController _jumpController;
+
     private Image _currentJumpImage;
     
     private Sprite _selectedJumpSprite;
@@ -43,6 +45,12 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         SuperJumpButton.SuperJumpUnselected += UnsetSuperJump;
     }
 
+    [Zenject.Inject]
+    public void Consruct(JumpController jumpController)
+    {
+        _jumpController = jumpController;
+    }
+
     private void Start()
     {
         _buttons = GetComponentsInChildren<SuperJumpButton>();
@@ -50,6 +58,11 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         _currentJumpImage.sprite = _defaultSuperJump.GetComponent<Image>().sprite;
         //делаю полупрозрачной
         _currentJumpImage.color = new Color(1, 1, 1, _unselectedAlpha);
+
+        if (gameObject.activeInHierarchy)
+        {
+            _jumpController.SetSuperJump(_defaultSuperJump.GetComponent<ISuperJump>());
+        }
     }
 
     public ISuperJump GetDefaultSuperJump()

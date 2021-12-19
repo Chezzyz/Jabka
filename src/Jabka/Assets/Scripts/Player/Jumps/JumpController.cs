@@ -22,18 +22,15 @@ public class JumpController : MonoBehaviour
 
     private SimpleJump _simpleJump;
 
-    private SuperJumpPicker _superJumpPicker;
-
     private ISuperJump _currentSuperJump;
 
     private float _currentForcePercent;
 
     [Inject]
-    public void Construct(SimpleJump simpleJump, PlayerTransformController playerTransformController, SuperJumpPicker superJumpPicker)
+    public void Construct(SimpleJump simpleJump, PlayerTransformController playerTransformController)
     {
         _simpleJump = simpleJump;
         _playerTransformController = playerTransformController;
-        _superJumpPicker = superJumpPicker;
     }
 
     private void OnEnable()
@@ -43,18 +40,18 @@ public class JumpController : MonoBehaviour
         SuperJumpPicker.SuperJumpPicked += SetSuperJump;
     }
 
-    private void Start()
+    public void SetSuperJump(ISuperJump superJump)
     {
-        _currentSuperJump = _superJumpPicker.GetDefaultSuperJump();
+        _currentSuperJump = superJump;
     }
 
     private void OnFingerUp(Vector2 fingerPosition, float swipeTime)
     {
         //если сила больше 0 и мы не впрыжке, то можем прыгать
-        if (_currentForcePercent > 0 && !_simpleJump.IsInJump() && !_currentSuperJump.IsInJump())
+        if (_currentForcePercent > 0 && !_simpleJump.IsInJump() && (_currentSuperJump == null || !_currentSuperJump.IsInJump()))
         {
             //если преодалеваем трешхолды по силе и времени, то делаем супер-прыжок, иначе обычный 
-            if (swipeTime <= _superJumpTimeTreshold && _currentForcePercent >= _superJumpForcePercentTreshold)
+            if (_currentSuperJump != null && swipeTime <= _superJumpTimeTreshold && _currentForcePercent >= _superJumpForcePercentTreshold)
             {
                 _currentSuperJump.SuperJump(_playerTransformController);
                 JumpStarted?.Invoke(_currentForcePercent, _currentSuperJump);
@@ -77,7 +74,7 @@ public class JumpController : MonoBehaviour
         //длина свайпа вниз в процентах от экрана, когда свайп сделан вниз delta приходит отрицательная
         _currentForcePercent = CalculateForcePercent(-delta, _minScreenHeightThreshold, _maxScreenHeightThreshold);
 
-        if (!(_simpleJump.IsInJump() || _currentSuperJump.IsInJump())){
+        if (!(_simpleJump.IsInJump() || (_currentSuperJump != null && _currentSuperJump.IsInJump()))){
             ForceChanged?.Invoke(
                 GetSimpleJumpData(_currentForcePercent),
                 _playerTransformController);
@@ -109,10 +106,7 @@ public class JumpController : MonoBehaviour
         return forcePercent;
     }
 
-    private void SetSuperJump(ISuperJump superJump)
-    {
-        _currentSuperJump = superJump;
-    }
+    
 
     private void OnDisable()
     {
