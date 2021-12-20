@@ -51,9 +51,11 @@ public class JumpController : MonoBehaviour
     private void OnFingerUp(Vector2 fingerPosition, float swipeTime)
     {
         //если сила больше 0 и мы не впрыжке, то можем прыгать
+        //shtefan предложение: насколько понимание о состянии "в прыжке" это ответственость прыжка? Может есть вариант это затащить под ответственность класса игрока?
         if (_currentForcePercent > 0 && !_simpleJump.IsInJump() && !_currentSuperJump.IsInJump())
         {
-            //если преодалеваем трешхолды по силе и времени, то делаем супер-прыжок, иначе обычный 
+            //если преодалеваем трешхолды по силе и времени, то делаем супер-прыжок, иначе обычный
+            //shtefan предлагаю вообще переписать это место, чтобы мы в условиях сначала находили аргументы для JumpStarted, а потом 1 раз в конце метода его запускали
             if (swipeTime <= _superJumpTimeTreshold && _currentForcePercent >= _superJumpForcePercentTreshold)
             {
                 _currentSuperJump.SuperJump(_playerTransformController);
@@ -92,8 +94,11 @@ public class JumpController : MonoBehaviour
 
     private float CalculateForcePercent(Vector3 delta, float minHeightTreshold, float maxHeightTreshold)
     {
+        //shtefan: можно заменить на var
         float deltaYPercent = delta.y / Screen.height;
 
+        //shtefan: можно написать if (deltaYPercent > minHeightTreshold) return 0 и тогда не придется else писать
+        //shtefan: а еще правильно Threshold а не Treshold
         if (deltaYPercent > minHeightTreshold)
         {
             deltaYPercent = Mathf.Clamp(deltaYPercent, minHeightTreshold, maxHeightTreshold);

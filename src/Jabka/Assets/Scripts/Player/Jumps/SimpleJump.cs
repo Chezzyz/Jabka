@@ -21,6 +21,7 @@ public class SimpleJump : BaseJump
 
     public bool IsInFall { get; private set; }
 
+    //shtefan можно удалить функцию
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -28,6 +29,7 @@ public class SimpleJump : BaseJump
 
     public Coroutine DoSimpleJump(PlayerTransformController playerTransformController, float forcePercent)
     {
+        //shtefan: можно заменить на var
         float duration = CalculateDuration(forcePercent);
         float height = CalculateHeight(forcePercent);
         float length = CalculateLength(forcePercent);
@@ -37,7 +39,7 @@ public class SimpleJump : BaseJump
         Coroutine jump = StartCoroutine(JumpCoroutine(playerTransformController, duration, height, length, maxProgress, _jumpCurve, lengthCurve));
 
         playerTransformController.SetIsGrounded(false);
-
+        //shtefan в вызове этого метода ты не используешь возвращаемое значение, поэтому метод можно сделать void, и избавится от переменной jump, оставить только StartCoroutine...
         return jump;
     }
 

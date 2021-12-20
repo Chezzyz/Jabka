@@ -5,6 +5,7 @@ using System.Collections;
 public class PlayerRotation : MonoBehaviour
 {
     [SerializeField]
+    //shtefan правильно sensitivity
     private float _sensetivity = 0.1f;
 
     private PlayerTransformController _playerTransformController;
@@ -26,6 +27,7 @@ public class PlayerRotation : MonoBehaviour
 
     private void OnPickerMenuStateChanged(bool state)
     {
+        //shtefan: можно удалить "== true"
         if(state == true)
         {
             _canRotate = false;
