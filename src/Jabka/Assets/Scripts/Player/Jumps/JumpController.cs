@@ -22,18 +22,15 @@ public class JumpController : MonoBehaviour
 
     private SimpleJump _simpleJump;
 
-    private SuperJumpPicker _superJumpPicker;
-
     private ISuperJump _currentSuperJump;
 
     private float _currentForcePercent;
 
     [Inject]
-    public void Construct(SimpleJump simpleJump, PlayerTransformController playerTransformController, SuperJumpPicker superJumpPicker)
+    public void Construct(SimpleJump simpleJump, PlayerTransformController playerTransformController)
     {
         _simpleJump = simpleJump;
         _playerTransformController = playerTransformController;
-        _superJumpPicker = superJumpPicker;
     }
 
     private void OnEnable()
@@ -43,20 +40,20 @@ public class JumpController : MonoBehaviour
         SuperJumpPicker.SuperJumpPicked += SetSuperJump;
     }
 
-    private void Start()
+    public void SetSuperJump(ISuperJump superJump)
     {
-        _currentSuperJump = _superJumpPicker.GetDefaultSuperJump();
+        _currentSuperJump = superJump;
     }
 
     private void OnFingerUp(Vector2 fingerPosition, float swipeTime)
     {
         //если сила больше 0 и мы не впрыжке, то можем прыгать
         //shtefan предложение: насколько понимание о состянии "в прыжке" это ответственость прыжка? Может есть вариант это затащить под ответственность класса игрока?
-        if (_currentForcePercent > 0 && !_simpleJump.IsInJump() && !_currentSuperJump.IsInJump())
+        //shtefan предлагаю вообще переписать это место, чтобы мы в условиях сначала находили аргументы для JumpStarted, а потом 1 раз в конце метода его запускали
+        if (_currentForcePercent > 0 && !_simpleJump.IsInJump() && (_currentSuperJump == null || !_currentSuperJump.IsInJump()))
         {
-            //если преодалеваем трешхолды по силе и времени, то делаем супер-прыжок, иначе обычный
-            //shtefan предлагаю вообще переписать это место, чтобы мы в условиях сначала находили аргументы для JumpStarted, а потом 1 раз в конце метода его запускали
-            if (swipeTime <= _superJumpTimeTreshold && _currentForcePercent >= _superJumpForcePercentTreshold)
+            //если преодалеваем трешхолды по силе и времени, то делаем супер-прыжок, иначе обычный 
+            if (_currentSuperJump != null && swipeTime <= _superJumpTimeTreshold && _currentForcePercent >= _superJumpForcePercentTreshold)
             {
                 _currentSuperJump.SuperJump(_playerTransformController);
                 JumpStarted?.Invoke(_currentForcePercent, _currentSuperJump);
@@ -79,9 +76,11 @@ public class JumpController : MonoBehaviour
         //длина свайпа вниз в процентах от экрана, когда свайп сделан вниз delta приходит отрицательная
         _currentForcePercent = CalculateForcePercent(-delta, _minScreenHeightThreshold, _maxScreenHeightThreshold);
 
-        ForceChanged?.Invoke(
-            GetSimpleJumpData(_currentForcePercent),
-            _playerTransformController);
+        if (!(_simpleJump.IsInJump() || (_currentSuperJump != null && _currentSuperJump.IsInJump()))){
+            ForceChanged?.Invoke(
+                GetSimpleJumpData(_currentForcePercent),
+                _playerTransformController);
+        }
     }
 
     private JumpData GetSimpleJumpData(float forcePercent)
@@ -112,10 +111,7 @@ public class JumpController : MonoBehaviour
         return forcePercent;
     }
 
-    private void SetSuperJump(ISuperJump superJump)
-    {
-        _currentSuperJump = superJump;
-    }
+    
 
     private void OnDisable()
     {

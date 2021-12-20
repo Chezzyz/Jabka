@@ -72,7 +72,6 @@ public class Trajectory : MonoBehaviour
         }
 
         ShowTrajectory(points.ToArray());
-        yield return null;
     }
 
     private void ShowTrajectory(Vector3[] points)
