@@ -6,11 +6,11 @@ using UnityEngine;
 public abstract class BaseQuestItem : MonoBehaviour
 {
     [SerializeField]
-    protected string _questId;
+    protected int _levelNumber;
 
-    public string GetQuestId()
+    public int GetLevelNumber()
     {
-        return _questId;
+        return _levelNumber;
     }
 
     protected virtual void OnTriggerEnter(Collider collider)

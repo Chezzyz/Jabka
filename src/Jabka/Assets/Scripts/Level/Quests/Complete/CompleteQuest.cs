@@ -13,10 +13,9 @@ public class CompleteQuest : BaseQuest
 
     private void OnLevelCompleted(CompletePlace completePlace)
     {
-        if (_id == completePlace.GetQuestId())
+        if (completePlace.GetLevelNumber() == GetLevelNumber())
         {
             Complete();
-            Debug.Log("Level Completed!");
         }
     }
 }

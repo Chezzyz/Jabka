@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Progress", menuName = "ScriptableObjects/MetaData/Progress", order = 1)]
+[CreateAssetMenu(fileName = "Progress", menuName = "ScriptableObjects/MetaData/Progress", order = 2)]
 public class ProgressData : ScriptableObject
 {
     [SerializeField]

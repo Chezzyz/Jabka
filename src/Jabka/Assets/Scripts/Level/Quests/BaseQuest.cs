@@ -37,6 +37,11 @@ public class BaseQuest : ScriptableObject
         }
     }
 
+    protected int GetLevelNumber()
+    {
+        return int.Parse(_id.Split(':')[0]);
+    }
+
     protected virtual void Complete()
     {
         _isCompleted = true;

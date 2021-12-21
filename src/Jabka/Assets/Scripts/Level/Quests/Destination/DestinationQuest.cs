@@ -19,7 +19,7 @@ public class DestinationQuest : BaseQuest
 
     private void OnDestinated(Destination destination)
     {
-        if (_id == destination.GetQuestId())
+        if (destination.GetLevelNumber() == GetLevelNumber())
         {
             _currentCount++;
             if (_currentCount == _goalCount)

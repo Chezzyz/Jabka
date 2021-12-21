@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Quest_1-2
   m_EditorClassIdentifier: 
   _id: 1:2
-  _questDescription: "\u0421\u043E\u0431\u0435\u0440\u0438 3 \u043A\u0443\u0431\u0438\u043A\u0430"
+  _questDescription: 'Collect 3 '
   _isCompleted: 1
   _goalCount: 3

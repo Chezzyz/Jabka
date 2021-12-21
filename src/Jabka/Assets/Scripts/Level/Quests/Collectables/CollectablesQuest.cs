@@ -20,7 +20,7 @@ public class CollectablesQuest : BaseQuest
 
     private void OnCollected(Collectable collectable)
     {
-        if (_id == collectable.GetQuestId())
+        if (collectable.GetLevelNumber() == GetLevelNumber())
         {
             _currentCount++;
             if (_currentCount == _goalCount)

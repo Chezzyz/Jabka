@@ -18,3 +18,4 @@ MonoBehaviour:
   _levelQuests:
   - {fileID: 11400000, guid: 862e3582aa161a844a7bb68cac838d79, type: 2}
   - {fileID: 11400000, guid: 42cb74a70919c1949b9fcd5c434a1c13, type: 2}
+  - {fileID: 11400000, guid: 9e4ee81a690a70442a05103a27dff076, type: 2}
