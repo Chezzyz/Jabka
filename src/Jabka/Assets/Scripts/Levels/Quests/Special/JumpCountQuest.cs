@@ -15,9 +15,16 @@ public class JumpCountQuest : BaseQuest
     protected override void OnEnable()
     {
         base.OnEnable();
-        _currentCount = 0;
+    }
+
+    protected override void OnSceneLoaded(string sceneName)
+    {
+        base.OnSceneLoaded(sceneName);
+        JumpController.JumpStarted -= OnJumpStarted;
+        CompletePlace.LevelCompleted -= OnLevelCompleted;
         JumpController.JumpStarted += OnJumpStarted;
         CompletePlace.LevelCompleted += OnLevelCompleted;
+        _currentCount = 0;
     }
 
     private void OnJumpStarted(float force, ISuperJump superJump)
@@ -37,5 +44,10 @@ public class JumpCountQuest : BaseQuest
                 Complete();
             }
         }
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
     }
 }

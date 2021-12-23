@@ -61,4 +61,11 @@ public class PlayerRotation : MonoBehaviour
             _playerTransformController.SetRotationY(_originRotationY + (-1 * _sensetivity * delta.x));
         }
     }
+
+    private void OnDisable()
+    {
+        InputHandler.SwipeDeltaChanged -= OnSwipeX;
+        InputHandler.FingerDown -= OnFingerDown;
+        SuperJumpPicker.SuperJumpMenuStateChanged -= OnPickerMenuStateChanged;
+    }
 }

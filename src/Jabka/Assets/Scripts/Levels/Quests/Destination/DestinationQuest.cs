@@ -13,8 +13,13 @@ public class DestinationQuest : BaseQuest
     protected override void OnEnable()
     {
         base.OnEnable();
-        Destination.Destinated += OnDestinated;
+    }
+
+    protected override void OnSceneLoaded(string sceneName)
+    {
+        base.OnSceneLoaded(sceneName);
         _currentCount = 0;
+        Destination.Destinated -= OnDestinated;
     }
 
     private void OnDestinated(Destination destination)
@@ -24,14 +29,14 @@ public class DestinationQuest : BaseQuest
             _currentCount++;
             if (_currentCount == _goalCount)
             {
-                Complete();
+                ReadyForComplete();
                 destination.GetComponent<BoxCollider>().enabled = false;
             }
         }
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
-        Destination.Destinated += OnDestinated;
+        base.OnDisable();
     }
 }

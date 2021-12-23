@@ -8,6 +8,13 @@ public class CompleteQuest : BaseQuest
     protected override void OnEnable()
     {
         base.OnEnable();
+        
+    }
+
+    protected override void OnSceneLoaded(string sceneName)
+    {
+        base.OnSceneLoaded(sceneName);
+        CompletePlace.LevelCompleted -= OnLevelCompleted;
         CompletePlace.LevelCompleted += OnLevelCompleted;
     }
 
@@ -17,5 +24,10 @@ public class CompleteQuest : BaseQuest
         {
             Complete();
         }
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
     }
 }

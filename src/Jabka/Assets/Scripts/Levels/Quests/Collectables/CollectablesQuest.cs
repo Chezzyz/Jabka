@@ -14,8 +14,14 @@ public class CollectablesQuest : BaseQuest
     protected override void OnEnable()
     {
         base.OnEnable();
-        Collectable.Collected += OnCollected;
+    }
+
+    protected override void OnSceneLoaded(string sceneName)
+    {
+        base.OnSceneLoaded(sceneName);
         _currentCount = 0;
+        Collectable.Collected -= OnCollected;
+        Collectable.Collected += OnCollected;
     }
 
     private void OnCollected(Collectable collectable)
@@ -25,13 +31,13 @@ public class CollectablesQuest : BaseQuest
             _currentCount++;
             if (_currentCount == _goalCount)
             {
-                Complete();
+                ReadyForComplete();
             }
         }
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
-        Collectable.Collected -= OnCollected;
+        base.OnDisable();
     }
 }

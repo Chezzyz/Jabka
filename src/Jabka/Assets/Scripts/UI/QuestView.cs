@@ -32,6 +32,8 @@ public class QuestView : MonoBehaviour
     private void OnEnable()
     {
         BaseQuest.QuestCompleted += OnQuestCompleted;
+        BaseQuest.QuestAlreadyCompleted += OnQuestCompleted;
+        BaseQuest.IsReadyForComplete += OnReadyForComplete;
     }
 
     private void Start()
@@ -43,9 +45,17 @@ public class QuestView : MonoBehaviour
 
     private void OnQuestCompleted(BaseQuest quest)
     {
-        if(quest.GetId() == _baseQuest.GetId())
+        if(quest && quest.GetId() == _baseQuest.GetId())
         {
             SetCompletedView();
+        }
+    }
+
+    private void OnReadyForComplete(BaseQuest quest)
+    {
+        if (quest && quest.GetId() == _baseQuest.GetId())
+        {
+            SetReadyForCompleteView();
         }
     }
 
@@ -69,6 +79,12 @@ public class QuestView : MonoBehaviour
         SetTextColor(_isInMainMenu ? _grayColor : _defaultColor);
     }
 
+    private void SetReadyForCompleteView()
+    {
+        SetSprite(_currentImage, _completedSprite, Color.white);
+        SetTextColor(_grayColor);
+    }
+
     private void SetCompletedView()
     {
         SetSprite(_currentImage, _completedSprite, Color.white);
@@ -90,5 +106,7 @@ public class QuestView : MonoBehaviour
     private void OnDisable()
     {
         BaseQuest.QuestCompleted -= OnQuestCompleted;
+        BaseQuest.QuestAlreadyCompleted -= OnQuestCompleted;
+        BaseQuest.IsReadyForComplete -= OnReadyForComplete;
     }
 }

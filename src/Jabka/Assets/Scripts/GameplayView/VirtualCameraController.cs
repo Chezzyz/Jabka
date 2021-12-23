@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
+[RequireComponent(typeof(CinemachineVirtualCamera))]
 public class VirtualCameraController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        
+        DeadZone.PlayerFall += OnPlayerFall;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnPlayerFall(PlayerTransformController playerTransformController)
     {
-        
+        GetComponent<CinemachineVirtualCamera>().Follow = null;
+    }
+
+    private void OnDisable()
+    {
+        DeadZone.PlayerFall -= OnPlayerFall;
     }
 }

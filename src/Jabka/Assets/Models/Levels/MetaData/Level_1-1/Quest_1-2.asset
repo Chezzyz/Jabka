@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 1:2
   _questDescription: 'Collect 3 '
-  _isCompleted: 1
+  _isCompleted: 0
   _goalCount: 3
