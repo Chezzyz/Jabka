@@ -68,6 +68,7 @@ public class DashSuperJump : BaseJump, ISuperJump
     public void SuperJump(PlayerTransformController playerTransformController)
     {
         _playerTransformController = playerTransformController;
+        //shtefan: можно заменить на var
         float maxProgress = _jumpCurve.keys.Last().time;
         AnimationCurve lengthCurve = AnimationCurve.Linear(0, 0, maxProgress, maxProgress);
 
@@ -87,7 +88,7 @@ public class DashSuperJump : BaseJump, ISuperJump
         {
             StopCoroutine(_currentJump);
             SetTimeScale(1);
-
+            //shtefan: можно заменить на var
             float maxProgress = _dashHeightCurve.keys.Last().time;
 
             _isInDash = true;

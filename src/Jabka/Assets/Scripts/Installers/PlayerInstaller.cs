@@ -23,9 +23,7 @@ public class PlayerInstaller : MonoInstaller
         Container.Bind<SuperJumpUnlocker>().FromComponentInNewPrefab(_superJumpUnlocker).AsSingle().NonLazy();
         Container.Bind<Trajectory>().FromComponentInNewPrefab(_trajectory).AsSingle().NonLazy();
 
-        
-
-        Container.Bind(typeof(PlayerTransformController), typeof(SimpleJump), typeof(PlayerRotation))
+        Container.Bind(typeof(PlayerTransformController), typeof(SimpleJump), typeof(PlayerRotation), typeof(JumpController))
             .FromComponentInNewPrefab(_playerPrefab).AsSingle().NonLazy();
     }
 }
