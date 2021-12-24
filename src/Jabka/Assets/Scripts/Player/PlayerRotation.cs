@@ -22,10 +22,11 @@ public class PlayerRotation : MonoBehaviour
     {
         InputHandler.SwipeDeltaChanged += OnSwipeX;
         InputHandler.FingerDown += OnFingerDown;
-        SuperJumpPicker.SuperJumpMenuStateChanged += OnPickerMenuStateChanged;
+        SuperJumpPicker.SuperJumpMenuStateChanged += OnMenuStateChanged;
+        Pause.PauseStateChanged += OnMenuStateChanged;
     }
 
-    private void OnPickerMenuStateChanged(bool state)
+    private void OnMenuStateChanged(bool state)
     {
         //shtefan: можно удалить "== true"
         if(state == true)
@@ -62,5 +63,13 @@ public class PlayerRotation : MonoBehaviour
         {
             _playerTransformController.SetRotationY(_originRotationY + (-1 * _sensetivity * delta.x));
         }
+    }
+
+    private void OnDisable()
+    {
+        InputHandler.SwipeDeltaChanged -= OnSwipeX;
+        InputHandler.FingerDown -= OnFingerDown;
+        SuperJumpPicker.SuperJumpMenuStateChanged -= OnMenuStateChanged;
+        Pause.PauseStateChanged -= OnMenuStateChanged;
     }
 }

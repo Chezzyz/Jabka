@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Quest_1-1
   m_EditorClassIdentifier: 
   _id: 1:1
-  _questDescription: "\u041F\u0440\u043E\u0439\u0434\u0438 \u0423\u0440\u043E\u0432\u0435\u043D\u044C"
-  _isCompleted: 1
+  _questDescription: Complete level
+  _isCompleted: 0

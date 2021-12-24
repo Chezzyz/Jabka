@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: -1:1
   _questDescription: "\u0421\u043E\u0431\u0435\u0440\u0438 1 \u043A\u0443\u0431\u0438\u043A"
-  _isCompleted: 1
+  _isCompleted: 0
   _goalCount: 1

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e385b2ab6962d4dbf6d05b3fb828b2, type: 3}
+  m_Name: Level_1-3
+  m_EditorClassIdentifier: 
+  _stageNumber: 1
+  _levelNumber: 3
+  _levelName: FirstSuperJump
+  _levelQuests:
+  - {fileID: 11400000, guid: 54c0593a5db151e4d983773b544b635c, type: 2}
+  - {fileID: 11400000, guid: fef4f339e47a10e4a8ce078119e9e48a, type: 2}
+  - {fileID: 11400000, guid: abd505caeb39c264f96b4ac4acf2a698, type: 2}
