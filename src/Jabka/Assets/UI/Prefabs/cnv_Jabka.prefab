@@ -366,7 +366,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2565082502278294991}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &2553749046970871686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,6 +849,7 @@ GameObject:
   - component: {fileID: 2193858578135887871}
   - component: {fileID: 7474985576068618104}
   - component: {fileID: 8500098762486212575}
+  - component: {fileID: 496234036}
   m_Layer: 5
   m_Name: btn_Pause
   m_TagString: Untagged
@@ -981,6 +982,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 496234036}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: PauseOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &496234036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922920824698163305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 648392296c5214b4ea259e1e5880c503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5036180791911723373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,7 +1382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainMenuScene: {fileID: 102900000, guid: 4dafa2547bd22f149898fdae09b2542d, type: 3}
-  _nextLevelScene: {fileID: 0}
+  _nextLevelScene: {fileID: 102900000, guid: 9eeedc2ca31b9424498ca0f5ba2bc528, type: 3}
   _sceneTransitionDuration: 1.5
   _retryTransitionDuration: 1
 --- !u!1 &5553110684281668914
@@ -2320,6 +2345,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 496234036}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: PauseOff
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

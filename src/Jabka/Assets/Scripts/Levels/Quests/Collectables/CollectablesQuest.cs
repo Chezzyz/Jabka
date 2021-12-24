@@ -11,11 +11,6 @@ public class CollectablesQuest : BaseQuest
 
     private int _currentCount;
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-    }
-
     protected override void OnSceneLoaded(string sceneName)
     {
         base.OnSceneLoaded(sceneName);
@@ -34,10 +29,5 @@ public class CollectablesQuest : BaseQuest
                 ReadyForComplete();
             }
         }
-    }
-
-    protected override void OnDisable()
-    {
-        base.OnDisable();
     }
 }

@@ -37,7 +37,7 @@ public class BaseQuest : ScriptableObject
     {
         if (_isCompleted)
         {
-            QuestCompleted?.Invoke(this);
+            QuestAlreadyCompleted?.Invoke(this);
             return;
         }
         SceneLoader.SceneLoaded += OnSceneLoaded;

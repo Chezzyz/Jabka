@@ -21,10 +21,11 @@ public class PlayerRotation : MonoBehaviour
     {
         InputHandler.SwipeDeltaChanged += OnSwipeX;
         InputHandler.FingerDown += OnFingerDown;
-        SuperJumpPicker.SuperJumpMenuStateChanged += OnPickerMenuStateChanged;
+        SuperJumpPicker.SuperJumpMenuStateChanged += OnMenuStateChanged;
+        Pause.PauseStateChanged += OnMenuStateChanged;
     }
 
-    private void OnPickerMenuStateChanged(bool state)
+    private void OnMenuStateChanged(bool state)
     {
         if(state == true)
         {
@@ -66,6 +67,7 @@ public class PlayerRotation : MonoBehaviour
     {
         InputHandler.SwipeDeltaChanged -= OnSwipeX;
         InputHandler.FingerDown -= OnFingerDown;
-        SuperJumpPicker.SuperJumpMenuStateChanged -= OnPickerMenuStateChanged;
+        SuperJumpPicker.SuperJumpMenuStateChanged -= OnMenuStateChanged;
+        Pause.PauseStateChanged -= OnMenuStateChanged;
     }
 }
