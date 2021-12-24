@@ -19,6 +19,8 @@ public class SimpleJump : BaseJump
     [SerializeField]
     private float _minDuration;
 
+    public static event Action<float, float> SimpleJumpStarted; //float: forcePercent, duration
+
     public bool IsInFall { get; private set; }
 
     protected override void OnEnable()
@@ -35,6 +37,8 @@ public class SimpleJump : BaseJump
         AnimationCurve lengthCurve = AnimationCurve.Linear(0, 0, maxProgress, maxProgress);
 
         Coroutine jump = StartCoroutine(JumpCoroutine(playerTransformController, duration, height, length, maxProgress, _jumpCurve, lengthCurve));
+
+        SimpleJumpStarted?.Invoke(forcePercent, duration);
 
         playerTransformController.SetIsGrounded(false);
 

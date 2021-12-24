@@ -33,7 +33,6 @@ public class DashSuperJump : BaseJump, ISuperJump
     [SerializeField]
     private float _slowMoDuration;
 
-    public static event Action DashJumpDashed;
     public static event Action<JumpData, PlayerTransformController> DashJumpPreparing;
 
     private Action<Vector2, float> FingerUpDelegate;
@@ -42,6 +41,9 @@ public class DashSuperJump : BaseJump, ISuperJump
 
     private bool _isInPrepare;
     private bool _isInDash;
+
+    public static event Action<float> DashJumpDashed;
+    public static event Action<float> DashJumpStarted; //float: duration
 
     protected override void OnEnable()
     {
@@ -70,6 +72,8 @@ public class DashSuperJump : BaseJump, ISuperJump
         AnimationCurve lengthCurve = AnimationCurve.Linear(0, 0, maxProgress, maxProgress);
 
         _currentJump = StartCoroutine(JumpCoroutine(_playerTransformController, _duration, _height, _length, maxProgress, _jumpCurve, lengthCurve));
+
+        DashJumpStarted?.Invoke(_duration);
     }
 
     public string GetJumpName()
@@ -89,8 +93,8 @@ public class DashSuperJump : BaseJump, ISuperJump
             _isInDash = true;
             _isInPrepare = false;
 
-            DashJumpDashed?.Invoke();
             StartCoroutine(JumpCoroutine(_playerTransformController, _dashDuration, _dashHeight, _dashLength, maxProgress, _dashHeightCurve, _dashLengthCurve));
+            DashJumpDashed?.Invoke(_dashDuration);
         }
     }
 

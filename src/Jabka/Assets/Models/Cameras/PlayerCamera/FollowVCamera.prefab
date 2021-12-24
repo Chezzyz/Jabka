@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3473241436423673796}
   - component: {fileID: 3473241436423673795}
   - component: {fileID: 687462376065534447}
+  - component: {fileID: 5254429646071070302}
   m_Layer: 0
   m_Name: FollowVCamera
   m_TagString: Untagged
@@ -78,6 +79,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee9dff52993b51c40ad3f483c36ec23d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5254429646071070302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3473241436423673794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baabe46cff87c4948988057199a566d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3473241437116127715
