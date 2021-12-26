@@ -66,6 +66,7 @@ MonoBehaviour:
   _desctiption: {fileID: 5342754374362602722}
   _currentImage: {fileID: 1692524382358468425}
   _currentStarImage: {fileID: 9169845864719750623}
+  _isInMainMenu: 0
 --- !u!1 &4381752491533542909
 GameObject:
   m_ObjectHideFlags: 0

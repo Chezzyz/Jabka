@@ -15,8 +15,7 @@ public class BaseJump : MonoBehaviour
         return _isInJump;
     }
 
-    //shtefan можно сделать private
-    public virtual void SetIsInJump(bool value)
+    protected virtual void SetIsInJump(bool value)
     {
         _isInJump = value;
     }
@@ -26,8 +25,6 @@ public class BaseJump : MonoBehaviour
         PlayerTransformController.Collided += OnCollision;
     }
 
-//shtefan нет оверрайда, можно убрать виртуал
-    //shtefan: можно использовать JumpData вместо кучи переменных
     protected virtual IEnumerator JumpCoroutine(
         PlayerTransformController playerTransformController,
         float duration,
@@ -40,9 +37,6 @@ public class BaseJump : MonoBehaviour
     {
         SetIsInJump(true);
 
-        //shtefan: неиспользуемая переменная
-        var wait = new WaitForFixedUpdate();
-        //shtefan: зачем везде писать конкретные типы вместо var? мы же не в c++
         float expiredTime = 0.0f;
 
         Vector3 originPosition = playerTransformController.GetTransformPosition();
@@ -51,14 +45,13 @@ public class BaseJump : MonoBehaviour
 
         float progress = 0;
 
-        //shtefan не нужны скобки где сравнеие
-        while (IsInJump() && (progress < maxProgress))
+        while (IsInJump() && progress < maxProgress)
         {
             expiredTime += Time.deltaTime;
             
             //когда прогресс больше единицы, значит происходит падение, все нормально
             progress = expiredTime / duration;
-            //shtefan: можно заменить на var
+            
             float nextHeight = height * heightCurve.Evaluate(progress);
             float nextLength = length * lengthCurve.Evaluate(progress);
             Vector3 nextPosition = originPosition + new Vector3((originDirection * nextLength).x, nextHeight, (originDirection * nextLength).z);
@@ -84,7 +77,6 @@ public class BaseJump : MonoBehaviour
         return Physics.CheckBox(pos, size / 2, rot, layerMask);
     }
 
-    //shtefan нет оверрайда, можно убрать виртуал
     protected virtual void OnCollision(Collision collision, PlayerTransformController playerTransformController)
     {
         if (IsInJump())

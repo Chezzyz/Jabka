@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 1:1
   _questDescription: Complete level
-  _isCompleted: 0
+  _isCompleted: 1

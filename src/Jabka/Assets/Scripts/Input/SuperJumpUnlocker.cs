@@ -21,7 +21,7 @@ public class SuperJumpUnlocker : MonoBehaviour
         _currentLevelMeta = levelMeta;
     }
 
-    private void Awake()
+    private void Start()
     {
         int stage = _currentLevelMeta.GetStageNumber();
         int level = _currentLevelMeta.GetLevelNumber();

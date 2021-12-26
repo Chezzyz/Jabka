@@ -4,7 +4,6 @@ using UnityEngine;
 
 public struct JumpData
 {
-    //shtefan private set'ы не используются
     public float Height { get; private set; }
     public float Length { get; private set; }
     public float ForcePercent { get; private set; }

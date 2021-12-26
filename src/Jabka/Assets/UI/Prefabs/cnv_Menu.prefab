@@ -1871,7 +1871,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5654485340085926360}
         m_TargetAssemblyTypeName: LevelView, Assembly-CSharp
-        m_MethodName: SetupLevelView
+        m_MethodName: SetupLevelViewInChooseMenu
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2162,7 +2162,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5654485340085926360}
         m_TargetAssemblyTypeName: LevelView, Assembly-CSharp
-        m_MethodName: SetupLevelView
+        m_MethodName: SetupLevelViewInChooseMenu
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2319,7 +2319,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5654485340085926360}
         m_TargetAssemblyTypeName: LevelView, Assembly-CSharp
-        m_MethodName: SetupLevelView
+        m_MethodName: SetupLevelViewInChooseMenu
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2796,7 +2796,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5654485340085926360}
         m_TargetAssemblyTypeName: LevelView, Assembly-CSharp
-        m_MethodName: SetupLevelView
+        m_MethodName: SetupLevelViewInChooseMenu
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4116,6 +4116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainMenuScene: {fileID: 0}
+  _nextLevelScene: {fileID: 0}
   _sceneTransitionDuration: 1.5
   _retryTransitionDuration: 1
 --- !u!1 &5654485340085926361
@@ -5150,7 +5151,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5654485340085926360}
         m_TargetAssemblyTypeName: LevelView, Assembly-CSharp
-        m_MethodName: SetupLevelView
+        m_MethodName: SetupLevelViewInChooseMenu
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

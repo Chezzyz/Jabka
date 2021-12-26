@@ -11,12 +11,17 @@ public class InputHandler : MonoBehaviour
 
     private bool _canSendEvents = true;
 
+    private System.Action<CompletePlace> _levelCompletedDelegate;
+
     private void OnEnable()
     {
         LeanTouch.OnFingerUpdate += OnFingerUpdate;
         LeanTouch.OnFingerDown += OnFingerDown;
         LeanTouch.OnFingerUp += OnFingerUp;
-        Pause.PauseStateChanged += OnPauseStateChanged;
+        Pause.PauseStateChanged += OnSendingEventsStateChanged;
+
+        _levelCompletedDelegate = (place) => OnSendingEventsStateChanged(true);
+        CompletePlace.LevelCompleted += _levelCompletedDelegate;
     }
 
     private void OnDisable()
@@ -24,12 +29,13 @@ public class InputHandler : MonoBehaviour
         LeanTouch.OnFingerUpdate -= OnFingerUpdate;
         LeanTouch.OnFingerDown -= OnFingerDown;
         LeanTouch.OnFingerUp -= OnFingerUp;
-        Pause.PauseStateChanged -= OnPauseStateChanged;
+        Pause.PauseStateChanged -= OnSendingEventsStateChanged;
+        CompletePlace.LevelCompleted -= _levelCompletedDelegate;
     }
 
-    private void OnPauseStateChanged(bool state)
+    private void OnSendingEventsStateChanged(bool isStopSendingEvents)
     {
-        if (state)
+        if (isStopSendingEvents)
         {
             _canSendEvents = false;
         }

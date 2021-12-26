@@ -43,7 +43,6 @@ public class Trajectory : MonoBehaviour
             yield break;
         }
         
-        //shtefan: можно заменить на var
         Vector3 originPosition = playerTransformController.GetTransformPosition();
         Vector3 direction = playerTransformController.GetForwardDirection();
 
