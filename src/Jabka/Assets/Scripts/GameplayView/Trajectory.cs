@@ -13,16 +13,18 @@ public class Trajectory : MonoBehaviour
     private LineRenderer _lineRenderer;
 
     private Action<float, ISuperJump> OnJumpStartedDelegate;
+    private Action<float> OnDashJumpDashed;
 
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
         OnJumpStartedDelegate = (num, sj) => OnJumpStarted();
+        OnDashJumpDashed = (duration) => OnJumpStarted();
 
         JumpController.ForceChanged += OnTrajectoryChanged;
         DashSuperJump.DashJumpPreparing += OnTrajectoryChanged;
         JumpController.JumpStarted += OnJumpStartedDelegate;
-        DashSuperJump.DashJumpDashed += OnJumpStarted;
+        DashSuperJump.DashJumpDashed += OnDashJumpDashed;
     }
 
     private void OnJumpStarted()
@@ -90,6 +92,6 @@ public class Trajectory : MonoBehaviour
         DashSuperJump.DashJumpPreparing -= OnTrajectoryChanged;
         JumpController.ForceChanged -= OnTrajectoryChanged;
         JumpController.JumpStarted -= OnJumpStartedDelegate;
-        DashSuperJump.DashJumpDashed -= OnJumpStarted;
+        DashSuperJump.DashJumpDashed -= OnDashJumpDashed;
     }
 }
