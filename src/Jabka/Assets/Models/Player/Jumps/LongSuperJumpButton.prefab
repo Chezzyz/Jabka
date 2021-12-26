@@ -136,6 +136,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _length: 12
+  _length: 16
   _height: 1.75
-  _duration: 0.75
+  _duration: 0.8

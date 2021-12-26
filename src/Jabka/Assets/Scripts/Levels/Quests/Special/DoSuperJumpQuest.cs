@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "JumpCountQuest", menuName = "ScriptableObjects/Quest/JumpCountQuest", order = 3)]
-public class JumpCountQuest : BaseQuest
+[CreateAssetMenu(fileName = "DoSuperJumpQuest", menuName = "ScriptableObjects/Quest/DoSuperJumpQuest", order = 4)]
+public class DoSuperJumpQuest : BaseQuest
 {
     [SerializeField]
-    private int _goalCount;
-
-    private int _currentCount;
+    private string _superJumpName;
 
     protected override void OnSceneLoaded(string sceneName)
     {
@@ -17,22 +15,21 @@ public class JumpCountQuest : BaseQuest
         CompletePlace.LevelCompleted -= OnLevelCompleted;
         JumpController.JumpStarted += OnJumpStarted;
         CompletePlace.LevelCompleted += OnLevelCompleted;
-        _currentCount = 0;
     }
 
     private void OnJumpStarted(float force, ISuperJump superJump)
     {
-        if(force > 0)
+        if(superJump != null && superJump.GetJumpName() == _superJumpName)
         {
-            _currentCount++;
+            ReadyForComplete();
         }
     }
 
     private void OnLevelCompleted(CompletePlace completePlace)
     {
-        if(completePlace.GetLevelNumber() == GetLevelNumber())
+        if (completePlace.GetLevelNumber() == GetLevelNumber())
         {
-            if(_currentCount <= _goalCount)
+            if (_isReadyForComplete)
             {
                 Complete();
             }

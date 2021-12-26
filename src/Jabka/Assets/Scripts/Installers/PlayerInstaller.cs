@@ -10,8 +10,6 @@ public class PlayerInstaller : MonoInstaller
     [SerializeField]
     private PlayerData _playerPrefab;
     [SerializeField]
-    private SuperJumpUnlocker _superJumpUnlocker;
-    [SerializeField]
     private PlayerCamera _playerCamera;
     [SerializeField]
     private Trajectory _trajectory;
@@ -20,7 +18,6 @@ public class PlayerInstaller : MonoInstaller
     {
         Container.Bind<InputHandler>().FromComponentInNewPrefab(_inputHandler).AsSingle().NonLazy();
         Container.Bind<PlayerCamera>().FromComponentInNewPrefab(_playerCamera).AsSingle().NonLazy();
-        Container.Bind<SuperJumpUnlocker>().FromComponentInNewPrefab(_superJumpUnlocker).AsSingle().NonLazy();
         Container.Bind<Trajectory>().FromComponentInNewPrefab(_trajectory).AsSingle().NonLazy();
 
         Container.Bind(typeof(PlayerTransformController), typeof(SimpleJump), typeof(PlayerRotation), typeof(JumpController))
