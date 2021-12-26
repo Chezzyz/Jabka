@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 1:3
   _questDescription: Finish with 7 or less jumps
-  _isCompleted: 0
+  _isCompleted: 1
   _goalCount: 7
   _levelNumber: 1

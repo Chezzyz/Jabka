@@ -5,8 +5,7 @@ using System.Collections;
 public class PlayerRotation : MonoBehaviour
 {
     [SerializeField]
-    //shtefan правильно sensitivity
-    private float _sensetivity = 0.1f;
+    private float _sensitivity = 0.1f;
 
     private PlayerTransformController _playerTransformController;
     private float _originRotationY;
@@ -28,7 +27,6 @@ public class PlayerRotation : MonoBehaviour
 
     private void OnMenuStateChanged(bool state)
     {
-        //shtefan: можно удалить "== true"
         if(state == true)
         {
             _canRotate = false;
@@ -61,7 +59,7 @@ public class PlayerRotation : MonoBehaviour
         //при движении пальца вправо, камера поворачивается влево и наоборот.
         if (_canRotate)
         {
-            _playerTransformController.SetRotationY(_originRotationY + (-1 * _sensetivity * delta.x));
+            _playerTransformController.SetRotationY(_originRotationY + (-1 * _sensitivity * delta.x));
         }
     }
 

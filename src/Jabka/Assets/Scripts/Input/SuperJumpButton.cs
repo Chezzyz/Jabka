@@ -90,6 +90,9 @@ public class SuperJumpButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     private void SetSelectImageActive(bool isSelected)
     {
-        GetComponent<Image>().sprite = isSelected ? _selectedSprite : _defaultSprite;
+        if (_isSelectable)
+        {
+            GetComponent<Image>().sprite = isSelected ? _selectedSprite : _defaultSprite;
+        }
     }
 }

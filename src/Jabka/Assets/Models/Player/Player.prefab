@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da35877aa98fb3f44a5ab330ec56c758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sensetivity: 0.1
+  _sensitivity: 0.1
 --- !u!114 &-352742710711870093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,5 +220,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minScreenHeightThreshold: 0.075
   _maxScreenHeightThreshold: 0.375
-  _superJumpTimeTreshold: 0.6
+  _superJumpTimeTreshold: 0.35
   _superJumpForcePercentTreshold: 0.5

@@ -37,11 +37,10 @@ public class BaseQuest : ScriptableObject
     {
         if (_isCompleted)
         {
-            QuestAlreadyCompleted?.Invoke(this);
             return;
         }
         SceneLoader.SceneLoaded += OnSceneLoaded;
-        QuestCompleted += OnLevelCompleted;
+        CompletePlace.LevelCompleted += OnLevelCompleted;
     }
 
     protected virtual void OnSceneLoaded(string sceneName)
@@ -72,9 +71,9 @@ public class BaseQuest : ScriptableObject
         Debug.Log($"Quest {_id} is ready for Complete");
     }
 
-    protected void OnLevelCompleted(BaseQuest quest)
+    protected void OnLevelCompleted(CompletePlace place)
     {
-        if(quest is CompleteQuest && quest.GetLevelNumber() == GetLevelNumber() && _isReadyForComplete)
+        if(place.GetLevelNumber() == GetLevelNumber() && _isReadyForComplete)
         {
             Complete();
         }
@@ -82,6 +81,7 @@ public class BaseQuest : ScriptableObject
 
     protected virtual void OnDisable()
     {
-        QuestCompleted -= OnLevelCompleted;
+        CompletePlace.LevelCompleted -= OnLevelCompleted;
+        SceneLoader.SceneLoaded -= OnSceneLoaded;
     }
 }

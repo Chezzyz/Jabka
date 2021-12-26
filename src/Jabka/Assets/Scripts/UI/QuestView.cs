@@ -7,8 +7,6 @@ using TMPro;
 public class QuestView : MonoBehaviour
 {
     [SerializeField]
-    private BaseQuest _baseQuest;
-    [SerializeField]
     private Sprite _completedSprite;
     [SerializeField]
     private Sprite _completedStarSprite;
@@ -25,6 +23,7 @@ public class QuestView : MonoBehaviour
 
     private Sprite _defaultStarSprite;
 
+    private BaseQuest _baseQuest;
 
     private readonly Color _grayColor = new Color(0.3019608f, 0.3019608f, 0.3019608f, 1);
     private readonly Color _defaultColor = Color.white;
@@ -32,20 +31,32 @@ public class QuestView : MonoBehaviour
     private void OnEnable()
     {
         BaseQuest.QuestCompleted += OnQuestCompleted;
-        BaseQuest.QuestAlreadyCompleted += OnQuestCompleted;
         BaseQuest.IsReadyForComplete += OnReadyForComplete;
     }
 
-    private void Start()
+    private void Awake()
     {
         _defaultSprite = _currentImage.sprite;
         _defaultStarSprite = _currentStarImage.sprite;
-        SetUpView(_baseQuest);
+    }
+
+    public void SetUpView(BaseQuest quest)
+    {
+        _baseQuest = quest;
+        _desctiption.text = quest?.GetDescription();
+        if (quest && quest.IsCompleted())
+        {
+            SetCompletedView();
+        }
+        else if(quest && !quest.IsCompleted())
+        {
+            SetDefaultView();
+        }
     }
 
     private void OnQuestCompleted(BaseQuest quest)
     {
-        if(quest && quest.GetId() == _baseQuest.GetId())
+        if (quest && quest.GetId() == _baseQuest.GetId())
         {
             SetCompletedView();
         }
@@ -56,19 +67,6 @@ public class QuestView : MonoBehaviour
         if (quest && quest.GetId() == _baseQuest.GetId())
         {
             SetReadyForCompleteView();
-        }
-    }
-
-    public void SetUpView(BaseQuest quest)
-    {
-        _desctiption.text = quest?.GetDescription();
-        if (quest && quest.IsCompleted())
-        {
-            SetCompletedView();
-        }
-        else if(quest && !quest.IsCompleted())
-        {
-            SetDefaultView();
         }
     }
 

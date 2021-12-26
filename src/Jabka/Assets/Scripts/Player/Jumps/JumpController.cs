@@ -93,20 +93,14 @@ public class JumpController : MonoBehaviour
 
     private float CalculateForcePercent(Vector3 delta, float minHeightTreshold, float maxHeightTreshold)
     {
-        //shtefan: можно заменить на var
         float deltaYPercent = delta.y / Screen.height;
 
-        //shtefan: можно написать if (deltaYPercent > minHeightTreshold) return 0 и тогда не придется else писать
-        //shtefan: а еще правильно Threshold а не Treshold
-        if (deltaYPercent > minHeightTreshold)
-        {
-            deltaYPercent = Mathf.Clamp(deltaYPercent, minHeightTreshold, maxHeightTreshold);
-        }
-        else
+        if (deltaYPercent < minHeightTreshold)
         {
             return 0;
         }
-
+        
+        deltaYPercent = Mathf.Clamp(deltaYPercent, minHeightTreshold, maxHeightTreshold);
         float forcePercent = (deltaYPercent - minHeightTreshold) / (maxHeightTreshold - minHeightTreshold);
         return forcePercent;
     }
