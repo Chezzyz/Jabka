@@ -22,7 +22,7 @@ public class PlayerAnimations : MonoBehaviour
 
     private void OnLongJumpStarted(float duration)
     {
-        _playerModel.DOLocalRotate(new Vector3(0, 360f, 0), duration, RotateMode.FastBeyond360);
+        _playerModel.DOLocalRotate(new Vector3(0, 360f, 0), duration * 0.75f, RotateMode.FastBeyond360);
     }
 
     private void OnDestroy()

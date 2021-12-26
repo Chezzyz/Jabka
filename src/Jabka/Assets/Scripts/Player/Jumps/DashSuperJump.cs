@@ -44,6 +44,7 @@ public class DashSuperJump : BaseJump, ISuperJump
 
     public static event Action<float> DashJumpDashed;
     public static event Action<float> DashJumpStarted; //float: duration
+    public static event Action<float> DashPreparingStarted; 
 
     protected override void OnEnable()
     {
@@ -109,6 +110,7 @@ public class DashSuperJump : BaseJump, ISuperJump
             var jumpData = new JumpData(_height, _length, 1, _dashHeightCurve);
             StartCoroutine(PreparingForDash(jumpData, _playerTransformController));
             StartCoroutine(OffPrepareAfterDelay(_slowMoDuration));
+            DashPreparingStarted?.Invoke(_slowMoDuration);
         }
     }
 

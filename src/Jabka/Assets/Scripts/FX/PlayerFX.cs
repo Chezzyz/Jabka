@@ -11,7 +11,7 @@ public class PlayerFX : MonoBehaviour
     private TrailRenderer _poweredSimpleJumpTrail;
 
     [SerializeField]
-    private TrailRenderer _longJumpTrail;
+    private ParticleSystem _longJumpCircles;
 
     [SerializeField]
     private ParticleSystem _jumpDust;
@@ -29,7 +29,7 @@ public class PlayerFX : MonoBehaviour
 
     private void OnLongJumpStarted(float obj)
     {
-        _longJumpTrail.gameObject.SetActive(true);
+        _longJumpCircles.Play();
     }
 
     private void OnSimpleJumpStarted(float forcePercent, float duration)
@@ -54,7 +54,6 @@ public class PlayerFX : MonoBehaviour
     {
         StartCoroutine(TurnOffTrail(_simpleJumpTrail, _simpleJumpTrail.time));
         StartCoroutine(TurnOffTrail(_poweredSimpleJumpTrail, _poweredSimpleJumpTrail.time));
-        StartCoroutine(TurnOffTrail(_longJumpTrail, _longJumpTrail.time));
     }
 
     private void InstantiateEffect(ParticleSystem particleSystem, Vector3 offset, float destroyTime)
