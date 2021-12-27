@@ -24,6 +24,13 @@ public class VirtualCameraFX : MonoBehaviour
         LongSuperJump.LongJumpStarted += OnLongJumpStarted;
         DashSuperJump.DashPreparingStarted += OnDashPreparingStarted;
         DashSuperJump.DashJumpDashed += OnDashJumpDashed;
+
+        JumpController.ForceChanged += OnForcedChanged;
+    }
+
+    private void OnForcedChanged(JumpData jumpData, PlayerTransformController playerTransform)
+    {
+        _virtualCamera.m_Lens.FieldOfView = defaultFoV + (jumpData.ForcePercent * 10);
     }
 
     private void OnDashPreparingStarted(float duration)
@@ -46,7 +53,11 @@ public class VirtualCameraFX : MonoBehaviour
     {
         if (forcePercent > 0.75f)
         {
-            FoVEffect(10f, duration, 0.2f);
+            FoVEffect(20f, duration, 0.8f);
+        }
+        else
+        { 
+            FoVEffect(10f, duration, 0.3f);
         }
     }
 
@@ -67,11 +78,12 @@ public class VirtualCameraFX : MonoBehaviour
         currentFovTween.Kill();
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         SimpleJump.SimpleJumpStarted -= OnSimpleJumpStarted;
         LongSuperJump.LongJumpStarted -= OnLongJumpStarted;
         DashSuperJump.DashPreparingStarted -= OnDashPreparingStarted;
         DashSuperJump.DashJumpDashed -= OnDashJumpDashed;
+        JumpController.ForceChanged -= OnForcedChanged;
     }
 }
