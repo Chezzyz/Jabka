@@ -36,7 +36,7 @@ public class StageView : MonoBehaviour
 
 
     private static Dictionary<int, string> _stageNameMapping = 
-        new Dictionary<int, string> {{1, "Cock"}};
+        new Dictionary<int, string> {{1, "Sky"}};
 
     private const int _countOfLevelsInStage = 5;
 

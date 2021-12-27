@@ -107,7 +107,7 @@ public class DashSuperJump : BaseJump, ISuperJump
             _isInPrepare = true;
             SetTimeScale(_timeScale);
 
-            var jumpData = new JumpData(_height, _length, 1, _dashHeightCurve);
+            var jumpData = new JumpData(_dashHeight, _dashLength, 1, _dashHeightCurve);
             StartCoroutine(PreparingForDash(jumpData, _playerTransformController));
             StartCoroutine(OffPrepareAfterDelay(_slowMoDuration));
             DashPreparingStarted?.Invoke(_slowMoDuration);

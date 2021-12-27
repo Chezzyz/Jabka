@@ -4115,8 +4115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 877690749d18b9849958d3da58d7ce17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainMenuScene: {fileID: 0}
-  _nextLevelScene: {fileID: 0}
+  _mainMenuScene: MenuScene
+  _nextLevelScene: 
   _sceneTransitionDuration: 1.5
   _retryTransitionDuration: 1
 --- !u!1 &5654485340085926361

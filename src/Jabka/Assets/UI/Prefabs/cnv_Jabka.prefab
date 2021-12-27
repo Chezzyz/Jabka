@@ -288,7 +288,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1121, y: -461}
+  m_AnchoredPosition: {x: 1121, y: -520}
   m_SizeDelta: {x: 0, y: 700}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &4235271021353529246
@@ -1425,8 +1425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 877690749d18b9849958d3da58d7ce17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainMenuScene: {fileID: 102900000, guid: 4dafa2547bd22f149898fdae09b2542d, type: 3}
-  _nextLevelScene: {fileID: 102900000, guid: 9eeedc2ca31b9424498ca0f5ba2bc528, type: 3}
+  _mainMenuScene: MenuScene
+  _nextLevelScene: Level_1-2
   _sceneTransitionDuration: 1.5
   _retryTransitionDuration: 1
 --- !u!1 &5553110684281668914
@@ -2742,6 +2742,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 0bc6ededf72ec73409286d2b095f784a, type: 3}
+    - target: {fileID: 8384429954021431369, guid: dbb5b3c2c914b544d9be6f97c906e71e, type: 3}
+      propertyPath: _dashLength
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384429954021431369, guid: dbb5b3c2c914b544d9be6f97c906e71e, type: 3}
+      propertyPath: _dashDuration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8384429954021431369, guid: dbb5b3c2c914b544d9be6f97c906e71e, type: 3}
       propertyPath: _dashHeightCurve.m_Curve.Array.size
       value: 4

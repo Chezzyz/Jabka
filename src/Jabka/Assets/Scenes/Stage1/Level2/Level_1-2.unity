@@ -1123,6 +1123,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cnv_Jabka
       objectReference: {fileID: 0}
+    - target: {fileID: 5325071165772205835, guid: 3831a84bf5879be4aa183f409c1e5b2c, type: 3}
+      propertyPath: _nextLevelScene
+      value: Level_1-2
+      objectReference: {fileID: 0}
     - target: {fileID: 5760781929303226488, guid: 3831a84bf5879be4aa183f409c1e5b2c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
