@@ -54,8 +54,19 @@ public class Trajectory : MonoBehaviour
 
         List<Vector3> points = new List<Vector3>();
 
+        bool isCollided = false;
+        int pointsAfterCollided = 5;
+
         for (int i = 1; i < pointsCount; i++)
         {
+            if (isCollided && pointsAfterCollided > 0)
+            {
+                pointsAfterCollided--;
+                if (pointsAfterCollided == 0)
+                {
+                    break;
+                }
+            }
             float progress = (float)i / _pointsCountPerLenght;
             float nextHeight = jumpData.Height * jumpData.JumpCurve.Evaluate(progress);
             float nextLength = jumpData.Length * progress;
@@ -66,7 +77,7 @@ public class Trajectory : MonoBehaviour
                 playerTransformController.GetQuaternion(),
                 PlayerTransformController.playerLayerMask))
             {
-                break;
+                isCollided = true;
             }
 
             points.Add(nextPosition);
