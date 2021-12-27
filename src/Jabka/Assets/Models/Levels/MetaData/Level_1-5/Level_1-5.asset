@@ -15,6 +15,7 @@ MonoBehaviour:
   _stageNumber: 1
   _levelNumber: 5
   _levelName: FirstSuperJump
+  _scene: Level_1-5
   _levelQuests:
   - {fileID: 11400000, guid: 357369155a05c2d43bc3175ed27bfa5b, type: 2}
   - {fileID: 11400000, guid: 37ada36eff1c87c40bc543102a23cbf8, type: 2}

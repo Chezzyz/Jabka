@@ -51,14 +51,7 @@ public class VirtualCameraFX : MonoBehaviour
 
     private void OnSimpleJumpStarted(float forcePercent, float duration)
     {
-        if (forcePercent > 0.75f)
-        {
-            FoVEffect(20f, duration, 0.8f);
-        }
-        else
-        { 
-            FoVEffect(10f, duration, 0.3f);
-        }
+        FoVEffect(10f, duration, 0.3f);
     }
 
     private void FoVEffect(float newFoV, float duration, float fovEffectPart)

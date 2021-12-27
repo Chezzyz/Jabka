@@ -20,7 +20,7 @@ public class SceneTransitionAnimator : MonoBehaviour
 
     private void Start()
     {
-        _mask.rectTransform.DOSizeDelta(new Vector2(2800, 2800), _duration).SetEase(_ease);
+        _mask.rectTransform.DOSizeDelta(new Vector2(3000, 3000), _duration).SetEase(_ease);
     }
 
     private void OnSceneLoadStarted(float delay)

@@ -40,12 +40,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - ShockWaveProgress: -0.2
+    - ShockWaveProgress: 0.35
     - Vector1_1bf52ff0993f4922b386a0d7f74ef675: 1
     - Vector1_76fd5d5b5f1c4f74ab7682ed92a421ae: 0.5
     - Vector1_b709641c5c454f458c18ebf269df1d05: 0.08
-    - Vector1_e47f1728ff144818aff18af39584cd51: 0.5
+    - Vector1_e47f1728ff144818aff18af39584cd51: 1.42
     - Vector1_f4703f0799cd4efda8e8e180f880d36d: -0.2
     m_Colors:
-    - Vector2_fcfe6d9838204c9a85ca6b5737a9a9d6: {r: 0.5, g: 0.25, b: 0, a: 0}
+    - Vector2_fcfe6d9838204c9a85ca6b5737a9a9d6: {r: 0.5, g: 0.46, b: 0, a: 0}
   m_BuildTextureStacks: []
