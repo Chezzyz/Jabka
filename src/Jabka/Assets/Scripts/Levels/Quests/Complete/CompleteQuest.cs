@@ -5,12 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CompleteQuest", menuName = "ScriptableObjects/Quest/CompleteQuest", order = 1)]
 public class CompleteQuest : BaseQuest
 {
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        
-    }
-
     protected override void OnSceneLoaded(string sceneName)
     {
         base.OnSceneLoaded(sceneName);
@@ -18,16 +12,12 @@ public class CompleteQuest : BaseQuest
         CompletePlace.LevelCompleted += OnLevelCompleted;
     }
 
-    private void OnLevelCompleted(CompletePlace completePlace)
+    protected override void OnLevelCompleted(CompletePlace completePlace)
     {
+        base.OnLevelCompleted(completePlace);
         if (completePlace.GetLevelNumber() == GetLevelNumber())
         {
             Complete();
         }
-    }
-
-    protected override void OnDisable()
-    {
-        base.OnDisable();
     }
 }

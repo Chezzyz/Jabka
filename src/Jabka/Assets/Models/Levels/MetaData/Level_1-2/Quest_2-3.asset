@@ -16,3 +16,5 @@ MonoBehaviour:
   _questDescription: 'Do a jump 16 meters long '
   _isCompleted: 0
   _superJumpName: Long
+  _goalCount: 1
+  _inARow: 0
