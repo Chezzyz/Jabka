@@ -43,6 +43,7 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     {
         SuperJumpButton.SuperJumpSelected += SetSelectedSuperJump;
         SuperJumpButton.SuperJumpUnselected += UnsetSuperJump;
+        SuperJumpUnlocker.SuperJumpsUnlocked += OnSuperJumpsUnlocked;
     }
 
     [Zenject.Inject]
@@ -55,7 +56,7 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     {
         _buttons = GetComponentsInChildren<SuperJumpButton>();
         _currentJumpImage = GetComponent<Image>();
-        _currentJumpImage.sprite = _defaultSuperJump.GetComponent<Image>().sprite;
+        
         //делаю полупрозрачной
         _currentJumpImage.color = new Color(1, 1, 1, _unselectedAlpha);
 
@@ -63,6 +64,11 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         {
             _jumpController.SetSuperJump(_defaultSuperJump.GetComponent<ISuperJump>());
         }
+    }
+
+    private void OnSuperJumpsUnlocked()
+    {
+        GetComponent<Image>().sprite = _defaultSuperJump.GetComponent<Image>().sprite;
     }
 
     public ISuperJump GetDefaultSuperJump()
@@ -165,5 +171,6 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     {
         SuperJumpButton.SuperJumpSelected -= SetSelectedSuperJump;
         SuperJumpButton.SuperJumpUnselected -= UnsetSuperJump;
+        SuperJumpUnlocker.SuperJumpsUnlocked -= OnSuperJumpsUnlocked;
     }
 }

@@ -16,6 +16,7 @@ public class SuperJumpUnlocker : MonoBehaviour
     private SuperJumpPicker _superJumpPicker;
 
     public static event System.Action<ISuperJump> SuperJumpUnlocked;
+    public static event System.Action SuperJumpsUnlocked;
 
     [Inject]
     public void Construct(LevelMetaData levelMeta)
@@ -46,6 +47,7 @@ public class SuperJumpUnlocker : MonoBehaviour
         {
             UnlockDashSuperJump();
         }
+        SuperJumpsUnlocked?.Invoke();
     }
 
     private void OnSuperJumpCollected(SuperJumpCollectable jumpCollectable)

@@ -95,4 +95,10 @@ public class SuperJumpButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
             GetComponent<Image>().sprite = isSelected ? _selectedSprite : _defaultSprite;
         }
     }
+
+    private void OnDisable()
+    {
+        SuperJumpSelected -= OnSelect;
+        SuperJumpUnlocker.SuperJumpUnlocked -= UnlockButton;
+    }
 }

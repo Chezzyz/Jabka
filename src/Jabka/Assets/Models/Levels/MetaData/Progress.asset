@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Progress
   m_EditorClassIdentifier: 
   _currentStage: 1
-  _currentLevel: 1
+  _currentLevel: 4

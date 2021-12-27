@@ -8,8 +8,9 @@ public class PlayerParenting : MonoBehaviour
     {
         if(collision.gameObject.TryGetComponent<PlayerTransformController>(out var playerTransformController))
         {
-            if (playerTransformController.IsOnHorizontalSurface(-collision.GetContact(0).normal)) {
-                playerTransformController.SetTransformParent(transform);
+            if (playerTransformController.IsOnHorizontalSurface(-collision.GetContact(0).normal)) 
+            {
+                playerTransformController.SetTransformParent(transform.parent);
             }
         }
     }
