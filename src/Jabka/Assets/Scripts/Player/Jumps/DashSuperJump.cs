@@ -7,33 +7,10 @@ using System.Linq;
 
 public class DashSuperJump : BaseJump, ISuperJump
 {
-    [Header("SimplePart")]
     [SerializeField]
-    private AnimationCurve _jumpCurve;
-    [SerializeField]
-    private float _length;
-    [SerializeField]
-    private float _height;
-    [SerializeField]
-    private float _duration;
+    private DashJumpData _jumpData;
 
-    [Header("DashPart")]
-    [SerializeField]
-    private AnimationCurve _dashHeightCurve;
-    [SerializeField]
-    private AnimationCurve _dashLengthCurve;
-    [SerializeField]
-    private float _dashLength;
-    [SerializeField]
-    private float _dashHeight;
-    [SerializeField]
-    private float _dashDuration;
-    [SerializeField]
-    private float _timeScale;
-    [SerializeField]
-    private float _slowMoDuration;
-
-    public static event Action<JumpData, PlayerTransformController> DashJumpPreparing;
+    public static event Action<ScriptableJumpData, PlayerTransformController> DashJumpPreparing;
 
     private Action<Vector2, float> FingerUpDelegate;
 
@@ -43,7 +20,6 @@ public class DashSuperJump : BaseJump, ISuperJump
     private bool _isInDash;
 
     public static event Action<float> DashJumpDashed;
-    public static event Action<float> DashJumpStarted; //float: duration
     public static event Action<float> DashPreparingStarted; 
 
     protected override void OnEnable()
@@ -66,16 +42,16 @@ public class DashSuperJump : BaseJump, ISuperJump
         }
     }
 
+    public override ScriptableJumpData GetJumpData()
+    {
+        return _jumpData;
+    }
+
     public void SuperJump(PlayerTransformController playerTransformController)
     {
         _playerTransformController = playerTransformController;
-        
-        float maxProgress = _jumpCurve.keys.Last().time;
-        AnimationCurve lengthCurve = AnimationCurve.Linear(0, 0, maxProgress, maxProgress);
 
-        _currentJump = StartCoroutine(JumpCoroutine(_playerTransformController, _duration, _height, _length, maxProgress, _jumpCurve, lengthCurve));
-
-        DashJumpStarted?.Invoke(_duration);
+        _currentJump = StartCoroutine(JumpCoroutine(_playerTransformController, _jumpData.GetJumpData()));
     }
 
     public string GetJumpName()
@@ -89,14 +65,14 @@ public class DashSuperJump : BaseJump, ISuperJump
         {
             StopCoroutine(_currentJump);
             SetTimeScale(1);
-            
-            float maxProgress = _dashHeightCurve.keys.Last().time;
 
             _isInDash = true;
             _isInPrepare = false;
 
-            StartCoroutine(JumpCoroutine(_playerTransformController, _dashDuration, _dashHeight, _dashLength, maxProgress, _dashHeightCurve, _dashLengthCurve));
-            DashJumpDashed?.Invoke(_dashDuration);
+            JumpData dashJumpData = new JumpData(_jumpData.DashHeight, _jumpData.DashLength, _jumpData.DashDuration, _jumpData.DashHeightCurve, _jumpData.DashLengthCurve);
+
+            StartCoroutine(JumpCoroutine(_playerTransformController, dashJumpData));
+            DashJumpDashed?.Invoke(_jumpData.DashDuration);
         }
     }
 
@@ -105,20 +81,19 @@ public class DashSuperJump : BaseJump, ISuperJump
         if (IsInJump() && !_isInDash)
         {
             _isInPrepare = true;
-            SetTimeScale(_timeScale);
+            SetTimeScale(_jumpData.TimeScale);
 
-            var jumpData = new JumpData(_dashHeight, _dashLength, 1, _dashHeightCurve);
-            StartCoroutine(PreparingForDash(jumpData, _playerTransformController));
-            StartCoroutine(OffPrepareAfterDelay(_slowMoDuration));
-            DashPreparingStarted?.Invoke(_slowMoDuration);
+            StartCoroutine(PreparingForDash(_playerTransformController));
+            StartCoroutine(OffPrepareAfterDelay(_jumpData.SlowMoDuration));
+            DashPreparingStarted?.Invoke(_jumpData.SlowMoDuration);
         }
     }
 
-    private IEnumerator PreparingForDash(JumpData jumpData, PlayerTransformController playerTransformController)
+    private IEnumerator PreparingForDash(PlayerTransformController playerTransformController)
     {
         while (_isInPrepare)
         {
-            DashJumpPreparing?.Invoke(jumpData, playerTransformController);
+            DashJumpPreparing?.Invoke(_jumpData, playerTransformController);
             yield return null;
         }
     }

@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 980416d704e533845ae76d789214ba45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _jumpData: {fileID: 11400000, guid: e11940b8ac42941458e5c96a3e994eb0, type: 2}
   _jumpCurve:
     serializedVersion: 2
     m_Curve:

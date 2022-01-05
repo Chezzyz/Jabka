@@ -144,6 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pointsCountPerLenght: 40
+  _simpleJumpMaterial: {fileID: 2100000, guid: 9da1daec1ab1ad0449a6fa345db2ff4e, type: 2}
+  _dashJumpMaterial: {fileID: 2100000, guid: 9da1daec1ab1ad0449a6fa345db2ff4e, type: 2}
 --- !u!114 &6410176929351950876
 MonoBehaviour:
   m_ObjectHideFlags: 0

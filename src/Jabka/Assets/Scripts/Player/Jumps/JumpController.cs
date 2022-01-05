@@ -15,7 +15,7 @@ public class JumpController : MonoBehaviour
     [SerializeField]
     private float _superJumpForcePercentTreshold;
 
-    public static event System.Action<JumpData, PlayerTransformController> ForceChanged;
+    public static event System.Action<ScriptableJumpData, PlayerTransformController> ForceChanged;
     public static event System.Action<float, ISuperJump> JumpStarted;
 
     private PlayerTransformController _playerTransformController;
@@ -83,12 +83,15 @@ public class JumpController : MonoBehaviour
         }
     }
 
-    private JumpData GetSimpleJumpData(float forcePercent)
+    private SimpleJumpData GetSimpleJumpData(float forcePercent)
     {
-        return new JumpData(_simpleJump.CalculateHeight(forcePercent),
-            _simpleJump.CalculateLength(forcePercent),
-            forcePercent,
-            _simpleJump.GetAnimationCurve());
+        JumpData jumpData = _simpleJump.CalculateCurrentJumpData(forcePercent);
+
+        SimpleJumpData scriptableJumpData = _simpleJump.GetJumpData() as SimpleJumpData;
+        scriptableJumpData.SetForcePercent(forcePercent);
+        scriptableJumpData.SetCurrentJumpData(jumpData);
+
+        return scriptableJumpData;
     }
 
     private float CalculateForcePercent(Vector3 delta, float minHeightTreshold, float maxHeightTreshold)
@@ -104,8 +107,6 @@ public class JumpController : MonoBehaviour
         float forcePercent = (deltaYPercent - minHeightTreshold) / (maxHeightTreshold - minHeightTreshold);
         return forcePercent;
     }
-
-    
 
     private void OnDisable()
     {

@@ -139,6 +139,7 @@ MonoBehaviour:
   _length: 6
   _height: 2.5
   _duration: 0.75
+  _jumpData: {fileID: 11400000, guid: 6801a3ca44694664a896b5bed7c27c3a, type: 2}
   _dashHeightCurve:
     serializedVersion: 2
     m_Curve: []
