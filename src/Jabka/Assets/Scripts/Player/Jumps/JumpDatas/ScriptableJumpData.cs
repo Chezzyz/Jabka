@@ -7,8 +7,9 @@ using UnityEngine;
 public class ScriptableJumpData : ScriptableObject
 {
     [SerializeField]
-    protected JumpData _jumpData; 
-
+    protected JumpData _jumpData;
+    [SerializeField]
+    private AnimationCurve curve;
     public JumpData GetJumpData()
     {
         return _jumpData;

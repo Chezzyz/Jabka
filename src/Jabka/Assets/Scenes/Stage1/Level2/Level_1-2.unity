@@ -993,7 +993,7 @@ MonoBehaviour:
   _fadeDurationSerializable: 1
   _closeDurationSerializable: 0.75
   _delayToShowSerializable: 0
-  _delayToCloseSerializable: 2
+  _delayToCloseSerializable: 1
 --- !u!1001 &1277342700
 PrefabInstance:
   m_ObjectHideFlags: 0

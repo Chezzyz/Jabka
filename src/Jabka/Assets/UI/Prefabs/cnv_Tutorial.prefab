@@ -222,7 +222,6 @@ GameObject:
   - component: {fileID: 5410197878985575703}
   - component: {fileID: 5410197878985575700}
   - component: {fileID: 5410197878985575784}
-  - component: {fileID: 5410197878985575787}
   m_Layer: 5
   m_Name: cnv_Tutorial
   m_TagString: Untagged
@@ -325,24 +324,6 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &5410197878985575787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5410197878985575701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1bc18c058b6b6149a8fb2a2a3a35679, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canvasGroupSerializable: {fileID: 5410197878985575784}
-  _animatorSerializable: {fileID: 5410197879093152206}
-  _fadeDurationSerializable: 1
-  _closeDurationSerializable: 0.75
-  _delayToShowSerializable: 0
-  _delayToCloseSerializable: 1.5
 --- !u!1 &5410197879093152204
 GameObject:
   m_ObjectHideFlags: 0

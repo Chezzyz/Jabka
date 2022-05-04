@@ -28,7 +28,7 @@ public class JumpCountQuest : BaseQuest
         }
     }
 
-    private void OnLevelCompleted(CompletePlace completePlace)
+    protected override void OnLevelCompleted(CompletePlace completePlace)
     {
         if(completePlace.GetLevelNumber() == GetLevelNumber())
         {

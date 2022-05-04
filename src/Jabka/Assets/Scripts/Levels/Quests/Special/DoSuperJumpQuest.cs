@@ -41,7 +41,7 @@ public class DoSuperJumpQuest : BaseQuest
         }
     }
 
-    private void OnLevelCompleted(CompletePlace completePlace)
+    protected override void OnLevelCompleted(CompletePlace completePlace)
     {
         if (completePlace.GetLevelNumber() == GetLevelNumber())
         {
