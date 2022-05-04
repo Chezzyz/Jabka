@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 //Класс хардкодим так как мы точно знаем когда нам надо разблокировать прыжки
@@ -66,7 +67,8 @@ public class SuperJumpUnlocker : MonoBehaviour
 
     private void UnlockLongSuperJump()
     {
-        _superJumpPicker.gameObject.SetActive(true);
+        _superJumpPicker.IsActive = true;
+        _superJumpPicker.GetComponent<Image>().enabled = true;
         SuperJumpUnlocked?.Invoke(_longSuperJump.GetComponent<ISuperJump>());
     }
 

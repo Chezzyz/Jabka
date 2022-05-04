@@ -48,16 +48,23 @@ public class Trajectory : MonoBehaviour
 
     private List<Vector3> CalculateTrajectory(ScriptableJumpData scriptableJumpData, PlayerTransformController playerTransformController)
     {
-        if (scriptableJumpData is SimpleJumpData data && data.GetForcePercent() == 0)
+        JumpData jumpData = scriptableJumpData.GetJumpData();
+
+        if (scriptableJumpData is SimpleJumpData simpleData && simpleData.GetForcePercent() == 0)
         {
             ClearTrajectory();
             return new List<Vector3>();
         }
-        
+
+        if(scriptableJumpData is DashJumpData dashData)
+        {
+            JumpData dashJumpData = new JumpData(dashData.DashHeight, dashData.DashLength, dashData.DashDuration, dashData.DashHeightCurve, dashData.DashLengthCurve);
+            jumpData = dashJumpData;
+        }
+
         Vector3 originPosition = playerTransformController.GetTransformPosition();
         Vector3 direction = playerTransformController.GetForwardDirection();
 
-        JumpData jumpData = scriptableJumpData.GetJumpData();
         float time = jumpData.HeightCurve.keys.Last().time;
         int pointsCount = (int)Mathf.Round(_pointsCountPerLenght * time);
 

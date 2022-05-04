@@ -104,7 +104,6 @@ public class QuestView : MonoBehaviour
     private void OnDisable()
     {
         BaseQuest.QuestCompleted -= OnQuestCompleted;
-        BaseQuest.QuestAlreadyCompleted -= OnQuestCompleted;
         BaseQuest.IsReadyForComplete -= OnReadyForComplete;
     }
 }

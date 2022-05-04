@@ -57,6 +57,7 @@ MonoBehaviour:
   _unselectedAlpha: 0.4
   _showAnimationDuration: 0.6
   _closeAnimationDuration: 0.5
+  _openDelay: 0.25
   _showEase: 9
   _closeEase: 9
 --- !u!222 &2427015801087307005
