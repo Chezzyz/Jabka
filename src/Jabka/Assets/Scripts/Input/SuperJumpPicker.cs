@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -20,9 +20,13 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     [SerializeField]
     private float _closeAnimationDuration;
     [SerializeField]
+    private float _openDelay;
+    [SerializeField]
     Ease _showEase;
     [SerializeField]
     Ease _closeEase;
+
+    public bool IsActive;
 
     private JumpController _jumpController;
 
@@ -30,11 +34,17 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     
     private Sprite _selectedJumpSprite;
 
-    public static event System.Action<ISuperJump> SuperJumpPicked;
+    public static event Action<ISuperJump> SuperJumpPicked;
 
-    public static event System.Action<bool> SuperJumpMenuStateChanged;
+    public static event Action<bool> SuperJumpMenuStateChanged;
+
+    public static event Action SuperJumpButtonClicked;
 
     private SuperJumpButton[] _buttons;
+
+    private bool _openDelayCompleted;
+
+    private Coroutine _openTimer;
 
     //имеется ввиду выделенное в UI
     private ISuperJump _selectedJump;
@@ -84,12 +94,37 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (!IsActive)
+        {
+            return;
+        }
+        _openTimer = StartCoroutine(OpenAfterDelay(_openDelay));
+    }
+
+    private IEnumerator OpenAfterDelay(float delay)
+    {
+        _openDelayCompleted = false;
+        yield return new WaitForSeconds(delay);
+        _openDelayCompleted = true;
         ShowPickerMenu(_buttons, _showAnimationDuration, _menuRadius, _showEase);
         SuperJumpMenuStateChanged?.Invoke(true);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (!IsActive)
+        {
+            return;
+        }
+
+        StopCoroutine(_openTimer);
+        //если быстро отпустили и палец был на копке 
+        if(!_openDelayCompleted && eventData.hovered.Count != 0)
+        {
+            SuperJumpButtonClicked?.Invoke();
+            return;
+        }
+
         if(_selectedJump != null)
         {
             PickSuperJump(_selectedJump, _selectedJumpSprite);

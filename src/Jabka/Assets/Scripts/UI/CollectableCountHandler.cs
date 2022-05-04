@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class CollectableCountHandler : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI _countText;
+    [SerializeField]
+    private float _animationPunchScale;
+    [SerializeField]
+    private float _animationPunchDuration;
 
     private int _countOfCollectables;
 
@@ -36,6 +41,18 @@ public class CollectableCountHandler : MonoBehaviour
     private void OnCollected(Collectable collectable)
     {
         _currentCount++;
-        _countText.text = $"{_currentCount}/{_countOfCollectables}";
+        Tween unpunch = _countText.transform.DOScale(Vector3.one, _animationPunchDuration).SetEase(Ease.InQuad).Pause();
+        _countText.transform.DOScale(Vector3.one * _animationPunchScale, _animationPunchDuration).SetEase(Ease.InCubic)
+            .OnComplete(() => 
+            {
+                _countText.text = $"{_currentCount}/{_countOfCollectables}";
+                unpunch.Play();
+            });
+        
+    }
+
+    private void OnDisable()
+    {
+        Collectable.Collected -= OnCollected;
     }
 }

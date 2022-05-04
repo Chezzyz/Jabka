@@ -15,12 +15,15 @@ public class BaseQuest : ScriptableObject
     protected bool _isReadyForComplete;
 
     public static event System.Action<BaseQuest> QuestCompleted;
-    public static event System.Action<BaseQuest> QuestAlreadyCompleted;
     public static event System.Action<BaseQuest> IsReadyForComplete;
 
     public string GetId()
     {
         return _id;
+    }
+    public int GetLevelNumber()
+    {
+        return int.Parse(_id.Split(':')[0]);
     }
 
     public string GetDescription()
@@ -46,11 +49,6 @@ public class BaseQuest : ScriptableObject
     protected virtual void OnSceneLoaded(string sceneName)
     {
         _isReadyForComplete = false;
-    }
-
-    protected int GetLevelNumber()
-    {
-        return int.Parse(_id.Split(':')[0]);
     }
 
     protected virtual void Complete()

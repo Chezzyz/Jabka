@@ -38,6 +38,7 @@ public class JumpController : MonoBehaviour
         InputHandler.SwipeDeltaChanged += OnSwipeY;
         InputHandler.FingerUp += OnFingerUp;
         SuperJumpPicker.SuperJumpPicked += SetSuperJump;
+        SuperJumpPicker.SuperJumpButtonClicked += StartSuperJump;
     }
 
     public void SetSuperJump(ISuperJump superJump)
@@ -55,8 +56,7 @@ public class JumpController : MonoBehaviour
             //если преодалеваем трешхолды по силе и времени, то делаем супер-прыжок, иначе обычный 
             if (_currentSuperJump != null && swipeTime <= _superJumpTimeTreshold && _currentForcePercent >= _superJumpForcePercentTreshold)
             {
-                _currentSuperJump.SuperJump(_playerTransformController);
-                JumpStarted?.Invoke(_currentForcePercent, _currentSuperJump);
+                //StartSuperJump();
             }
             else
             {
@@ -108,10 +108,17 @@ public class JumpController : MonoBehaviour
         return forcePercent;
     }
 
+    private void StartSuperJump()
+    {
+        _currentSuperJump.SuperJump(_playerTransformController);
+        JumpStarted?.Invoke(_currentForcePercent, _currentSuperJump);
+    }
+
     private void OnDisable()
     {
         InputHandler.SwipeDeltaChanged -= OnSwipeY;
         InputHandler.FingerUp -= OnFingerUp;
         SuperJumpPicker.SuperJumpPicked -= SetSuperJump;
+        SuperJumpPicker.SuperJumpButtonClicked -= StartSuperJump;
     }
 }

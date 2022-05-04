@@ -45,6 +45,7 @@ public class LevelView : MonoBehaviour
 
         SetupLevelView(levelNumber);
 
+        _startLevelButton.onClick.RemoveAllListeners();
         _startLevelButton.onClick.AddListener(() => _sceneLoader.LoadScene(levelMetaData.GetSceneName()));
     }
     
