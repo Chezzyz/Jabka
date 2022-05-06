@@ -2913,6 +2913,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2777445977224978471, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777445977224978471, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777445977224978471, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 41.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777445977224978471, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.17061067
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777445977224978471, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.0045872834
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777445977224978471, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9849719
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777445977224978471, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.026483366
+      objectReference: {fileID: 0}
     - target: {fileID: 2804760937621126526, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2939,7 +2967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3472156124715560435, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
       propertyPath: _nextLevelScene
-      value: MenuScene
+      value: Level_1-5
       objectReference: {fileID: 0}
     - target: {fileID: 3907874602038237824, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2964,6 +2992,10 @@ PrefabInstance:
     - target: {fileID: 3907874602038237824, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590426636182952484, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
+      propertyPath: _nextLevelScene
+      value: Level_1-5
       objectReference: {fileID: 0}
     - target: {fileID: 7884371893973939485, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
       propertyPath: _levelMetaData

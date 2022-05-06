@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [RequireComponent(typeof(Collider))]
 public class MoveOnTouch : MonoBehaviour
@@ -11,7 +12,8 @@ public class MoveOnTouch : MonoBehaviour
     {
         if(collision.gameObject.TryGetComponent<PlayerTransformController>(out _))
         {
-            PlayerTouched?.Invoke(GetComponentInParent<GenericPlatformMove>());
+            GenericPlatformMove[] generics = GetComponentsInParent<GenericPlatformMove>();
+            generics.ToList().ForEach(generic => PlayerTouched?.Invoke(generic));
         }
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ef2fa1bd0d0e843a4ca1ad02e9c6fb, type: 3}
   m_Name: Quest_5-2
   m_EditorClassIdentifier: 
-  _id: 2:2
-  _questDescription: 'Collect 3 '
+  _id: 5:2
+  _questDescription: Collect 8 lilies
   _isCompleted: 0
-  _goalCount: 3
+  _goalCount: 8
