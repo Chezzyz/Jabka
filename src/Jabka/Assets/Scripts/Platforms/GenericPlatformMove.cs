@@ -64,7 +64,7 @@ public class GenericPlatformMove : MonoBehaviour
         }
         else if (_mode == Mode.Rotation)
         {
-            StartRotating(_direction, _rotationAngle, _duration, _loopType, _ease);
+            StartRotating(_direction, _rotationAngle, _duration, _loopCount, _loopType, _delay, _ease);
         }
     }
 
@@ -85,16 +85,21 @@ public class GenericPlatformMove : MonoBehaviour
         seq.Play();
     }
 
-    private void StartRotating(Direction direction, float angle, float duration, LoopType loopType, Ease ease)
+    private void StartRotating(Direction direction, float angle, float duration, int loopCount, LoopType loopType, float delay, Ease ease)
     {
+        var seq = DOTween.Sequence();
+
         float x = direction == Direction.X ? angle : transform.localEulerAngles.x;
         float y = direction == Direction.Y ? angle : transform.localEulerAngles.y;
         float z = direction == Direction.Z ? angle : transform.localEulerAngles.z;
         var endValue = new Vector3(x, y, z);
 
-        var rotationMove = transform.DOLocalRotate(endValue, duration).SetLoops(-1, loopType);
+        var rotationMove = transform.DOLocalRotate(endValue, duration);
+
         rotationMove.SetEase(ease);
-        rotationMove.Play();
+        seq.Append(rotationMove);
+        seq.SetLoops(loopCount, loopType).AppendInterval(delay/2).PrependInterval(delay / 2);
+        seq.Play();
     }
 
     private void OnStartEvent(GenericPlatformMove platform)

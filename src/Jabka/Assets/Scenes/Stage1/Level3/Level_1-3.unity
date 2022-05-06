@@ -282,17 +282,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &163136118 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3472156124715560435, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
-  m_PrefabInstance: {fileID: 8775799997958158151}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 877690749d18b9849958d3da58d7ce17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &234527946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1704,10 +1693,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5590426636182952484, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
+      propertyPath: _nextLevelScene
+      value: Level_1-4
+      objectReference: {fileID: 0}
     - target: {fileID: 6074366034696708893, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
       propertyPath: _sceneLoader
       value: 
-      objectReference: {fileID: 163136118}
+      objectReference: {fileID: 0}
     - target: {fileID: 8203341505377318029, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0

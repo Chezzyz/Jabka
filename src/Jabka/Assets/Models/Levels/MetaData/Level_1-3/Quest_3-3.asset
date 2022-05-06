@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 3:3
   _questDescription: Do 3 Long Jumps in a row
-  _isCompleted: 1
+  _isCompleted: 0
   _superJumpName: Long
   _goalCount: 3
   _inARow: 1
