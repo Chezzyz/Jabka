@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DevTool : MonoBehaviour
+public class TimeScaler : MonoBehaviour
 {
     [SerializeField]
     private float _timeScale;

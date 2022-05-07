@@ -8,6 +8,7 @@ public class ScriptableJumpData : ScriptableObject
 {
     [SerializeField]
     protected JumpData _jumpData;
+    //это прикол
     [SerializeField]
     private AnimationCurve curve;
     public JumpData GetJumpData()

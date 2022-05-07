@@ -40,7 +40,7 @@ public class WinWindowView : MonoBehaviour
         _background.DOBlendableColor(_backgroundColor, _backgroundFadeDuration);
         _levelNumber.rectTransform.DOMoveY(screenHeight - 225, _groupsAppearDuration).SetDelay(_groupsAppearDelay);
         _completedText.rectTransform.DOMoveY(screenHeight - 325, _groupsAppearDuration).SetDelay(_groupsAppearDelay);
-        _buttonsGroup.DOMoveY(-90, _groupsAppearDuration).SetDelay(_groupsAppearDelay);
+        _buttonsGroup.DOMoveY(-15, _groupsAppearDuration).SetDelay(_groupsAppearDelay);
         _questsGroup.DOLocalMoveX(0, _groupsAppearDuration).SetDelay(_groupsAppearDelay * 2);
     }
 
