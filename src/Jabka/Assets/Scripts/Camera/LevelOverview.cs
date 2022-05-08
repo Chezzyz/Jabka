@@ -17,10 +17,13 @@ public class LevelOverview : MonoBehaviour
     private CinemachineVirtualCamera _dollyCamera;
 
     [SerializeField]
+    private AnimationCurve _cameraCurve;
+
+    [SerializeField]
     private CinemachineDollyCart _dollyCart;
 
     [SerializeField]
-    private AnimationCurve _speedCurve;
+    private AnimationCurve _cartCurve;
 
     private void OnEnable()
     {
@@ -39,11 +42,11 @@ public class LevelOverview : MonoBehaviour
     [Button]
     private void StartOverview()
     {
-        StartCoroutine(OverviewCoroutine(_duration, _dollyCamera, _dollyCart, _speedCurve));
+        StartCoroutine(OverviewCoroutine(_duration, _dollyCamera, _cameraCurve, _dollyCart, _cartCurve));
     }
 
-    private IEnumerator OverviewCoroutine(float duration, CinemachineVirtualCamera dollyCamera, 
-        CinemachineDollyCart dollyCart, AnimationCurve intensityCurve)
+    private IEnumerator OverviewCoroutine(float duration, CinemachineVirtualCamera dollyCamera,
+        AnimationCurve cameraCurve, CinemachineDollyCart dollyCart, AnimationCurve cartCurve)
     {
         float expiredTime = 0.0f;
         float maxProgress = 1f;
@@ -55,14 +58,14 @@ public class LevelOverview : MonoBehaviour
 
             progress = expiredTime / duration;
 
-            _dollyCart.m_Position = intensityCurve.Evaluate(progress);
+            dollyCart.m_Position = cartCurve.Evaluate(progress);
 
-            _dollyCamera.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition = intensityCurve.Evaluate(progress);
+            dollyCamera.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition = cameraCurve.Evaluate(progress);
 
             yield return null;
         }
 
-        _dollyCamera.Priority = 0;
+        dollyCamera.Priority = 0;
 
         yield return null;
 

@@ -17,7 +17,8 @@ public class HUDHandler : MonoBehaviour
 
     private void OnSceneChanged(int prevScene, int currentScene)
     {
-        if (prevScene != currentScene)
+        //Если переключились с другой сцены, то отключаем hud. Кроме первого уровня
+        if (prevScene != currentScene  && currentScene != 1)
         {
             _hudCanvas.enabled = false;
         }

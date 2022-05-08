@@ -40,10 +40,7 @@ public class LevelPreparation : MonoBehaviour
     private void StartLevel()
     {
         PlayButtonPushed?.Invoke();
-        _canvasGroup.DOFade(0, 1f).onComplete = () =>
-        {
-            gameObject.SetActive(false);
-        };
+        _canvasGroup.DOFade(0, 1f).onComplete = () => gameObject.SetActive(false);
     }
 
     private void ShowQuests(List<QuestView> questViews, float appearDuration)

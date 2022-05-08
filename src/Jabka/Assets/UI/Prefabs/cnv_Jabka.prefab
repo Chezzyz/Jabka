@@ -769,6 +769,7 @@ GameObject:
   - component: {fileID: 3307893422992206713}
   - component: {fileID: 3307893422992206712}
   - component: {fileID: 3307893422992206719}
+  - component: {fileID: 5677656583004748994}
   m_Layer: 5
   m_Name: cnv_Jabka
   m_TagString: Untagged
@@ -862,6 +863,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5677656583004748994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3307893422992206718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 542615dc0b303134183db6e39e943d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hudCanvas: {fileID: 3307893422992206713}
 --- !u!1 &3407314677507862549
 GameObject:
   m_ObjectHideFlags: 0

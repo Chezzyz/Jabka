@@ -47,7 +47,7 @@ public class InputHandler : MonoBehaviour
 
     private void OnSceneChanged(int prevScene, int currentScene)
     {
-        if (prevScene != currentScene)
+        if (prevScene != currentScene && currentScene != 1)
         {
             _canSendEvents = false;
         }
