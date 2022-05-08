@@ -532,10 +532,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvasGroupSerializable: {fileID: 490693027}
   _animatorSerializable: {fileID: 2068200608}
-  _fadeDurationSerializable: 1
-  _closeDurationSerializable: 0.75
-  _delayToShowSerializable: 0.5
-  _delayToCloseSerializable: 0.5
+  _fadeDurationSerializable: 0.3
+  _closeDurationSerializable: 0.3
+  _delayToShowSerializable: 0.3
+  _delayToCloseSerializable: 0.3
 --- !u!1 &611633584
 GameObject:
   m_ObjectHideFlags: 0

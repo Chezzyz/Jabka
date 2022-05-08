@@ -40,7 +40,8 @@ public class DashTutorial : BaseFingerTutorial
     {
         yield return new WaitForSeconds(delay);
         Time.timeScale = _timeScale;
-        StartCoroutine(AccessToEndAfterDelay(_delayToCloseSerializable));
+        //Избавляемся от задержки чтобы timescale точно вернулся назад
+        _isAbleToClose = true;
         ShowTutorial();
     }
 

@@ -7,6 +7,6 @@ public class DevToolsInstaller : MonoInstaller
     GameObject _devToolsPrefab;
     public override void InstallBindings()
     {
-        Container.Bind<DevTool>().FromComponentInNewPrefab(_devToolsPrefab).AsSingle().NonLazy();
+        Container.Bind<TimeScaler>().FromComponentInNewPrefab(_devToolsPrefab).AsSingle().NonLazy();
     }
 }

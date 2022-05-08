@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1487047612194165041}
   - component: {fileID: 1487047612194165046}
   - component: {fileID: 1487047612194165047}
-  - component: {fileID: 1487047612194165040}
   - component: {fileID: 1487047612194165043}
   m_Layer: 0
   m_Name: SceneContext
@@ -49,7 +48,6 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1487047612194165047}
-  - {fileID: 1487047612194165040}
   - {fileID: 1487047612194165043}
   _installerPrefabs: []
   _autoRun: 1
@@ -82,22 +80,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputHandler: {fileID: 790016892153716700, guid: 4b56bbd479da49546a8958eb3a318af1, type: 3}
   _playerPrefab: {fileID: 7407397076881580382, guid: 22ed6136f376e564694cce57f8719cf1, type: 3}
-  _superJumpUnlocker: {fileID: 4759550605664601817, guid: 01dc7ddfbbf65984ca2d995397038507, type: 3}
   _playerCamera: {fileID: 687462376065534447, guid: 1c9d1fb3cf740584aaacaf489947c13b, type: 3}
-  _trajectory: {fileID: 9122828653286803896, guid: 22e1a510e3d181a48a7cad9ca10eea23, type: 3}
---- !u!114 &1487047612194165040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1487047612194165044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e25eff20778e8c0499ce5d32969fedfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _devToolsPrefab: {fileID: 1871152073592632638, guid: b6df95bc44cd4394e9625c3eba11f79f, type: 3}
+  _trajectory: {fileID: 6997881744921315659, guid: 22e1a510e3d181a48a7cad9ca10eea23, type: 3}
 --- !u!114 &1487047612194165043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,4 +95,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelMetaData: {fileID: 11400000, guid: 8bcd779d6beae974caa0b6e27292cc43, type: 2}
-  _canvas: {fileID: 3307893422992206713, guid: 524c023280cfb964dadcff78ae1f2bec, type: 3}
