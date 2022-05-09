@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96bc13c671a56104098fb605aab8ef57, type: 3}
   m_Name: Quest_5-1
   m_EditorClassIdentifier: 
-  _id: 2:1
+  _id: 5:1
   _questDescription: Complete level
   _isCompleted: 0

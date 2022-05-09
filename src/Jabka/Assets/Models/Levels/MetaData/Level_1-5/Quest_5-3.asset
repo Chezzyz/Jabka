@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253022dade7ca80469c3c3e3455fd5b3, type: 3}
   m_Name: Quest_5-3
   m_EditorClassIdentifier: 
-  _id: 2:3
-  _questDescription: Finish with 7 or less jumps
+  _id: 5:3
+  _questDescription: Finish with 17 or less jumps
   _isCompleted: 0
-  _goalCount: 7
-  _levelNumber: 1
+  _goalCount: 17

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Quest_2-3
   m_EditorClassIdentifier: 
   _id: 2:3
-  _questDescription: 'Do a jump 16 meters long '
+  _questDescription: Do a Super Jump
   _isCompleted: 0
   _superJumpName: Long
+  _goalCount: 1
+  _inARow: 0

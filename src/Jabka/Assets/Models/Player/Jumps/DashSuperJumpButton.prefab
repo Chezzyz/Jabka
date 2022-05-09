@@ -137,47 +137,12 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _length: 6
-  _height: 2
+  _height: 2.5
   _duration: 0.75
-  _dashCurve:
+  _jumpData: {fileID: 11400000, guid: 6801a3ca44694664a896b5bed7c27c3a, type: 2}
+  _dashHeightCurve:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: -0.01674321
-      outSlope: 0
-      tangentMode: 65
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.1573697
-    - serializedVersion: 3
-      time: 0.5997342
-      value: 0
-      inSlope: -0
-      outSlope: -0.019359902
-      tangentMode: 5
-      weightedMode: 0
-      inWeight: 0.14452507
-      outWeight: 0.30886644
-    - serializedVersion: 3
-      time: 1
-      value: -1
-      inSlope: -4.7036743
-      outSlope: -4.7036743
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.06454149
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 3
-      value: -20
-      inSlope: -9.5
-      outSlope: -0.90980625
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.62727135
-      outWeight: 0
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

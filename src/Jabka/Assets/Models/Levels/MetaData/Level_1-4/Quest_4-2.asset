@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Quest_4-2
   m_EditorClassIdentifier: 
   _id: 4:2
-  _questDescription: 'Collect 3 '
+  _questDescription: Collect 9 lilies
   _isCompleted: 0
-  _goalCount: 3
+  _goalCount: 9

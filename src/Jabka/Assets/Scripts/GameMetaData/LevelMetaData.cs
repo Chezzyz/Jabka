@@ -14,7 +14,7 @@ public class LevelMetaData : ScriptableObject
     [SerializeField]
     private string _levelName;
     [SerializeField]
-    private Object _scene;
+    private string _scene;
     [SerializeField]
     private List<BaseQuest> _levelQuests;
 
@@ -35,12 +35,7 @@ public class LevelMetaData : ScriptableObject
 
     public string GetSceneName()
     {
-        if(_scene is SceneAsset)
-        {
-            return _scene.name;
-        }
-        Debug.LogError($"Scene field in {name} is not SceneAsset!");
-        return string.Empty;
+        return _scene;
     }
 
     public BaseQuest GetQuest(int questNumber)

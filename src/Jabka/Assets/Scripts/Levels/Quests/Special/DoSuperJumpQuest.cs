@@ -7,6 +7,12 @@ public class DoSuperJumpQuest : BaseQuest
 {
     [SerializeField]
     private string _superJumpName;
+    [SerializeField]
+    private int _goalCount;
+    [SerializeField]
+    private bool _inARow;
+
+    private int _currentCount = 0;
 
     protected override void OnSceneLoaded(string sceneName)
     {
@@ -15,17 +21,27 @@ public class DoSuperJumpQuest : BaseQuest
         CompletePlace.LevelCompleted -= OnLevelCompleted;
         JumpController.JumpStarted += OnJumpStarted;
         CompletePlace.LevelCompleted += OnLevelCompleted;
+        _currentCount = 0;
     }
 
     private void OnJumpStarted(float force, ISuperJump superJump)
     {
         if(superJump != null && superJump.GetJumpName() == _superJumpName)
         {
-            ReadyForComplete();
+            _currentCount++;
+            if (_currentCount == _goalCount)
+            {
+                ReadyForComplete();
+            }
+        }
+        //если обычный прыжок и прыгать должны подряд 
+        else if (_inARow && force > 0)
+        {
+            _currentCount = 0;
         }
     }
 
-    private void OnLevelCompleted(CompletePlace completePlace)
+    protected override void OnLevelCompleted(CompletePlace completePlace)
     {
         if (completePlace.GetLevelNumber() == GetLevelNumber())
         {

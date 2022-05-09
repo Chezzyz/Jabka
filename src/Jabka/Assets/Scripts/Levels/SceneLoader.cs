@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     [SerializeField]
-    private Object _mainMenuScene;
+    private string _mainMenuScene;
     [SerializeField]
-    private Object _nextLevelScene;
+    private string _nextLevelScene;
     [SerializeField]
     private float _sceneTransitionDuration;
     [SerializeField]
@@ -44,18 +44,12 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        if(_mainMenuScene is SceneAsset)
-        {
-            LoadScene(_mainMenuScene.name);
-        }
+        LoadScene(_mainMenuScene);
     }
 
     public void LoadNextLevel()
     {
-        if (_nextLevelScene is SceneAsset)
-        {
-            LoadScene(_nextLevelScene.name);
-        }
+        LoadScene(_nextLevelScene);
     }
 
     public void LoadCurrentScene()

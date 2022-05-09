@@ -1,7 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
 
-//[RequireComponent(typeof(Material))]
 public class TrajectoryAnimation : MonoBehaviour
 {
     [SerializeField]

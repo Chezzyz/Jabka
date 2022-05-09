@@ -15,7 +15,7 @@ public class JumpController : MonoBehaviour
     [SerializeField]
     private float _superJumpForcePercentTreshold;
 
-    public static event System.Action<JumpData, PlayerTransformController> ForceChanged;
+    public static event System.Action<ScriptableJumpData, PlayerTransformController> ForceChanged;
     public static event System.Action<float, ISuperJump> JumpStarted;
 
     private PlayerTransformController _playerTransformController;
@@ -38,6 +38,7 @@ public class JumpController : MonoBehaviour
         InputHandler.SwipeDeltaChanged += OnSwipeY;
         InputHandler.FingerUp += OnFingerUp;
         SuperJumpPicker.SuperJumpPicked += SetSuperJump;
+        SuperJumpPicker.SuperJumpButtonClicked += StartSuperJump;
     }
 
     public void SetSuperJump(ISuperJump superJump)
@@ -55,8 +56,7 @@ public class JumpController : MonoBehaviour
             //если преодалеваем трешхолды по силе и времени, то делаем супер-прыжок, иначе обычный 
             if (_currentSuperJump != null && swipeTime <= _superJumpTimeTreshold && _currentForcePercent >= _superJumpForcePercentTreshold)
             {
-                _currentSuperJump.SuperJump(_playerTransformController);
-                JumpStarted?.Invoke(_currentForcePercent, _currentSuperJump);
+                //StartSuperJump();
             }
             else
             {
@@ -83,12 +83,15 @@ public class JumpController : MonoBehaviour
         }
     }
 
-    private JumpData GetSimpleJumpData(float forcePercent)
+    private SimpleJumpData GetSimpleJumpData(float forcePercent)
     {
-        return new JumpData(_simpleJump.CalculateHeight(forcePercent),
-            _simpleJump.CalculateLength(forcePercent),
-            forcePercent,
-            _simpleJump.GetAnimationCurve());
+        JumpData jumpData = _simpleJump.CalculateCurrentJumpData(forcePercent);
+
+        SimpleJumpData scriptableJumpData = _simpleJump.GetJumpData() as SimpleJumpData;
+        scriptableJumpData.SetForcePercent(forcePercent);
+        scriptableJumpData.SetCurrentJumpData(jumpData);
+
+        return scriptableJumpData;
     }
 
     private float CalculateForcePercent(Vector3 delta, float minHeightTreshold, float maxHeightTreshold)
@@ -105,12 +108,17 @@ public class JumpController : MonoBehaviour
         return forcePercent;
     }
 
-    
+    private void StartSuperJump()
+    {
+        _currentSuperJump.SuperJump(_playerTransformController);
+        JumpStarted?.Invoke(_currentForcePercent, _currentSuperJump);
+    }
 
     private void OnDisable()
     {
         InputHandler.SwipeDeltaChanged -= OnSwipeY;
         InputHandler.FingerUp -= OnFingerUp;
         SuperJumpPicker.SuperJumpPicked -= SetSuperJump;
+        SuperJumpPicker.SuperJumpButtonClicked -= StartSuperJump;
     }
 }

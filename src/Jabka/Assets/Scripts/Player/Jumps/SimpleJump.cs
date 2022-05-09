@@ -7,41 +7,40 @@ using Zenject;
 public class SimpleJump : BaseJump
 {
     [SerializeField]
-    private AnimationCurve _jumpCurve;
-    [SerializeField]
-    private float _maxHeight;
-    [SerializeField]
-    private float _maxLength;
-    [SerializeField]
-    private float _minLength;
-    [SerializeField]
-    private float _maxDuration;
-    [SerializeField]
-    private float _minDuration;
+    private SimpleJumpData _jumpData;
 
     public static event Action<float, float> SimpleJumpStarted; //float: forcePercent, duration
 
     public bool IsInFall { get; private set; }
 
+    public override ScriptableJumpData GetJumpData()
+    {
+        return _jumpData;
+    }
+
     public Coroutine DoSimpleJump(PlayerTransformController playerTransformController, float forcePercent)
     {
-        float duration = CalculateDuration(forcePercent);
-        float height = CalculateHeight(forcePercent);
-        float length = CalculateLength(forcePercent);
-        float maxProgress = _jumpCurve.keys.Last().time;
-        AnimationCurve lengthCurve = AnimationCurve.Linear(0, 0, maxProgress, maxProgress);
+        JumpData currentJumpData = CalculateCurrentJumpData(forcePercent);
+        Coroutine jump = StartCoroutine(JumpCoroutine(playerTransformController, currentJumpData));
 
-        Coroutine jump = StartCoroutine(JumpCoroutine(playerTransformController, duration, height, length, maxProgress, _jumpCurve, lengthCurve));
-
-        SimpleJumpStarted?.Invoke(forcePercent, duration);
+        SimpleJumpStarted?.Invoke(forcePercent, currentJumpData.Duration);
 
         playerTransformController.SetIsGrounded(false);
         return jump;
     }
 
-    public AnimationCurve GetAnimationCurve() => _jumpCurve;
+    public JumpData CalculateCurrentJumpData(float forcePercent)
+    {
+        return new JumpData(CalculateHeight(forcePercent),
+            CalculateLength(forcePercent),
+            CalculateDuration(forcePercent),
+            GetHeightCurve(),
+            GetLengthCurve());
+    }
 
-    public float CalculateDuration(float forcePercent) => _minDuration + (_maxDuration - _minDuration) * forcePercent;
-    public float CalculateHeight(float forcePercent) => _maxHeight * forcePercent;
-    public float CalculateLength(float forcePercent) => _minLength + (_maxLength - _minLength) * forcePercent;
+    public AnimationCurve GetHeightCurve() => _jumpData.GetJumpData().HeightCurve;
+    public AnimationCurve GetLengthCurve() => _jumpData.GetJumpData().LengthCurve;
+    public float CalculateDuration(float forcePercent) => _jumpData.MinDuration + (_jumpData.MaxDuration - _jumpData.MinDuration) * forcePercent;
+    public float CalculateHeight(float forcePercent) => _jumpData.MaxHeight * forcePercent;
+    public float CalculateLength(float forcePercent) => _jumpData.MinLength + (_jumpData.MaxLength - _jumpData.MinLength) * forcePercent;
 }

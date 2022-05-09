@@ -28,9 +28,12 @@ public class VirtualCameraFX : MonoBehaviour
         JumpController.ForceChanged += OnForcedChanged;
     }
 
-    private void OnForcedChanged(JumpData jumpData, PlayerTransformController playerTransform)
+    private void OnForcedChanged(ScriptableJumpData jumpData, PlayerTransformController playerTransform)
     {
-        _virtualCamera.m_Lens.FieldOfView = defaultFoV + (jumpData.ForcePercent * 10);
+        if(jumpData is SimpleJumpData data)
+        {
+            _virtualCamera.m_Lens.FieldOfView = defaultFoV + (data.GetForcePercent() * 10);
+        }
     }
 
     private void OnDashPreparingStarted(float duration)
@@ -51,14 +54,7 @@ public class VirtualCameraFX : MonoBehaviour
 
     private void OnSimpleJumpStarted(float forcePercent, float duration)
     {
-        if (forcePercent > 0.75f)
-        {
-            FoVEffect(20f, duration, 0.8f);
-        }
-        else
-        { 
-            FoVEffect(10f, duration, 0.3f);
-        }
+        FoVEffect(10f, duration, 0.3f);
     }
 
     private void FoVEffect(float newFoV, float duration, float fovEffectPart)

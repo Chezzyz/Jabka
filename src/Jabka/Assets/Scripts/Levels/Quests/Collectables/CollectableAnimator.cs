@@ -21,6 +21,7 @@ public class CollectableAnimator : MonoBehaviour
     {
         Collectable.Collected += OnCollected;
         SuperJumpCollectable.SuperJumpCollected += OnCollected;
+        Destination.Destinated += OnCollected; 
     }
 
     private void Start()
@@ -63,5 +64,6 @@ public class CollectableAnimator : MonoBehaviour
     {
         Collectable.Collected -= OnCollected;
         SuperJumpCollectable.SuperJumpCollected -= OnCollected;
+        Destination.Destinated -= OnCollected;
     }
 }

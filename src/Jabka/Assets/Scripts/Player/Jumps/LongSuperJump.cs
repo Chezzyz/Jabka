@@ -7,24 +7,20 @@ using UnityEngine;
 public class LongSuperJump : BaseJump, ISuperJump
 {
     [SerializeField]
-    private AnimationCurve _jumpCurve;
-    [SerializeField]
-    private float _length;
-    [SerializeField]
-    private float _height;
-    [SerializeField]
-    private float _duration;
+    private ScriptableJumpData _jumpData;
 
     public static event Action<float> LongJumpStarted; //float: duration
 
+    public override ScriptableJumpData GetJumpData()
+    {
+        return _jumpData;
+    }
+
     public void SuperJump(PlayerTransformController playerTransformController)
     {
-        float maxProgress = _jumpCurve.keys.Last().time;
-        AnimationCurve lengthCurve = AnimationCurve.Linear(0, 0, maxProgress, maxProgress);
+        _currentJump = StartCoroutine(JumpCoroutine(playerTransformController, _jumpData.GetJumpData()));
 
-        _currentJump = StartCoroutine(JumpCoroutine(playerTransformController, _duration, _height, _length, maxProgress, _jumpCurve, lengthCurve));
-
-        LongJumpStarted?.Invoke(_duration);
+        LongJumpStarted?.Invoke(_jumpData.GetJumpData().Duration);
     }
 
     public string GetJumpName()

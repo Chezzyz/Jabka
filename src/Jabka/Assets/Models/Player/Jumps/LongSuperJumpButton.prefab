@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8028d274107794548a6ac15052f520ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _jumpData: {fileID: 11400000, guid: fe21de2eecb86854c96918a76abbb6c6, type: 2}
   _jumpCurve:
     serializedVersion: 2
     m_Curve:

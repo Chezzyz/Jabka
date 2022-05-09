@@ -2,6 +2,7 @@ using UnityEngine;
 using Lean.Touch;
 using System;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class InputHandler : MonoBehaviour
 {
@@ -22,7 +23,11 @@ public class InputHandler : MonoBehaviour
 
         _levelCompletedDelegate = (place) => OnSendingEventsStateChanged(true);
         CompletePlace.LevelCompleted += _levelCompletedDelegate;
+
+        LevelOverview.OverviewEnded += OnOverviewEnded;
+        SceneStatus.SceneChanged += OnSceneChanged;
     }
+
 
     private void OnDisable()
     {
@@ -31,6 +36,21 @@ public class InputHandler : MonoBehaviour
         LeanTouch.OnFingerUp -= OnFingerUp;
         Pause.PauseStateChanged -= OnSendingEventsStateChanged;
         CompletePlace.LevelCompleted -= _levelCompletedDelegate;
+        LevelOverview.OverviewEnded -= OnOverviewEnded;
+        SceneStatus.SceneChanged -= OnSceneChanged;
+    }
+
+    private void OnOverviewEnded()
+    {
+        _canSendEvents = true;
+    }
+
+    private void OnSceneChanged(int prevScene, int currentScene)
+    {
+        if (prevScene != currentScene && currentScene != 1)
+        {
+            _canSendEvents = false;
+        }
     }
 
     private void OnSendingEventsStateChanged(bool isStopSendingEvents)

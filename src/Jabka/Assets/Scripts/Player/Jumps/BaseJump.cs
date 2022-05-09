@@ -4,7 +4,7 @@ using System.Linq;
 using System;
 using UnityEngine;
 
-public class BaseJump : MonoBehaviour
+public abstract class BaseJump : MonoBehaviour
 {
     private bool _isInJump;
 
@@ -16,6 +16,8 @@ public class BaseJump : MonoBehaviour
     {
         return _isInJump;
     }
+
+    public abstract ScriptableJumpData GetJumpData();
 
     protected virtual void SetIsInJump(bool value)
     {
@@ -29,12 +31,7 @@ public class BaseJump : MonoBehaviour
 
     protected virtual IEnumerator JumpCoroutine(
         PlayerTransformController playerTransformController,
-        float duration,
-        float height,
-        float length,
-        float maxProgress,
-        AnimationCurve heightCurve,
-        AnimationCurve lengthCurve,
+        JumpData jumpData,
         int layerToMask = PlayerTransformController.playerLayerMask)
     {
         SetIsInJump(true);
@@ -45,6 +42,7 @@ public class BaseJump : MonoBehaviour
         Vector3 originDirection = playerTransformController.GetForwardDirection();
         Vector3 colliderSize = playerTransformController.GetBoxColliderSize();
 
+        float maxProgress = jumpData.HeightCurve.keys.Last().time;
         float progress = 0;
 
         while (IsInJump() && progress < maxProgress)
@@ -52,10 +50,10 @@ public class BaseJump : MonoBehaviour
             expiredTime += Time.deltaTime;
             
             //когда прогресс больше единицы, значит происходит падение, все нормально
-            progress = expiredTime / duration;
+            progress = expiredTime / jumpData.Duration;
             
-            float nextHeight = height * heightCurve.Evaluate(progress);
-            float nextLength = length * lengthCurve.Evaluate(progress);
+            float nextHeight = jumpData.Height * jumpData.HeightCurve.Evaluate(progress);
+            float nextLength = jumpData.Length * jumpData.LengthCurve.Evaluate(progress);
             Vector3 nextPosition = originPosition + new Vector3((originDirection * nextLength).x, nextHeight, (originDirection * nextLength).z);
 
             if (!IsCollideWithSomething(nextPosition, colliderSize, playerTransformController.GetQuaternion(), layerToMask))
@@ -82,10 +80,10 @@ public class BaseJump : MonoBehaviour
 
     protected virtual void OnCollision(Collision collision, PlayerTransformController playerTransformController)
     {
-        if (IsInJump())
-        {
-            SetIsInJump(false);
-        }
+        //if (IsInJump())
+        //{
+        //    SetIsInJump(false);
+        //}
     }
 
     protected virtual void OnDisable()
