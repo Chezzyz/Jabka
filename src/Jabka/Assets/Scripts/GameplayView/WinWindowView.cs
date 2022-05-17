@@ -35,13 +35,12 @@ public class WinWindowView : MonoBehaviour
 
     private void OnLevelCompleted(CompletePlace place)
     {
-        float screenHeight = Screen.height;
         GetComponent<Canvas>().enabled = true;
         _background.DOBlendableColor(_backgroundColor, _backgroundFadeDuration);
-        _levelNumber.rectTransform.DOMoveY(screenHeight - 225, _groupsAppearDuration).SetDelay(_groupsAppearDelay);
-        _completedText.rectTransform.DOMoveY(screenHeight - 325, _groupsAppearDuration).SetDelay(_groupsAppearDelay);
-        _buttonsGroup.DOMoveY(-15, _groupsAppearDuration).SetDelay(_groupsAppearDelay);
-        _questsGroup.DOLocalMoveX(0, _groupsAppearDuration).SetDelay(_groupsAppearDelay * 2);
+        _levelNumber.rectTransform.DOAnchorPosY(-225, _groupsAppearDuration).SetDelay(_groupsAppearDelay);
+        _completedText.rectTransform.DOAnchorPosY(-325, _groupsAppearDuration).SetDelay(_groupsAppearDelay);
+        _buttonsGroup.DOAnchorPosY(-15, _groupsAppearDuration).SetDelay(_groupsAppearDelay);
+        _questsGroup.DOAnchorPosX(0, _groupsAppearDuration).SetDelay(_groupsAppearDelay * 2);
     }
 
     private void OnDisable()

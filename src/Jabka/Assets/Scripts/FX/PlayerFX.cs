@@ -34,7 +34,7 @@ public class PlayerFX : MonoBehaviour
 
     private void OnSimpleJumpStarted(float forcePercent, float duration)
     {
-        if (forcePercent > 0.25f && forcePercent < 0.75f)
+        if (forcePercent > 0.25f && forcePercent <= 0.75f)
         {
             _simpleJumpTrail.gameObject.SetActive(true);
         }

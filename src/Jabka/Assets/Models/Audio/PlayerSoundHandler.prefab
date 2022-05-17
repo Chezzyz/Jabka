@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1531961066111243508
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5370070437320114865}
+  - component: {fileID: 7132059101287447784}
+  m_Layer: 0
+  m_Name: PlayerSoundHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5370070437320114865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531961066111243508}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7132059101287447784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531961066111243508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fd3da2be5d2f9c4bae59f41409f5d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lowForceJumpSound: {fileID: 8300000, guid: 9f2c610a12191bf47a98c6faf0d75d1e, type: 3}
+  _lowForceJumpVolumeScale: 0.3
+  _mediumForceJumpSound: {fileID: 8300000, guid: 14871d727ceaeb849921b7b01edb2950, type: 3}
+  _mediumForceJumpVolumeScale: 0.3
+  _highForceJumpSound: {fileID: 8300000, guid: 4ec91b77db3bfcf43bdaa93c608ef0b8, type: 3}
+  _highForceJumpVolumeScale: 0.3
+  _longJumpSound: {fileID: 8300000, guid: 547f961dbfe7de84a8536ae27102f140, type: 3}
+  _longJumpVolumeScale: 0.5
+  _dashJumpStartedSound: {fileID: 8300000, guid: 14871d727ceaeb849921b7b01edb2950, type: 3}
+  _dashJumpStartedVolumeScale: 0.3
+  _dashJumpDashedSound: {fileID: 8300000, guid: 834980ec0d2d554408d6b6d29dd2f398, type: 3}
+  _dashJumpDashedVolumeScale: 0.65
+  _dashJumpDashedSound2: {fileID: 8300000, guid: 7a0241c2578716b4e925469dd91a5a81, type: 3}
+  _dashJumpDashedVolumeScale2: 0.55
+  _minPitch: 0.85
+  _maxPitch: 1

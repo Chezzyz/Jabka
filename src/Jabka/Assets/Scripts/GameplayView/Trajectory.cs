@@ -22,6 +22,7 @@ public class Trajectory : MonoBehaviour
     {
         JumpController.ForceChanged += OnTrajectoryChanged;
         DashSuperJump.DashJumpPreparing += OnDashTrajectoryChanged;
+        DashSuperJump.DashPreparingEnded += ClearTrajectory;
         JumpController.JumpStarted += OnJumpStarted;
         DashSuperJump.DashJumpDashed += OnJumpStarted;
     }
@@ -141,6 +142,7 @@ public class Trajectory : MonoBehaviour
     {
         JumpController.ForceChanged -= OnTrajectoryChanged;
         DashSuperJump.DashJumpPreparing -= OnDashTrajectoryChanged;
+        DashSuperJump.DashPreparingEnded -= ClearTrajectory;
         JumpController.JumpStarted -= OnJumpStarted;
         DashSuperJump.DashJumpDashed -= OnJumpStarted;
     }
