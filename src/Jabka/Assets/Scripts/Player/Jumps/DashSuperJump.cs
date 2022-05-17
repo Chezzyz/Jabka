@@ -19,8 +19,10 @@ public class DashSuperJump : BaseJump, ISuperJump
     private bool _isInPrepare;
     private bool _isInDash;
 
+    public static event Action DashJumpStarted;
+    public static event Action<float> DashPreparingStarted;
+    public static event Action DashPreparingEnded;
     public static event Action<float> DashJumpDashed;
-    public static event Action<float> DashPreparingStarted; 
 
     protected override void OnEnable()
     {
@@ -52,6 +54,8 @@ public class DashSuperJump : BaseJump, ISuperJump
         _playerTransformController = playerTransformController;
 
         _currentJump = StartCoroutine(JumpCoroutine(_playerTransformController, _jumpData.GetJumpData()));
+
+        DashJumpStarted?.Invoke();
     }
 
     public string GetJumpName()
@@ -103,6 +107,7 @@ public class DashSuperJump : BaseJump, ISuperJump
         yield return new WaitForSeconds(delay);
         SetTimeScale(1);
         _isInPrepare = false;
+        DashPreparingEnded?.Invoke();
     }
 
     private void SetTimeScale(float value)

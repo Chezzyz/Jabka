@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4496780349642411043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4496780349642411229}
+  - component: {fileID: 4496780349642411042}
+  m_Layer: 0
+  m_Name: BackgroundMusicHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4496780349642411229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4496780349642411043}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 856.23254, y: 1054.1385, z: 20.04956}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4496780349642411042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4496780349642411043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc239c49d51adad48b44c13991c15ccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _menuMusic: {fileID: 8300000, guid: f0deb9f44ca777c45915450f6af24e32, type: 3}
+  _menuMusicVolumeScale: 0.075
+  _backgroundMusicStage1: {fileID: 8300000, guid: 86a2d0e433f3f05469e2a1653bab2cd6, type: 3}
+  _backgroundMusicStage1Level5: {fileID: 8300000, guid: 86a2d0e433f3f05469e2a1653bab2cd6, type: 3}
+  _backgroundMusicVolumeScaleStage1: 0.05
+  _backgroundMusicStage2: {fileID: 0}
+  _backgroundMusicVolumeScaleStage2: 0
+  _backgroundMusicStage3: {fileID: 0}
+  _backgroundMusicVolumeScaleStage3: 0
+  _levelCompletedSound: {fileID: 8300000, guid: 9cbecd60259c61943af0f87b1ab53733, type: 3}
+  _levelCompletedSoundVolumeScale: 1
+  _dashJumpPitch: 0.35
+  _dashJumpPitchDuration: 0.05

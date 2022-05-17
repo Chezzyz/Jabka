@@ -10,6 +10,8 @@ public class LevelPreparation : MonoBehaviour
 {
     public static event Action PlayButtonPushed;
 
+    public static event Action QuestAppearStarted;
+
     [SerializeField]
     private List<QuestView> _questViews;
 
@@ -24,8 +26,6 @@ public class LevelPreparation : MonoBehaviour
 
     private void OnEnable()
     {
-        ShowQuests(_questViews, _allAppearDuration);
-        _playButton.onClick.AddListener(StartLevel);
         SceneStatus.SceneChanged += OnSceneChanged;
     }
 
@@ -34,6 +34,11 @@ public class LevelPreparation : MonoBehaviour
         if (prevScene == currentScene)
         {
             gameObject.SetActive(false);
+        }
+        else
+        {
+            ShowQuests(_questViews, _allAppearDuration);
+            _playButton.onClick.AddListener(StartLevel);
         }
     }
 
@@ -51,8 +56,7 @@ public class LevelPreparation : MonoBehaviour
 
         foreach (var quest in questViews)
         {
-            quest.transform.localPosition += new Vector3(1000f, 0f, 0f);
-            sequence.Append(quest.transform.DOLocalMoveX(0, appearDuration / questViews.Count));
+            sequence.Append(quest.GetComponent<RectTransform>().DOAnchorPosX(0, appearDuration / questViews.Count).OnStart(() => QuestAppearStarted?.Invoke()));
         }
 
         sequence.onComplete = () =>

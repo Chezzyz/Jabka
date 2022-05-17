@@ -4721,9 +4721,9 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1080, y: 1920}
+  m_ReferenceResolution: {x: 1080, y: 2160}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -4798,10 +4798,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvasGroupSerializable: {fileID: 5834519070106958145}
   _animatorSerializable: {fileID: 540063383}
-  _fadeDurationSerializable: 1
+  _fadeDurationSerializable: 0.75
   _closeDurationSerializable: 0.75
   _delayToShowSerializable: 0
-  _delayToCloseSerializable: 1
+  _delayToCloseSerializable: 0.5
 --- !u!1 &5834519070335909349
 GameObject:
   m_ObjectHideFlags: 0

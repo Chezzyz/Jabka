@@ -31,8 +31,12 @@ public class OnCompleteQuestEffect : MonoBehaviour
     [SerializeField]
     private float _animationPunchScale;
 
+    public static event System.Action ReadyForCompleteViewSetted;
+
     private readonly Color _defaultColor = Color.white;
     private readonly Color _grayColor = new Color(0.3019608f, 0.3019608f, 0.3019608f, 1);
+
+    
 
     private LevelMetaData _levelMetaData;
 
@@ -80,6 +84,7 @@ public class OnCompleteQuestEffect : MonoBehaviour
     {
         SetSprite(_currentImage, _completedSprite, Color.white);
         SetTextColor(_grayColor);
+        ReadyForCompleteViewSetted?.Invoke();
     }
 
     private void SetDefaultView()

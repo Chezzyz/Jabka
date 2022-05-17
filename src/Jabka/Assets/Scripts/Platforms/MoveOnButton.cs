@@ -6,6 +6,10 @@ public class MoveOnButton : MonoBehaviour
 {
     [SerializeField]
     private List<GenericPlatformMove> _platformsToMove;
+    [SerializeField]
+    private Material _offMaterial;
+    [SerializeField]
+    private Material _onMaterial;
 
     public static event System.Action<GenericPlatformMove> ButtonPressed;
 
@@ -13,6 +17,7 @@ public class MoveOnButton : MonoBehaviour
     {
         if(collision.gameObject.TryGetComponent<PlayerTransformController>(out _))
         {
+            GetComponent<Renderer>().material = _onMaterial;
             foreach(var platform in _platformsToMove)
             {
                 ButtonPressed?.Invoke(platform);

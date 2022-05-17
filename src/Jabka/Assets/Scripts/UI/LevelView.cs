@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class LevelView : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class LevelView : MonoBehaviour
     private SceneLoader _sceneLoader;
 
     private LevelMetaData _levelMetaData;
+
+    private UnityAction _lastLoadSceneListener;
 
     private const int _levelCountInStage = 5;
 
@@ -45,8 +48,10 @@ public class LevelView : MonoBehaviour
 
         SetupLevelView(levelNumber);
 
-        _startLevelButton.onClick.RemoveAllListeners();
-        _startLevelButton.onClick.AddListener(() => _sceneLoader.LoadScene(levelMetaData.GetSceneName()));
+
+        if(_lastLoadSceneListener != null) _startLevelButton.onClick.RemoveListener(_lastLoadSceneListener);
+        _lastLoadSceneListener = () => _sceneLoader.LoadScene(levelMetaData.GetSceneName());
+        _startLevelButton.onClick.AddListener(_lastLoadSceneListener);
     }
     
     private void SetupLevelView(int levelNumber)

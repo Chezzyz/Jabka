@@ -242,7 +242,7 @@ PrefabInstance:
     - target: {fileID: 7915584810875181009, guid: 7a4060b6426585749acfc1be7d25f6d2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f6e5b1a850abbf04db4517f8f3c7aec8, type: 2}
+      objectReference: {fileID: 2100000, guid: 34cac0e4f3576774fa8dbaed23b7a3cc, type: 2}
     m_RemovedComponents:
     - {fileID: 2644895711069880520, guid: 7a4060b6426585749acfc1be7d25f6d2, type: 3}
     - {fileID: 7912733475040616603, guid: 7a4060b6426585749acfc1be7d25f6d2, type: 3}
@@ -268,6 +268,8 @@ MonoBehaviour:
   - {fileID: 320698143}
   - {fileID: 762899572}
   - {fileID: 935745379}
+  _offMaterial: {fileID: 2100000, guid: 34cac0e4f3576774fa8dbaed23b7a3cc, type: 2}
+  _onMaterial: {fileID: 2100000, guid: f6e5b1a850abbf04db4517f8f3c7aec8, type: 2}
 --- !u!64 &76176605
 MeshCollider:
   m_ObjectHideFlags: 0

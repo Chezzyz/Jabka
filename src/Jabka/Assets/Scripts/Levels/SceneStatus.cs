@@ -30,6 +30,11 @@ public class SceneStatus : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public static int GetCurrentLevelNumber()
+    {
+        return _currentScene;
+    }
+
     private void OnSceneLoadStarted(float delay)
     {
         _prevScene = SceneManager.GetActiveScene().buildIndex;

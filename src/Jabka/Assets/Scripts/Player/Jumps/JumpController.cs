@@ -110,8 +110,11 @@ public class JumpController : MonoBehaviour
 
     private void StartSuperJump()
     {
-        _currentSuperJump.SuperJump(_playerTransformController);
-        JumpStarted?.Invoke(_currentForcePercent, _currentSuperJump);
+        if (!_currentSuperJump.IsInJump())
+        {
+            _currentSuperJump.SuperJump(_playerTransformController);
+            JumpStarted?.Invoke(_currentForcePercent, _currentSuperJump);
+        }
     }
 
     private void OnDisable()
