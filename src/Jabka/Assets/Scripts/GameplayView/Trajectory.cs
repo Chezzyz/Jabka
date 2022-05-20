@@ -23,8 +23,9 @@ public class Trajectory : MonoBehaviour
         JumpController.ForceChanged += OnTrajectoryChanged;
         DashSuperJump.DashJumpPreparing += OnDashTrajectoryChanged;
         DashSuperJump.DashPreparingEnded += ClearTrajectory;
-        JumpController.JumpStarted += OnJumpStarted;
-        DashSuperJump.DashJumpDashed += OnJumpStarted;
+        SimpleJump.SimpleJumpStarted += OnSimpleJumpStarted;
+        JumpController.SimpleJumpCancelled += OnSimpleJumpStarted;
+        DashSuperJump.DashJumpDashed += OnDashJumpDashed;
     }
 
     private void OnTrajectoryChanged(ScriptableJumpData jumpData, PlayerTransformController playerTransformController)
@@ -84,8 +85,9 @@ public class Trajectory : MonoBehaviour
             nextLength = jumpData.Length * progress;
             nextPosition = originPosition + new Vector3((direction * nextLength).x, nextHeight, (direction * nextLength).z);
 
+            Vector3 collider = playerTransformController.GetBoxColliderSize();
             if (BaseJump.IsCollideWithSomething(nextPosition,
-                playerTransformController.GetBoxColliderSize(),
+                new Vector3(collider.x/3, collider.y, collider.z/3),
                 playerTransformController.GetQuaternion(),
                 PlayerTransformController.playerLayerMask))
             {
@@ -121,12 +123,12 @@ public class Trajectory : MonoBehaviour
         pointPrefab.SetActive(false);
     }
 
-    private void OnJumpStarted(float num, ISuperJump sj)
+    private void OnSimpleJumpStarted(float arg1, float arg2)
     {
         ClearTrajectory();
     }
 
-    private void OnJumpStarted(float num)
+    private void OnDashJumpDashed(float num)
     {
         ClearTrajectory();
     }
@@ -143,7 +145,8 @@ public class Trajectory : MonoBehaviour
         JumpController.ForceChanged -= OnTrajectoryChanged;
         DashSuperJump.DashJumpPreparing -= OnDashTrajectoryChanged;
         DashSuperJump.DashPreparingEnded -= ClearTrajectory;
-        JumpController.JumpStarted -= OnJumpStarted;
-        DashSuperJump.DashJumpDashed -= OnJumpStarted;
+        SimpleJump.SimpleJumpStarted -= OnSimpleJumpStarted;
+        JumpController.SimpleJumpCancelled -= OnSimpleJumpStarted;
+        DashSuperJump.DashJumpDashed -= OnDashJumpDashed;
     }
 }

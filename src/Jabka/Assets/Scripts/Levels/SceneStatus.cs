@@ -1,17 +1,22 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneStatus : MonoBehaviour
 {
-    public static SceneStatus Instance;
+    [SerializeField]
+    List<LevelMetaData> _levelMetaDatas;
 
     public static Action<int, int> SceneChanged;
 
-    private static int _prevScene = -1;
-    private static int _currentScene = -1;
+    public static SceneStatus Instance;
+
+    private static int _prevSceneIndex = -1;
+    private static int _currentSceneIndex = -1;
+
+    private static Dictionary<int, LevelMetaData> _levelMetaDataMap;
 
     private void Awake()
     {
@@ -24,26 +29,46 @@ public class SceneStatus : MonoBehaviour
         {
             Instance = this;
         }
+        
+        DontDestroyOnLoad(gameObject);
+    }
 
+    private void OnEnable()
+    {
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneLoader.SceneLoadStarted += OnSceneLoadStarted;
-        DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        InitLevelMetaDataMap();
     }
 
     public static int GetCurrentLevelNumber()
     {
-        return _currentScene;
+        return _currentSceneIndex;
+    }
+
+    public static LevelMetaData GetLevelMetaData(int levelNumber)
+    {
+        return _levelMetaDataMap[levelNumber];
+    }
+
+    private void InitLevelMetaDataMap()
+    {
+        _levelMetaDataMap = new Dictionary<int, LevelMetaData>();
+        _levelMetaDatas.ForEach(meta => _levelMetaDataMap.Add(meta.GetLevelNumber(), meta));
     }
 
     private void OnSceneLoadStarted(float delay)
     {
-        _prevScene = SceneManager.GetActiveScene().buildIndex;
+        _prevSceneIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode arg1)
     {
-        _currentScene = scene.buildIndex;
-
-        SceneChanged?.Invoke(_prevScene, _currentScene);
+        _currentSceneIndex = scene.buildIndex;
+        SceneChanged?.Invoke(_prevSceneIndex, _currentSceneIndex);
     }
+
 }

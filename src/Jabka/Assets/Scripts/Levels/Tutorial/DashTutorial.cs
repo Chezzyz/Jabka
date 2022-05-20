@@ -25,12 +25,12 @@ public class DashTutorial : BaseFingerTutorial
     {
         Construct(_canvasGroupSerializable, _animatorSerializable, _fadeDurationSerializable, _closeDurationSerializable);
         InputHandler.FingerDown += OnFingerDown;
-        JumpController.JumpStarted += OnJumpStarted;
+        DashSuperJump.DashJumpStarted += OnDashJumpStarted;
     }
 
-    private void OnJumpStarted(float force, ISuperJump superJump)
+    private void OnDashJumpStarted()
     {
-        if(!_isShowed && superJump != null && superJump.GetJumpName() == "Dash")
+        if(!_isShowed)
         {
             StartCoroutine(SlowAndShowAfterDelay(_delayToShowSerializable));
         }
@@ -59,6 +59,6 @@ public class DashTutorial : BaseFingerTutorial
     private void OnDisable()
     {
         InputHandler.FingerDown -= OnFingerDown;
-        JumpController.JumpStarted -= OnJumpStarted;
+        DashSuperJump.DashJumpStarted -= OnDashJumpStarted;
     }
 }

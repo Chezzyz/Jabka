@@ -160,7 +160,7 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
             StopTweensOfObjects(button.transform, buttonImage, _currentJumpImage);
 
             button.transform.DOLocalMove(new Vector3(x * radius, y * radius, 0), duration).SetEase(ease)
-                .OnStart(() => button.SetIsSelectable(true, duration/2));
+                .OnStart(() => button.SetIsSelectable(true, duration/4));
             buttonImage.DOFade(1, duration);
             _currentJumpImage.DOFade(1, duration);
         }

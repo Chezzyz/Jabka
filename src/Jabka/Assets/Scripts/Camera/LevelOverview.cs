@@ -5,13 +5,14 @@ using System.Collections;
 using System.Linq;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelOverview : MonoBehaviour
 {
     public static event Action OverviewEnded; 
 
     [SerializeField]
-    private float _duration;
+    private float _cameraDuration;
 
     [SerializeField]
     private CinemachineVirtualCamera _dollyCamera;
@@ -20,15 +21,22 @@ public class LevelOverview : MonoBehaviour
     private AnimationCurve _cameraCurve;
 
     [SerializeField]
+    private float _cartDuration;
+
+    [SerializeField]
     private CinemachineDollyCart _dollyCart;
 
     [SerializeField]
     private AnimationCurve _cartCurve;
 
+    [SerializeField]
+    private Button _skipButton;
+
     private void OnEnable()
     {
         LevelPreparation.PlayButtonPushed += StartOverview;
         SceneStatus.SceneChanged += OnSceneChanged;
+        _skipButton.onClick.AddListener(() => { _dollyCamera.Priority = 0; OverviewEnded?.Invoke(); _skipButton.gameObject.SetActive(false); });
     }
 
     private void OnSceneChanged(int prevScene, int currentScene)
@@ -36,31 +44,34 @@ public class LevelOverview : MonoBehaviour
         if (prevScene == currentScene)
         {
             _dollyCamera.Priority = 0;
+            _skipButton.gameObject.SetActive(false);
         }
     }
 
     [Button]
     private void StartOverview()
     {
-        StartCoroutine(OverviewCoroutine(_duration, _dollyCamera, _cameraCurve, _dollyCart, _cartCurve));
+        _skipButton.gameObject.SetActive(true);
+        StartCoroutine(OverviewCoroutine(_cameraDuration, _dollyCamera, _cameraCurve, _cartDuration, _dollyCart, _cartCurve));
     }
 
-    private IEnumerator OverviewCoroutine(float duration, CinemachineVirtualCamera dollyCamera,
-        AnimationCurve cameraCurve, CinemachineDollyCart dollyCart, AnimationCurve cartCurve)
+    private IEnumerator OverviewCoroutine(float cameraDuration, CinemachineVirtualCamera dollyCamera,
+        AnimationCurve cameraCurve, float cartDuration, CinemachineDollyCart dollyCart, AnimationCurve cartCurve)
     {
         float expiredTime = 0.0f;
         float maxProgress = 1f;
-        float progress = 0.0f;
+        float cameraProgress = 0.0f;
+        float cartProgress = 0.0f;
 
-        while (progress < maxProgress)
+        while (cameraProgress < maxProgress || cartProgress < maxProgress)
         {
             expiredTime += Time.deltaTime;
 
-            progress = expiredTime / duration;
+            cameraProgress = expiredTime / cameraDuration;
+            cartProgress = expiredTime / cartDuration;
 
-            dollyCart.m_Position = cartCurve.Evaluate(progress);
-
-            dollyCamera.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition = cameraCurve.Evaluate(progress);
+            dollyCart.m_Position = cartCurve.Evaluate(cartProgress);
+            dollyCamera.GetCinemachineComponent<CinemachineTrackedDolly>().m_PathPosition = cameraCurve.Evaluate(cameraProgress);
 
             yield return null;
         }
@@ -69,6 +80,8 @@ public class LevelOverview : MonoBehaviour
 
         yield return null;
 
+        _skipButton.gameObject.SetActive(false);
+
         OverviewEnded?.Invoke();
     }
 
@@ -76,5 +89,6 @@ public class LevelOverview : MonoBehaviour
     {
         LevelPreparation.PlayButtonPushed -= StartOverview;
         SceneStatus.SceneChanged -= OnSceneChanged;
+        _skipButton.onClick.RemoveAllListeners();
     }
 }

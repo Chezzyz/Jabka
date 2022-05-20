@@ -57,9 +57,10 @@ public class PlayerRotation : MonoBehaviour
     private void OnSwipeX(Vector2 delta)
     {
         //при движении пальца вправо, камера поворачивается влево и наоборот.
+        float normalizedOffset = (delta.x / Screen.width) * 1000;
         if (_canRotate)
         {
-            _playerTransformController.SetRotationY(_originRotationY + (-1 * _sensitivity * delta.x));
+            _playerTransformController.SetRotationY(_originRotationY + (-1 * _sensitivity * normalizedOffset));
         }
     }
 

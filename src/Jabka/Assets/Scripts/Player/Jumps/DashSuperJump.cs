@@ -24,9 +24,8 @@ public class DashSuperJump : BaseJump, ISuperJump
     public static event Action DashPreparingEnded;
     public static event Action<float> DashJumpDashed;
 
-    protected override void OnEnable()
+    private void OnEnable()
     {
-        base.OnEnable();
         FingerUpDelegate = (vec, num) => DoDash();
         InputHandler.FingerUp += FingerUpDelegate;
         InputHandler.FingerDown += PrepareForDash;
@@ -115,9 +114,8 @@ public class DashSuperJump : BaseJump, ISuperJump
         Time.timeScale = value;
     }
 
-    protected override void OnDisable()
+    private void OnDisable()
     {
-        base.OnDisable();
         InputHandler.FingerUp -= FingerUpDelegate;
         InputHandler.FingerDown -= PrepareForDash;
     }

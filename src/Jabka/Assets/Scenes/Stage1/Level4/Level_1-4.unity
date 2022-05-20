@@ -2718,6 +2718,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 787310898351344808, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 805238683955519971, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2741,6 +2745,10 @@ PrefabInstance:
     - target: {fileID: 805238683955519971, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 822311165899465849, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1218567770775208847, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
       propertyPath: m_Name
@@ -2792,6 +2800,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2086515377416677962, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2739833714322875116, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
+      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2777445977224978471, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
@@ -2921,6 +2933,14 @@ PrefabInstance:
     - target: {fileID: 4581553474973938229, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
       propertyPath: _duration
       value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4581553474973938229, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
+      propertyPath: _cartDuration
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4581553474973938229, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
+      propertyPath: _cameraDuration
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4581553474973938229, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
       propertyPath: _cartCurve.m_Curve.Array.size
@@ -3281,6 +3301,10 @@ PrefabInstance:
     - target: {fileID: 8693843022328756617, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8988025713434368132, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8996724192815638473, guid: 7d8a91461f4a0594caa0a48650889f29, type: 3}
       propertyPath: m_LocalRotation.w

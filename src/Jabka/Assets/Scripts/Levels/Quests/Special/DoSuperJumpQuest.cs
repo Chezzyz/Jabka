@@ -17,14 +17,16 @@ public class DoSuperJumpQuest : BaseQuest
     protected override void OnSceneLoaded(string sceneName)
     {
         base.OnSceneLoaded(sceneName);
-        JumpController.JumpStarted -= OnJumpStarted;
+        JumpController.SuperJumpStarted -= OnJumpStarted;
+        SimpleJump.SimpleJumpStarted -= OnSimpleJumpStarted;
         CompletePlace.LevelCompleted -= OnLevelCompleted;
-        JumpController.JumpStarted += OnJumpStarted;
+        JumpController.SuperJumpStarted += OnJumpStarted;
         CompletePlace.LevelCompleted += OnLevelCompleted;
+        SimpleJump.SimpleJumpStarted += OnSimpleJumpStarted;
         _currentCount = 0;
     }
 
-    private void OnJumpStarted(float force, ISuperJump superJump)
+    private void OnJumpStarted(ISuperJump superJump)
     {
         if(superJump != null && superJump.GetJumpName() == _superJumpName)
         {
@@ -34,8 +36,12 @@ public class DoSuperJumpQuest : BaseQuest
                 ReadyForComplete();
             }
         }
+    }
+
+    private void OnSimpleJumpStarted(float arg1, float arg2)
+    {
         //если обычный прыжок и прыгать должны подряд 
-        else if (_inARow && force > 0)
+        if (_inARow)
         {
             _currentCount = 0;
         }

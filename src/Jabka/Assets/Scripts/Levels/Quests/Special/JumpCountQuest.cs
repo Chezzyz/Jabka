@@ -13,19 +13,24 @@ public class JumpCountQuest : BaseQuest
     protected override void OnSceneLoaded(string sceneName)
     {
         base.OnSceneLoaded(sceneName);
-        JumpController.JumpStarted -= OnJumpStarted;
+        SimpleJump.SimpleJumpStarted -= OnSimpleJumpStarted;
+        JumpController.SuperJumpStarted -= OnSuperJumpStarted;
         CompletePlace.LevelCompleted -= OnLevelCompleted;
-        JumpController.JumpStarted += OnJumpStarted;
+
+        SimpleJump.SimpleJumpStarted += OnSimpleJumpStarted;
+        JumpController.SuperJumpStarted += OnSuperJumpStarted;
         CompletePlace.LevelCompleted += OnLevelCompleted;
         _currentCount = 0;
     }
 
-    private void OnJumpStarted(float force, ISuperJump superJump)
+    private void OnSimpleJumpStarted(float arg1, float arg2)
     {
-        if(force > 0)
-        {
-            _currentCount++;
-        }
+         _currentCount++;
+    }
+
+    private void OnSuperJumpStarted(ISuperJump superJump)
+    {
+        _currentCount++;
     }
 
     protected override void OnLevelCompleted(CompletePlace completePlace)

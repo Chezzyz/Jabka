@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
@@ -17,6 +15,7 @@ public abstract class BaseQuestItem : MonoBehaviour
     {
         if (collider.gameObject.TryGetComponent<PlayerTransformController>(out _))
         {
+            GetComponent<BoxCollider>().enabled = false;
             SendEvent();
         }
     }

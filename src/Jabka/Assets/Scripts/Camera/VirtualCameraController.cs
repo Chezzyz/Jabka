@@ -8,7 +8,8 @@ public class VirtualCameraController : MonoBehaviour
 {
     private void OnEnable()
     {
-        DeadZone.PlayerFall += OnPlayerFall;
+        FallZone.PlayerFall += OnPlayerFall;
+        Checkpoint.PlayerSpawned += OnPlayerSpawned;
     }
 
     private void OnPlayerFall(PlayerTransformController playerTransformController)
@@ -16,8 +17,14 @@ public class VirtualCameraController : MonoBehaviour
         GetComponent<CinemachineVirtualCamera>().Follow = null;
     }
 
+    private void OnPlayerSpawned(PlayerTransformController playerTransformController)
+    {
+        GetComponent<CinemachineVirtualCamera>().Follow = playerTransformController.transform;
+    }
+
     private void OnDisable()
     {
-        DeadZone.PlayerFall -= OnPlayerFall;
+        FallZone.PlayerFall -= OnPlayerFall;
+        Checkpoint.PlayerSpawned -= OnPlayerSpawned;
     }
 }

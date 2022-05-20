@@ -24,11 +24,6 @@ public abstract class BaseJump : MonoBehaviour
         _isInJump = value;
     }
 
-    protected virtual void OnEnable()
-    {
-        PlayerTransformController.Collided += OnCollision;
-    }
-
     protected virtual IEnumerator JumpCoroutine(
         PlayerTransformController playerTransformController,
         JumpData jumpData,
@@ -76,18 +71,5 @@ public abstract class BaseJump : MonoBehaviour
         //исключаем из проверки все передаваемые слои
         int layerMask = ~layersToMask.Select(layer => (1 << layer)).Sum();
         return Physics.CheckBox(pos, size / 2, rot, layerMask);
-    }
-
-    protected virtual void OnCollision(Collision collision, PlayerTransformController playerTransformController)
-    {
-        //if (IsInJump())
-        //{
-        //    SetIsInJump(false);
-        //}
-    }
-
-    protected virtual void OnDisable()
-    {
-        PlayerTransformController.Collided -= OnCollision;
     }
 }

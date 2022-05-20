@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeadZone : MonoBehaviour
+public class FallZone : MonoBehaviour
 {
     [SerializeField]
     private float _deadZoneY;
@@ -20,6 +20,12 @@ public class DeadZone : MonoBehaviour
     }
 
     private void OnEnable()
+    {
+        _eventSended = false;
+        Checkpoint.PlayerSpawned += OnPlayerSpawned;
+    }
+
+    private void OnPlayerSpawned(PlayerTransformController _)
     {
         _eventSended = false;
     }
