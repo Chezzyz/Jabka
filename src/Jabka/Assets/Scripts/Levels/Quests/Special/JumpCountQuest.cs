@@ -25,17 +25,23 @@ public class JumpCountQuest : BaseQuest
 
     private void OnSimpleJumpStarted(float arg1, float arg2)
     {
-         _currentCount++;
+        if (SceneStatus.GetCurrentLevelNumber() == GetLevelNumber())
+        {
+            _currentCount++;
+        }
     }
 
     private void OnSuperJumpStarted(ISuperJump superJump)
     {
-        _currentCount++;
+        if (SceneStatus.GetCurrentLevelNumber() == GetLevelNumber())
+        {
+            _currentCount++;
+        }
     }
 
     protected override void OnLevelCompleted(CompletePlace completePlace)
     {
-        if(completePlace.GetLevelNumber() == GetLevelNumber())
+        if(SceneStatus.GetCurrentLevelNumber() == GetLevelNumber())
         {
             if(_currentCount <= _goalCount)
             {

@@ -1,59 +1,19 @@
-using System.Collections;
 using System;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using DG.Tweening;
-using UnityEngine.UI;
 
-[RequireComponent(typeof(Image))]
-public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+
+public class SuperJumpPicker : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _defaultSuperJump;
-    [SerializeField]
-    private float _menuRadius;
-    [SerializeField]
-    private float _unselectedAlpha;
-    [SerializeField]
-    private float _showAnimationDuration;
-    [SerializeField]
-    private float _closeAnimationDuration;
-    [SerializeField]
-    private float _openDelay;
-    [SerializeField]
-    Ease _showEase;
-    [SerializeField]
-    Ease _closeEase;
+    private SuperJumpButton _defaultSuperJump;
 
     public bool IsActive;
 
     private JumpController _jumpController;
 
-    private Image _currentJumpImage;
-    
-    private Sprite _selectedJumpSprite;
-
-    public static event Action<ISuperJump> SuperJumpPicked;
-
-    public static event Action<bool> SuperJumpMenuStateChanged;
-
-    public static event Action SuperJumpButtonClicked;
-
-    private SuperJumpButton[] _buttons;
-
-    private bool _openDelayCompleted;
-
-    private Coroutine _openTimer;
-
-    //имеется ввиду выделенное в UI
-    private ISuperJump _selectedJump;
-
     private void OnEnable()
     {
-        SuperJumpButton.SuperJumpSelected += SetSelectedSuperJump;
-        SuperJumpButton.SuperJumpUnselected += UnsetSuperJump;
-        SuperJumpUnlocker.SuperJumpsUnlocked += OnSuperJumpsUnlocked;
+        SuperJumpButton.SuperJumpSelected += OnSuperJumpSelected;
     }
 
     [Zenject.Inject]
@@ -64,148 +24,20 @@ public class SuperJumpPicker : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     private void Start()
     {
-        _buttons = GetComponentsInChildren<SuperJumpButton>();
-        _currentJumpImage = GetComponent<Image>();
-        
-        //делаю полупрозрачной
-        _currentJumpImage.color = new Color(1, 1, 1, _unselectedAlpha);
-
         if (gameObject.activeInHierarchy)
         {
-            _jumpController.SetSuperJump(_defaultSuperJump.GetComponent<ISuperJump>());
+            _defaultSuperJump.Select();
         }
     }
 
-    private void OnSuperJumpsUnlocked()
+    private void OnSuperJumpSelected(ISuperJump superJump)
     {
-        GetComponent<Image>().sprite = _defaultSuperJump.GetComponent<Image>().sprite;
-    }
-
-    public ISuperJump GetDefaultSuperJump()
-    {
-        if (_defaultSuperJump.TryGetComponent<ISuperJump>(out var defaultSuperJump) == false)
-        {
-            Debug.Log("SuperJumpPicker doesn't have a default super jump");
-            return null;
-        }
-
-        return defaultSuperJump;
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (!IsActive)
-        {
-            return;
-        }
-        _openTimer = StartCoroutine(OpenAfterDelay(_openDelay));
-    }
-
-    private IEnumerator OpenAfterDelay(float delay)
-    {
-        _openDelayCompleted = false;
-        yield return new WaitForSeconds(delay);
-        _openDelayCompleted = true;
-        ShowPickerMenu(_buttons, _showAnimationDuration, _menuRadius, _showEase);
-        SuperJumpMenuStateChanged?.Invoke(true);
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        if (!IsActive)
-        {
-            return;
-        }
-
-        StopCoroutine(_openTimer);
-        //если быстро отпустили и палец был на копке 
-        if(!_openDelayCompleted && eventData.hovered.Count != 0)
-        {
-            SuperJumpButtonClicked?.Invoke();
-            return;
-        }
-
-        if(_selectedJump != null)
-        {
-            PickSuperJump(_selectedJump, _selectedJumpSprite);
-        }
-
-        ClosePickerMenu(_buttons, _closeAnimationDuration, _closeEase);
-        SuperJumpMenuStateChanged?.Invoke(false);
-    }
-
-    private void PickSuperJump(ISuperJump pickedJump, Sprite pickedSprite)
-    {
-        SuperJumpPicked?.Invoke(pickedJump);
-        _currentJumpImage.sprite = pickedSprite;
-        _selectedJumpSprite = null;
-        _selectedJump = null;
-    }
-
-    private void ShowPickerMenu(SuperJumpButton[] buttons, float duration, float radius, Ease ease)
-    {
-        int count = buttons.Length;
-        for(int i = 0; i < count; i++)
-        {
-            SuperJumpButton button = buttons[i];
-
-            float halfCircle = 180;
-            //величина угла одного сегмента * номер сегмента
-            float angle = (halfCircle / (1 + count)) * (1 + i);
-            float x = Mathf.Cos(angle * Mathf.Deg2Rad);
-            float y = Mathf.Sin(angle * Mathf.Deg2Rad);
-
-            Image buttonImage = button.GetComponent<Image>();
-
-            StopTweensOfObjects(button.transform, buttonImage, _currentJumpImage);
-
-            button.transform.DOLocalMove(new Vector3(x * radius, y * radius, 0), duration).SetEase(ease)
-                .OnStart(() => button.SetIsSelectable(true, duration/4));
-            buttonImage.DOFade(1, duration);
-            _currentJumpImage.DOFade(1, duration);
-        }
-    }
-
-    private void ClosePickerMenu(SuperJumpButton[] buttons, float duration, Ease ease)
-    {
-        int count = buttons.Length;
-        for (int i = 0; i < count; i++)
-        {
-            SuperJumpButton button = buttons[i];
-
-            Image buttonImage = button.GetComponent<Image>();
-
-            StopTweensOfObjects(button.transform, buttonImage, _currentJumpImage);
-
-            button.transform.DOLocalMove(Vector3.zero, duration).SetEase(ease)
-                .OnStart(() => button.SetIsSelectable(false)); ;
-            buttonImage.DOFade(0, duration);
-            _currentJumpImage.DOFade(_unselectedAlpha, duration);
-        }
-    }
-
-    private int StopTweensOfObjects(params Component[] components)
-    {
-        int killed = 0;
-        components.ToList().ForEach(component => killed += component.DOKill());
-        return killed;
-    }
-
-    private void SetSelectedSuperJump(ISuperJump superJump, Sprite sprite)
-    {
-        _selectedJump = superJump;
-        _selectedJumpSprite = sprite;
-    }
-
-    private void UnsetSuperJump()
-    {
-        _selectedJump = null;
+        _jumpController.SetSuperJump(superJump);
     }
 
     private void OnDisable()
     {
-        SuperJumpButton.SuperJumpSelected -= SetSelectedSuperJump;
-        SuperJumpButton.SuperJumpUnselected -= UnsetSuperJump;
-        SuperJumpUnlocker.SuperJumpsUnlocked -= OnSuperJumpsUnlocked;
+        SuperJumpButton.SuperJumpSelected -= OnSuperJumpSelected;
     }
+
 }

@@ -15,7 +15,7 @@ public class CompleteQuest : BaseQuest
     protected override void OnLevelCompleted(CompletePlace completePlace)
     {
         base.OnLevelCompleted(completePlace);
-        if (completePlace.GetLevelNumber() == GetLevelNumber())
+        if (SceneStatus.GetCurrentLevelNumber() == GetLevelNumber())
         {
             Complete();
         }

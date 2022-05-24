@@ -11,7 +11,7 @@ public class JumpController : MonoBehaviour
     [SerializeField]
     private float _maxScreenHeightThreshold;
 
-    public static event System.Action<ScriptableJumpData, PlayerTransformController> ForceChanged;
+    public static event System.Action<ScriptableJumpData> ForceChanged;
     public static event System.Action<ISuperJump> SuperJumpStarted;
     public static event System.Action<float, float> SimpleJumpCancelled;
 
@@ -34,8 +34,7 @@ public class JumpController : MonoBehaviour
     {
         InputHandler.SwipeDeltaChanged += OnSwipeY;
         InputHandler.FingerUp += OnFingerUp;
-        SuperJumpPicker.SuperJumpPicked += SetSuperJump;
-        SuperJumpPicker.SuperJumpButtonClicked += StartSuperJump;
+        SuperJumpButton.SuperJumpButtonClicked += StartSuperJump;
     }
 
     public void SetSuperJump(ISuperJump superJump)
@@ -62,7 +61,7 @@ public class JumpController : MonoBehaviour
         //длина свайпа вниз в процентах от экрана, когда свайп сделан вниз delta приходит отрицательная
         _currentForcePercent = CalculateForcePercent(-delta, _minScreenHeightThreshold, _maxScreenHeightThreshold);
 
-        ForceChanged?.Invoke(GetSimpleJumpData(_currentForcePercent), _playerTransformController);
+        ForceChanged?.Invoke(GetSimpleJumpData(_currentForcePercent));
     }
 
     private SimpleJumpData GetSimpleJumpData(float forcePercent)
@@ -103,7 +102,6 @@ public class JumpController : MonoBehaviour
     {
         InputHandler.SwipeDeltaChanged -= OnSwipeY;
         InputHandler.FingerUp -= OnFingerUp;
-        SuperJumpPicker.SuperJumpPicked -= SetSuperJump;
-        SuperJumpPicker.SuperJumpButtonClicked -= StartSuperJump;
+        SuperJumpButton.SuperJumpButtonClicked -= StartSuperJump;
     }
 }

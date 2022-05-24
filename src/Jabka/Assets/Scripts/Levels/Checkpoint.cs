@@ -13,6 +13,9 @@ public class Checkpoint : MonoBehaviour
     [SerializeField]
     private GameObject _model;
     [SerializeField]
+    [Tooltip("Высота, на которой надо заспаунить игрока относительно объекта чекпоинта")]
+    private float _heightForUp;
+    [SerializeField]
     private float _upDuration;
 
     public static event System.Action<Checkpoint> CheckpointActivated;
@@ -40,7 +43,7 @@ public class Checkpoint : MonoBehaviour
 
     public void SpawnPlayer()
     {
-        _playerTransformController.SetPosition(transform.position);
+        _playerTransformController.SetPosition(transform.position + new Vector3(0, _heightForUp, 0));
         _playerTransformController.SetRotation(transform.rotation.eulerAngles);
         PlayerSpawned?.Invoke(_playerTransformController);
     }

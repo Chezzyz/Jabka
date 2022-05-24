@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3169281608148144211}
   - component: {fileID: 3169281608148144208}
   m_Layer: 5
-  m_Name: LongSuperJumpButton
+  m_Name: img_LongSuperJumpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,16 +60,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9150d7e95bbb6664f9003b200188f544, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c21cf33e67b90ef45955ca3b381ace30, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -89,8 +89,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6fae4a2f21b4ca409d29fccce88af6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selectedSprite: {fileID: 0}
-  _defaultSprite: {fileID: 0}
+  _defaultSprite: {fileID: 21300000, guid: c21cf33e67b90ef45955ca3b381ace30, type: 3}
+  _selectedSprite: {fileID: 21300000, guid: 2a827005ee147da47baf9fe87bcc8dda, type: 3}
+  _superJump: {fileID: 3169281608148144208}
+  _clickTreshhold: 0.15
+  _holdTreshhold: 0.5
 --- !u!114 &3169281608148144208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,39 +107,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpData: {fileID: 11400000, guid: fe21de2eecb86854c96918a76abbb6c6, type: 2}
-  _jumpCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 4.1336036
-      outSlope: 4.1336036
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.0267123
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -3.894346
-      outSlope: -3.894346
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.034770668
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 3
-      value: -20
-      inSlope: -10
-      outSlope: -0.90980625
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.62727135
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _length: 16
-  _height: 1.75
-  _duration: 0.8

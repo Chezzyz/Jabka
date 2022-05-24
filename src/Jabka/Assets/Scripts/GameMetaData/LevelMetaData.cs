@@ -46,4 +46,9 @@ public class LevelMetaData : ScriptableObject
         }
         return _levelQuests[questNumber - 1];
     }
+
+    public List<BaseQuest> GetQuests()
+    {
+        return _levelQuests;
+    }
 }

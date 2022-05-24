@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using NaughtyAttributes;
 
 public class SceneStatus : MonoBehaviour
 {
@@ -18,6 +19,18 @@ public class SceneStatus : MonoBehaviour
 
     private static Dictionary<int, LevelMetaData> _levelMetaDataMap;
 
+    private static Dictionary<string, int> _sceneToLevelNumberMap = new Dictionary<string, int>()
+    {
+        { "SashaScene", -1 },
+        { "DenisScene", -1 },
+        { "MenuScene", 0 },
+        { "Level_1-1", 1 },
+        { "Level_1-2", 2 },
+        { "Level_1-3", 3 },
+        { "Level_1-4", 4 },
+        { "Level_1-5", 5 }
+    };
+
     private void Awake()
     {
         if (Instance != null)
@@ -31,6 +44,8 @@ public class SceneStatus : MonoBehaviour
         }
         
         DontDestroyOnLoad(gameObject);
+
+        InitLevelMetaDataMap();
     }
 
     private void OnEnable()
@@ -39,19 +54,19 @@ public class SceneStatus : MonoBehaviour
         SceneLoader.SceneLoadStarted += OnSceneLoadStarted;
     }
 
-    private void Start()
-    {
-        InitLevelMetaDataMap();
-    }
-
     public static int GetCurrentLevelNumber()
     {
-        return _currentSceneIndex;
+        return _sceneToLevelNumberMap[SceneManager.GetActiveScene().name];
     }
 
     public static LevelMetaData GetLevelMetaData(int levelNumber)
     {
         return _levelMetaDataMap[levelNumber];
+    }
+
+    public static LevelMetaData GetCurrentMetaData()
+    {
+        return GetLevelMetaData(GetCurrentLevelNumber());
     }
 
     private void InitLevelMetaDataMap()
@@ -71,4 +86,9 @@ public class SceneStatus : MonoBehaviour
         SceneChanged?.Invoke(_prevSceneIndex, _currentSceneIndex);
     }
 
+    [Button]
+    private void ClearQuests()
+    {
+        _levelMetaDatas.ForEach(data => data.GetQuests().ForEach(quest => quest.SetIsCompleted(false)));
+    }
 }

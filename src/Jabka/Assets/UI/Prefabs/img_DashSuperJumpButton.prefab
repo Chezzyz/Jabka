@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2860129536949746694}
   - component: {fileID: 1018505874346493065}
   m_Layer: 5
-  m_Name: DashSuperJumpButton
+  m_Name: img_DashSuperJumpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,16 +60,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: acc73d9fcd4c1f1418c2e41248a0bc6b, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
+  m_Sprite: {fileID: 21300000, guid: 0bc6ededf72ec73409286d2b095f784a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -89,8 +89,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6fae4a2f21b4ca409d29fccce88af6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selectedSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  _defaultSprite: {fileID: 21300000, guid: f57dfffc64d3e8040812ea901d65b96f, type: 3}
+  _defaultSprite: {fileID: 21300000, guid: 392d04c10ac9d6448b470961f186d513, type: 3}
+  _selectedSprite: {fileID: 21300000, guid: 0a72e6efd016e0a4198d059228fcd317, type: 3}
+  _superJump: {fileID: 1018505874346493065}
+  _clickTreshhold: 0.15
+  _holdTreshhold: 0.5
 --- !u!114 &1018505874346493065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,75 +106,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab691bb938a19f479781395c592c362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 4.1336036
-      outSlope: 4.1336036
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.0267123
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -3.894346
-      outSlope: -3.894346
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.034770668
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 3
-      value: -20
-      inSlope: -10
-      outSlope: -0.90980625
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.62727135
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _length: 6
-  _height: 2.5
-  _duration: 0.75
   _jumpData: {fileID: 11400000, guid: 6801a3ca44694664a896b5bed7c27c3a, type: 2}
-  _dashHeightCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _dashLengthCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2.862937
-      outSlope: 2.862937
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.028089888
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _dashLength: 6
-  _dashHeight: 2
-  _dashDuration: 0.75
-  _timeScale: 0.1
-  _slowMoDuration: 0.2

@@ -36,12 +36,12 @@ public class CheckpointHandler : MonoBehaviour
 
     private void OnSceneChanged(int prevIndex, int currentIndex)
     {
-        //Грузимся на первом чекпоинте если зашли на уровень не с рестарта
-        if(prevIndex != currentIndex && currentIndex != 0)
+        //Грузимся на первом чекпоинте если зашли на уровень с рестарта/умерли на первом чекпоинте/пришли из меню
+        if (currentIndex != 0) 
         {
             Checkpoint[] checkpoints = FindObjectsOfType<Checkpoint>();
             _lastCheckpoint = checkpoints.Where(checkpoint => checkpoint.GetOrderNumber() == 1).First();
-            _lastCheckpoint?.SpawnPlayer();
+            _lastCheckpoint.SpawnPlayer();
         }
     }
 

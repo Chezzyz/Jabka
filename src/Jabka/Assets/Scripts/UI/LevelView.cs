@@ -8,10 +8,6 @@ using UnityEngine.Events;
 public class LevelView : MonoBehaviour
 {
     [SerializeField]
-    private LevelMetaDataMap _levelMetaDataMap;
-    [SerializeField]
-    private StageView _stageView;
-    [SerializeField]
     private TextMeshProUGUI _levelNumberText;
     [SerializeField]
     private List<QuestView> _questViews;
@@ -20,31 +16,21 @@ public class LevelView : MonoBehaviour
     [SerializeField]
     private SceneLoader _sceneLoader;
 
-    private LevelMetaData _levelMetaData;
 
     private UnityAction _lastLoadSceneListener;
 
-    private const int _levelCountInStage = 5;
-
-    [Zenject.Inject] 
-    public void Construct(LevelMetaData levelMetaData)
-    {
-        _levelMetaData = levelMetaData;
-    }
-
     private void Start()
     {
-        if (_levelMetaData != null)
+        if (SceneStatus.GetCurrentLevelNumber() != 0)
         {
-            SetupLevelView(_levelMetaData.GetLevelNumber());
-        }    
+            SetupLevelView(SceneStatus.GetCurrentLevelNumber());
+        }
     }
 
-    public void SetupLevelViewInChooseMenu(int localLevelNumber)
+    public void SetupLevelViewInChooseMenu(int levelNumber)
     {
         //получаем «глобальный» номер уровня
-        int levelNumber = _levelCountInStage * (_stageView.GetCurrentPageNumber() - 1) + localLevelNumber;
-        LevelMetaData levelMetaData = _levelMetaDataMap.GetLevelMetaData(levelNumber);
+        LevelMetaData levelMetaData = SceneStatus.GetLevelMetaData(levelNumber);
 
         SetupLevelView(levelNumber);
 
@@ -56,7 +42,7 @@ public class LevelView : MonoBehaviour
     private void SetupLevelView(int levelNumber)
     {
         _levelNumberText.text = $"Level {levelNumber}";
-        LevelMetaData levelMetaData = _levelMetaDataMap.GetLevelMetaData(levelNumber);
+        LevelMetaData levelMetaData = SceneStatus.GetLevelMetaData(levelNumber);
 
         for (int questNumber = 1; questNumber <= _questViews.Count; questNumber++)
         {

@@ -9,6 +9,6 @@ public class Destination : BaseQuestItem
     protected override void SendEvent()
     {
         Destinated?.Invoke(this);
-        Debug.Log($"Destination for quest on level {_levelNumber} destinated");
+        Debug.Log($"Destination for quest on level {SceneStatus.GetCurrentLevelNumber()} destinated");
     }
 }

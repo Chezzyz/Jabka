@@ -9,6 +9,6 @@ public class CompletePlace : BaseQuestItem
     protected override void SendEvent()
     {
         LevelCompleted?.Invoke(this);
-        Debug.Log($"Level {_levelNumber} completed");
+        Debug.Log($"Level {SceneStatus.GetCurrentLevelNumber()} completed");
     }
 }

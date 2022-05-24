@@ -20,6 +20,6 @@ public class SuperJumpCollectable : BaseQuestItem
             Debug.Log($"button {gameObject.name} doesn't have ISuperJump field");
         }
         SuperJumpCollected?.Invoke(this);
-        Debug.Log($"SuperJump on level {_levelNumber} collected");
+        Debug.Log($"SuperJump on level {SceneStatus.GetCurrentLevelNumber()} collected");
     }
 }

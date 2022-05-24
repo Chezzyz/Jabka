@@ -30,7 +30,7 @@ public class VirtualCameraFX : MonoBehaviour
         JumpController.ForceChanged += OnForcedChanged;
     }
 
-    private void OnForcedChanged(ScriptableJumpData jumpData, PlayerTransformController playerTransform)
+    private void OnForcedChanged(ScriptableJumpData jumpData)
     {
         if(jumpData is SimpleJumpData data && data.GetForcePercent() > 0)
         {

@@ -28,7 +28,7 @@ public class DoSuperJumpQuest : BaseQuest
 
     private void OnJumpStarted(ISuperJump superJump)
     {
-        if(superJump != null && superJump.GetJumpName() == _superJumpName)
+        if(SceneStatus.GetCurrentLevelNumber() == GetLevelNumber() && superJump != null && superJump.GetJumpName() == _superJumpName)
         {
             _currentCount++;
             if (_currentCount == _goalCount)
@@ -49,7 +49,7 @@ public class DoSuperJumpQuest : BaseQuest
 
     protected override void OnLevelCompleted(CompletePlace completePlace)
     {
-        if (completePlace.GetLevelNumber() == GetLevelNumber())
+        if (SceneStatus.GetCurrentLevelNumber() == GetLevelNumber())
         {
             if (_isReadyForComplete)
             {

@@ -14,7 +14,7 @@ public class DestinationQuest : BaseQuest
 
     private void OnDestinated(Destination destination)
     {
-        if (destination.GetLevelNumber() == GetLevelNumber())
+        if (SceneStatus.GetCurrentLevelNumber() == GetLevelNumber())
         {
             ReadyForComplete();
         }
