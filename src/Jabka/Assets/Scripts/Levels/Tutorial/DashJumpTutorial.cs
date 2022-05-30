@@ -1,3 +1,4 @@
+using Lean.Touch;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,7 @@ public class DashJumpTutorial : BaseFingerTutorial
     {
         Construct(_canvasGroupSerializable, _animatorSerializable, _fadeDurationSerializable, _closeDurationSerializable);
         SuperJumpCollectable.SuperJumpCollected += OnSuperJumpCollected;
-        InputHandler.FingerDown += OnFingerDown;
+        LeanTouch.OnFingerDown += OnFingerDown;
     }
 
     private void OnSuperJumpCollected(SuperJumpCollectable superJump)
@@ -30,7 +31,7 @@ public class DashJumpTutorial : BaseFingerTutorial
         ShowTutorial();
     }
 
-    private void OnFingerDown(Vector2 pos)
+    private void OnFingerDown(LeanFinger _)
     {
         if (_isAbleToClose)
         {
@@ -41,6 +42,6 @@ public class DashJumpTutorial : BaseFingerTutorial
     private void OnDisable()
     {
         SuperJumpCollectable.SuperJumpCollected -= OnSuperJumpCollected;
-        InputHandler.FingerDown -= OnFingerDown;
+        LeanTouch.OnFingerDown -= OnFingerDown;
     }
 }

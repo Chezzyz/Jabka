@@ -11,10 +11,10 @@ public class StageView : MonoBehaviour
     private ProgressData _progressData;
 
     [SerializeField]
-    private List<Button> _completedLevelButtons;
+    private List<StagePage> _stagePages;
 
     [SerializeField]
-    private TextMeshProUGUI _stageName;
+    private List<Button> _currentStageLevelButtons;
 
     [SerializeField]
     private Sprite _currentLevelSprite;
@@ -29,99 +29,95 @@ public class StageView : MonoBehaviour
     private Button _previousStageButton;
 
     [SerializeField]
-    private GameObject _comingSoonBook;
+    private StagePage _comingSoonPage;
 
     [SerializeField]
     private Canvas _mainMenuCanvas;
 
-
-    private static Dictionary<int, string> _stageNameMapping = 
-        new Dictionary<int, string> {{1, "Sky"}};
-
     private const int _countOfLevelsInStage = 5;
+   
+    private int _currentPageIndex;
 
-    [SerializeField]
-    private int _currentPage;
+    private StagePage _currentPage;
 
     private void OnEnable()
     {
-        _nextStageButton.onClick.AddListener(() => { ChangeCurrentPage(1); SetupStage(); });
-        _previousStageButton.onClick.AddListener(() => { ChangeCurrentPage(-1); SetupStage(); });
+        _nextStageButton.onClick.AddListener(() => { ChangeCurrentPage(1); });
+        _previousStageButton.onClick.AddListener(() => { ChangeCurrentPage(-1); });
     }
 
     private void Start()
     {
-        _currentPage = _progressData.GetCurrentStage();
-        SetupStage();
+        _currentPageIndex = _progressData.GetCurrentStage() - 1;
+        ChangeCurrentPage(0);
     }
 
     private void ChangeCurrentPage(int value)
     {
-        if(_currentPage == 1 && value == -1)
+        if(_currentPageIndex == 0 && value == -1)
         {
             //если нажимаем назад на первой странице то переходим на главную
-            _currentPage = 0;
             GetComponent<Canvas>().enabled = false;
             _mainMenuCanvas.enabled = true;
             return;
         }
-        _currentPage += value;
+        _currentPageIndex += value;
 
-    }
+        _currentPage?.gameObject.SetActive(false);
 
-    public int GetCurrentPageNumber()
-    {
-        return _currentPage;
-    }
-
-    private void SetupStage()
-    {
-        int currentStage = _progressData.GetCurrentStage();
-        int currentLevel = _progressData.GetCurrentLevel();
-
-        //доджим проход если переключились на главную
-        if(_currentPage == 0)
-        {
-            _currentPage = _progressData.GetCurrentStage();
-            return;
-        }
-
-        if (_currentPage == _stageNameMapping.Count + 1)
+        //если переключаемся на страницу этапа, номер которой больше максимального, показываем страницу coming soon
+        if (_currentPageIndex == _stagePages.Count)
         {
             _nextStageButton.gameObject.SetActive(false);
-            _comingSoonBook.SetActive(true);
+            _comingSoonPage.gameObject.SetActive(true);
             return;
         }
         else
         {
             _nextStageButton.gameObject.SetActive(true);
-            _comingSoonBook.SetActive(false);
+            _comingSoonPage.gameObject.SetActive(false);
         }
 
-        _stageName.text = _stageNameMapping[_currentPage];
+        _currentPage = _stagePages[_currentPageIndex];
 
-        for (int i = 0; i < _countOfLevelsInStage; i++)
+        _currentPage.gameObject.SetActive(true);
+        _currentStageLevelButtons = _currentPage.GetStageButtons();
+
+        SetupStage(_currentPageIndex, _currentStageLevelButtons);
+    }
+
+    public int GetCurrentPageNumber()
+    {
+        return _currentPageIndex;
+    }
+
+    private void SetupStage(int pageIndex, List<Button> stageButtons)
+    {
+        int currentProgressStage = _progressData.GetCurrentStage();
+        int currentProgressLevel = _progressData.GetCurrentLevel();
+        int stageNumber = pageIndex + 1;
+
+        for (int i = 0 + pageIndex * _countOfLevelsInStage; i < _countOfLevelsInStage + pageIndex * _countOfLevelsInStage; i++)
         {
-            if (_currentPage > currentStage)
+            if (stageNumber > currentProgressStage)
             {
-                SetButtonState(_completedLevelButtons[i], false, _currentLevelSprite);
+                SetButtonState(stageButtons[i], false, _currentLevelSprite);
             }
-            if (_currentPage == currentStage)
+            if (stageNumber == currentProgressStage)
             {
                 int levelNumber = i + 1;
-                if (levelNumber <= currentLevel)
+                if (levelNumber <= currentProgressLevel)
                 {
-                    SetButtonState(_completedLevelButtons[i], true,
-                        levelNumber == currentLevel ? _currentLevelSprite : _completedLevelSprite);
+                    SetButtonState(stageButtons[i], true, levelNumber == currentProgressLevel ? _currentLevelSprite : _completedLevelSprite);
                 }
                 else
                 {
-                    SetButtonState(_completedLevelButtons[i], false, _currentLevelSprite);
+                    SetButtonState(stageButtons[i], false, _currentLevelSprite);
                 }
             }
-            if (_currentPage < currentStage)
+            if (stageNumber < currentProgressStage)
             { 
-                SetButtonState(_completedLevelButtons[i], true, _completedLevelSprite);
+                SetButtonState(stageButtons[i], true, _completedLevelSprite);
             }
         }
     }

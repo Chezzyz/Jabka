@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class BackgroundAudioHandler : MonoBehaviour
+public class BackgroundAudioHandler : BaseAudioHandler<BackgroundAudioSource>
 {
     [Header("Menu")]
     [SerializeField]
@@ -13,8 +13,6 @@ public class BackgroundAudioHandler : MonoBehaviour
     [Header("Stage 1")]
     [SerializeField]
     private AudioClip _backgroundMusicStage1;
-    [SerializeField]
-    private AudioClip _backgroundMusicStage1Level5;
     [SerializeField]
     [Range(0f, 1f)]
     private float _backgroundMusicVolumeScaleStage1;
@@ -46,51 +44,45 @@ public class BackgroundAudioHandler : MonoBehaviour
     [SerializeField]
     private float _dashJumpPitchDuration;
 
-
-    private AudioSource _audioSource;
-    private static BackgroundAudioHandler _singleton;
-
-    private void Awake()
+    protected override void Awake()
     {
-        if (_singleton == null)
-        {
-            _singleton = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+        base.Awake();
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         DashSuperJump.DashPreparingStarted += OnDashPreparingStarted;
         DashSuperJump.DashPreparingEnded += OnDashPreparingEnded;
         CompletePlace.LevelCompleted += OnLevelCompleted;
-        SceneLoader.SceneLoaded += OnSceneLoaded;
+        SettingsHandler.MusicStateChanged += OnMusicStateChanged;
     }
 
-    private void OnSceneLoaded(string name)
+    protected override void OnSceneLoaded(string name)
     {
-        _audioSource = FindObjectOfType<CameraAudioSource>()?.GetComponent<AudioSource>();
-        if(_audioSource == null)
-        {
-            Debug.LogWarning("CameraAudioSource not found on scene");
-        }
+        base.OnSceneLoaded(name);
 
-        int stage = name == "MenuScene" ? 0 : int.Parse(name.Split('_')[1].Split('-')[0]);
-        int level = name == "MenuScene" ? 0 : int.Parse(name.Split('_')[1].Split('-')[1]);
-        if (name == "MenuScene") PlayClip(_menuMusic, volumeScale: _menuMusicVolumeScale);
-        else if (stage == 1)
+        int stage = SceneStatus.GetCurrentStageNumber();
+
+       
+
+        System.Action play = stage switch
         {
-            if(level == 5) PlayClip(_backgroundMusicStage1Level5, volumeScale: _backgroundMusicVolumeScaleStage1);
-            else PlayClip(_backgroundMusicStage1, volumeScale: _backgroundMusicVolumeScaleStage1);
+            0 => () => PlayClip(_menuMusic, volumeScale: _menuMusicVolumeScale),
+            1 => () => PlayClip(_backgroundMusicStage1, volumeScale: _backgroundMusicVolumeScaleStage1),
+            2 => () => PlayClip(_backgroundMusicStage2, volumeScale: _backgroundMusicVolumeScaleStage2),
+            3 => () => PlayClip(_backgroundMusicStage3, volumeScale: _backgroundMusicVolumeScaleStage3),
+            _ => () => Debug.LogWarning("Music for this stage is not implemented")
+        };
+        play();
+    }
+
+    protected override void OnVolumeChanged(float coef)
+    {
+        if (_audioSource != null && SettingsHandler.MusicIsOn())
+        {
+            _audioSource.volume = _volumeScale * coef;
         }
-        else if (stage == 2) PlayClip(_backgroundMusicStage2, volumeScale: _backgroundMusicVolumeScaleStage2);
-        else if (stage == 3) PlayClip(_backgroundMusicStage3, volumeScale: _backgroundMusicVolumeScaleStage3);
-        else throw new System.NotImplementedException();
     }
 
     private void OnDashPreparingStarted(float slowmoDuration)
@@ -108,19 +100,9 @@ public class BackgroundAudioHandler : MonoBehaviour
         _audioSource.PlayOneShot(_levelCompletedSound, _levelCompletedSoundVolumeScale);
     }
 
-    private void PlayClip(AudioClip clip, float pitch = 1f, float volumeScale = 1f)
+    private void OnMusicStateChanged()
     {
-        _audioSource.pitch = pitch;
-        _audioSource.volume = volumeScale;
-        _audioSource.clip = clip;
-        _audioSource.Play();
+        _audioSource.volume = SettingsHandler.MusicIsOn() ? _volumeScale * SettingsHandler.GetVolumeCoef() : 0;
     }
 
-    private void OnDisable()
-    {
-        DashSuperJump.DashPreparingStarted -= OnDashPreparingStarted;
-        DashSuperJump.DashPreparingEnded -= OnDashPreparingEnded;
-        SceneLoader.SceneLoaded -= OnSceneLoaded;
-        CompletePlace.LevelCompleted -= OnLevelCompleted;
-    }
 }

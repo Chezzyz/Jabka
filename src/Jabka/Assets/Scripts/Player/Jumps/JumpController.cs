@@ -6,17 +6,9 @@ using Zenject;
 [RequireComponent(typeof(Rigidbody))]
 public class JumpController : MonoBehaviour
 {
-    [SerializeField]
-    private float _minScreenHeightThreshold;
-    [SerializeField]
-    private float _maxScreenHeightThreshold;
-    [SerializeField]
-    private float _superJumpTimeTreshold;
-    [SerializeField]
-    private float _superJumpForcePercentTreshold;
-
-    public static event System.Action<ScriptableJumpData, PlayerTransformController> ForceChanged;
-    public static event System.Action<float, ISuperJump> JumpStarted;
+    public static event System.Action<ScriptableJumpData> ForceChanged;
+    public static event System.Action<ISuperJump> SuperJumpStarted;
+    public static event System.Action<float, float> SimpleJumpCancelled;
 
     private PlayerTransformController _playerTransformController;
 
@@ -37,8 +29,7 @@ public class JumpController : MonoBehaviour
     {
         InputHandler.SwipeDeltaChanged += OnSwipeY;
         InputHandler.FingerUp += OnFingerUp;
-        SuperJumpPicker.SuperJumpPicked += SetSuperJump;
-        SuperJumpPicker.SuperJumpButtonClicked += StartSuperJump;
+        SuperJumpButton.SuperJumpButtonClicked += StartSuperJump;
     }
 
     public void SetSuperJump(ISuperJump superJump)
@@ -49,38 +40,23 @@ public class JumpController : MonoBehaviour
     private void OnFingerUp(Vector2 fingerPosition, float swipeTime)
     {
         //если сила больше 0 и мы не впрыжке, то можем прыгать
-        //shtefan предложение: насколько понимание о состянии "в прыжке" это ответственость прыжка? Может есть вариант это затащить под ответственность класса игрока?
-        //shtefan предлагаю вообще переписать это место, чтобы мы в условиях сначала находили аргументы для JumpStarted, а потом 1 раз в конце метода его запускали
         if (_currentForcePercent > 0 && !_simpleJump.IsInJump() && (_currentSuperJump == null || !_currentSuperJump.IsInJump()))
         {
-            //если преодалеваем трешхолды по силе и времени, то делаем супер-прыжок, иначе обычный 
-            if (_currentSuperJump != null && swipeTime <= _superJumpTimeTreshold && _currentForcePercent >= _superJumpForcePercentTreshold)
-            {
-                //StartSuperJump();
-            }
-            else
-            {
-                _simpleJump.DoSimpleJump(_playerTransformController, _currentForcePercent);
-                JumpStarted?.Invoke(_currentForcePercent, null);
-            }
+            _simpleJump.DoSimpleJump(_playerTransformController, _currentForcePercent);
             _currentForcePercent = 0;
-        }
+        } 
         else
         {
-            JumpStarted?.Invoke(0, null);
+            SimpleJumpCancelled?.Invoke(_currentForcePercent, _simpleJump.CalculateCurrentJumpData(_currentForcePercent).Duration);
         }
     }
 
     private void OnSwipeY(Vector2 delta)
     {
         //длина свайпа вниз в процентах от экрана, когда свайп сделан вниз delta приходит отрицательная
-        _currentForcePercent = CalculateForcePercent(-delta, _minScreenHeightThreshold, _maxScreenHeightThreshold);
+        _currentForcePercent = CalculateForcePercent(-delta);
 
-        if (!(_simpleJump.IsInJump() || (_currentSuperJump != null && _currentSuperJump.IsInJump()))){
-            ForceChanged?.Invoke(
-                GetSimpleJumpData(_currentForcePercent),
-                _playerTransformController);
-        }
+        ForceChanged?.Invoke(GetSimpleJumpData(_currentForcePercent));
     }
 
     private SimpleJumpData GetSimpleJumpData(float forcePercent)
@@ -94,26 +70,28 @@ public class JumpController : MonoBehaviour
         return scriptableJumpData;
     }
 
-    private float CalculateForcePercent(Vector3 delta, float minHeightTreshold, float maxHeightTreshold)
+    private float CalculateForcePercent(Vector3 delta)
     {
+        (float minPercent, float maxPercent) = SettingsHandler.GetVerticalSensetivityBounds(); 
+
         float deltaYPercent = delta.y / Screen.height;
 
-        if (deltaYPercent < minHeightTreshold)
+        if (deltaYPercent < minPercent)
         {
             return 0;
         }
         
-        deltaYPercent = Mathf.Clamp(deltaYPercent, minHeightTreshold, maxHeightTreshold);
-        float forcePercent = (deltaYPercent - minHeightTreshold) / (maxHeightTreshold - minHeightTreshold);
+        deltaYPercent = Mathf.Clamp(deltaYPercent, minPercent, maxPercent);
+        float forcePercent = (deltaYPercent - minPercent) / (maxPercent - minPercent);
         return forcePercent;
     }
 
     private void StartSuperJump()
     {
-        if (!_currentSuperJump.IsInJump())
+        if (!_simpleJump.IsInJump() && !_currentSuperJump.IsInJump())
         {
             _currentSuperJump.SuperJump(_playerTransformController);
-            JumpStarted?.Invoke(_currentForcePercent, _currentSuperJump);
+            SuperJumpStarted?.Invoke(_currentSuperJump);
         }
     }
 
@@ -121,7 +99,6 @@ public class JumpController : MonoBehaviour
     {
         InputHandler.SwipeDeltaChanged -= OnSwipeY;
         InputHandler.FingerUp -= OnFingerUp;
-        SuperJumpPicker.SuperJumpPicked -= SetSuperJump;
-        SuperJumpPicker.SuperJumpButtonClicked -= StartSuperJump;
+        SuperJumpButton.SuperJumpButtonClicked -= StartSuperJump;
     }
 }

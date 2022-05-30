@@ -21,7 +21,7 @@ public class CollectablesQuest : BaseQuest
 
     private void OnCollected(Collectable collectable)
     {
-        if (collectable.GetLevelNumber() == GetLevelNumber())
+        if (SceneStatus.GetCurrentLevelNumber() == GetLevelNumber())
         {
             _currentCount++;
             if (_currentCount == _goalCount)

@@ -36,6 +36,11 @@ public class BaseQuest : ScriptableObject
         return _isCompleted;
     }
 
+    public void SetIsCompleted(bool value)
+    {
+        _isCompleted = value;
+    }
+
     protected virtual void OnEnable()
     {
         if (_isCompleted)
@@ -71,7 +76,7 @@ public class BaseQuest : ScriptableObject
 
     protected virtual void OnLevelCompleted(CompletePlace place)
     {
-        if(place.GetLevelNumber() == GetLevelNumber() && _isReadyForComplete)
+        if(SceneStatus.GetCurrentLevelNumber() == GetLevelNumber() && _isReadyForComplete)
         {
             Complete();
         }

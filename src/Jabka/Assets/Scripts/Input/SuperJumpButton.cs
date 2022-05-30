@@ -5,100 +5,147 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-public class SuperJumpButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class SuperJumpButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
+    [SerializeField]
+    private Sprite _defaultSprite;
     [SerializeField]
     private Sprite _selectedSprite;
     [SerializeField]
-    private Sprite _defaultSprite;
-
-    private ISuperJump _superJump;
+    private BaseJump _superJump;
+    [SerializeField]
+    private float _clickTreshhold;
+    [SerializeField]
+    private float _holdTreshhold;
 
     private Image _currentImage;
-
-    private bool _isSelectable = false;
+    private SuperJumpsWheel _parentWheel;
 
     private bool _isLocked = true;
+    private bool _isSelected = false;
+    private bool _isClick = false;
 
-    public static event System.Action<ISuperJump, Sprite> SuperJumpSelected;
-    public static event System.Action SuperJumpUnselected;
+    private float _clickTimer;
+
+    public static event System.Action<ISuperJump> SuperJumpSelected;
+    public static event System.Action SuperJumpButtonClicked;
+    public static event System.Action<ScriptableJumpData> SuperJumpButtonHolded;
+    public static event System.Action SuperJumpButtonReleased;
 
     private void OnEnable()
     {
-        SuperJumpSelected += OnSelect;
-        SuperJumpUnlocker.SuperJumpUnlocked += UnlockButton;
+        SuperJumpUnlocker.SuperJumpUnlocked += OnButtonUnlocked;
+        SuperJumpSelected += OnSuperJumpSelected;
+    }
+
+    private void Start()
+    {
         _currentImage = GetComponent<Image>();
-        if (TryGetComponent(out _superJump) == false)
+        _parentWheel = GetComponentInParent<SuperJumpsWheel>();
+    }
+
+    public void Select()
+    {
+        SuperJumpSelected?.Invoke(GetSuperJump());
+        _isSelected = true;
+    }
+
+    public bool IsLocked()
+    {
+        return _isLocked;
+    }
+
+    public void SetFade(float value)
+    {
+        Color current = _currentImage.color;
+        _currentImage.color = new Color(current.r, current.g, current.b, Mathf.Clamp01(value));
+    }
+
+    public void SetScale(float value)
+    {
+        transform.localScale = new Vector3(value, value, 1);
+    }
+
+    private void OnSuperJumpSelected(ISuperJump superJump)
+    {
+        if(_superJump != null && GetSuperJump().GetJumpName() != superJump.GetJumpName())
         {
-            Debug.Log($"button {gameObject.name} doesn't have ISuperJump field");
+            _isSelected = false;
         }
     }
 
-    private void UnlockButton(ISuperJump unlockedSuperJump)
+    private void OnButtonUnlocked(ISuperJump unlockedSuperJump)
     {
-        if(_superJump.GetJumpName() == unlockedSuperJump.GetJumpName())
+        if (_superJump != null && GetSuperJump().GetJumpName() == unlockedSuperJump.GetJumpName())
         {
             _isLocked = false;
-            _currentImage.sprite = _defaultSprite;
+            GetComponent<Image>().sprite = _defaultSprite;
         }
     }
 
-    public void SetIsSelectable(bool value)
+    private ISuperJump GetSuperJump()
     {
-        if (_isLocked == false)
+        return (ISuperJump)_superJump;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        ((IPointerDownHandler)_parentWheel).OnPointerDown(eventData);
+        
+        if (_isSelected && !_isLocked)
         {
-            _isSelectable = value;
+            _currentImage.sprite = _selectedSprite;
+            StartCoroutine(StartClickTimer());
         }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        ((IPointerUpHandler)_parentWheel).OnPointerUp(eventData);
+
+        if (!_isLocked)
+        {
+            _currentImage.sprite = _defaultSprite;
+        }
+        
+        if (_isClick && _isSelected && !_isLocked && !eventData.dragging)
+        {
+            SuperJumpButtonClicked?.Invoke();
+        }
+        SuperJumpButtonReleased?.Invoke();
         StopAllCoroutines();
     }
 
-    public void SetIsSelectable(bool value, float delay)
+    public void OnDrag(PointerEventData eventData)
     {
-        StartCoroutine(SetIsSelectableDelay(value, delay));
+        ((IDragHandler)_parentWheel).OnDrag(eventData);
     }
 
-    private IEnumerator SetIsSelectableDelay(bool value, float delay)
+    private IEnumerator StartClickTimer()
     {
-        yield return new WaitForSeconds(delay);
-        SetIsSelectable(value);
-    }
+        _isClick = true;
+        _clickTimer = 0;
 
-    public void OnPointerExit(PointerEventData eventData) {
-        if (_isSelectable)
+        while (true)
         {
-            SetSelectImageActive(false);
-            SuperJumpUnselected?.Invoke();
-        }
-    }
+            _clickTimer += Time.deltaTime;
+            
+            if(_clickTimer > _clickTreshhold)
+            {
+                _isClick = false;
+            }
+            if(_clickTimer > _holdTreshhold)
+            {
+                SuperJumpButtonHolded?.Invoke(_superJump.GetJumpData());
+            }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (_isSelectable)
-        {
-            SetSelectImageActive(true);
-            SuperJumpSelected?.Invoke(_superJump, _defaultSprite);
+            yield return null;
         }
-    }
-
-    private void OnSelect(ISuperJump selected, Sprite sprite)
-    {
-        if(_superJump.GetJumpName() != selected.GetJumpName())
-        {
-            SetSelectImageActive(false);
-        }
-    }
-
-    private void SetSelectImageActive(bool isSelected)
-    {
-        if (_isSelectable)
-        {
-            GetComponent<Image>().sprite = isSelected ? _selectedSprite : _defaultSprite;
-        }
-    }
+    } 
 
     private void OnDisable()
     {
-        SuperJumpSelected -= OnSelect;
-        SuperJumpUnlocker.SuperJumpUnlocked -= UnlockButton;
+        SuperJumpUnlocker.SuperJumpUnlocked -= OnButtonUnlocked;
+        SuperJumpSelected -= OnSuperJumpSelected;
     }
 }

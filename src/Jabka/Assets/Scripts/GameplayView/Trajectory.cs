@@ -1,6 +1,4 @@
-using System;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,23 +16,43 @@ public class Trajectory : MonoBehaviour
     [SerializeField]
     private LineRenderer _dashLineRenderer;
 
+    private bool _isDashTrajectory = false;
+
+    private PlayerTransformController _playerTransformController;
+
+    [Zenject.Inject]
+    public void Construct(PlayerTransformController controller)
+    {
+        _playerTransformController = controller;
+    }
+
     private void OnEnable()
     {
         JumpController.ForceChanged += OnTrajectoryChanged;
         DashSuperJump.DashJumpPreparing += OnDashTrajectoryChanged;
         DashSuperJump.DashPreparingEnded += ClearTrajectory;
-        JumpController.JumpStarted += OnJumpStarted;
-        DashSuperJump.DashJumpDashed += OnJumpStarted;
+        SimpleJump.SimpleJumpStarted += OnSimpleJumpStarted;
+        JumpController.SimpleJumpCancelled += OnSimpleJumpStarted;
+        DashSuperJump.DashJumpDashed += OnDashJumpDashed;
+        SuperJumpButton.SuperJumpButtonHolded += OnJumpButtonHolded;
+        SuperJumpButton.SuperJumpButtonReleased += ClearTrajectory;
     }
 
-    private void OnTrajectoryChanged(ScriptableJumpData jumpData, PlayerTransformController playerTransformController)
+    private void OnTrajectoryChanged(ScriptableJumpData jumpData)
     {
-        ShowTrajectory(_lineRenderer, CalculateTrajectory(jumpData, playerTransformController).ToArray());
+        ShowTrajectory(_lineRenderer, CalculateTrajectory(jumpData, _playerTransformController).ToArray());
     }
 
-    private void OnDashTrajectoryChanged(ScriptableJumpData jumpData, PlayerTransformController playerTransformController)
+    private void OnDashTrajectoryChanged(ScriptableJumpData jumpData)
     {
-        ShowTrajectory(_dashLineRenderer, CalculateTrajectory(jumpData, playerTransformController).ToArray());
+        _isDashTrajectory = true;
+        ShowTrajectory(_dashLineRenderer, CalculateTrajectory(jumpData, _playerTransformController).ToArray());
+        _isDashTrajectory = false;
+    }
+
+    private void OnJumpButtonHolded(ScriptableJumpData jumpData)
+    {
+        ShowTrajectory(_lineRenderer, CalculateTrajectory(jumpData, _playerTransformController).ToArray());
     }
 
     private List<Vector3> CalculateTrajectory(ScriptableJumpData scriptableJumpData, PlayerTransformController playerTransformController)
@@ -47,7 +65,7 @@ public class Trajectory : MonoBehaviour
             return new List<Vector3>();
         }
 
-        if(scriptableJumpData is DashJumpData dashData)
+        if(scriptableJumpData is DashJumpData dashData && _isDashTrajectory)
         {
             JumpData dashJumpData = new JumpData(dashData.DashHeight, dashData.DashLength, dashData.DashDuration, dashData.DashHeightCurve, dashData.DashLengthCurve);
             jumpData = dashJumpData;
@@ -84,8 +102,9 @@ public class Trajectory : MonoBehaviour
             nextLength = jumpData.Length * progress;
             nextPosition = originPosition + new Vector3((direction * nextLength).x, nextHeight, (direction * nextLength).z);
 
+            Vector3 collider = playerTransformController.GetBoxColliderSize();
             if (BaseJump.IsCollideWithSomething(nextPosition,
-                playerTransformController.GetBoxColliderSize(),
+                new Vector3(collider.x/3, collider.y, collider.z/3),
                 playerTransformController.GetQuaternion(),
                 PlayerTransformController.playerLayerMask))
             {
@@ -121,12 +140,12 @@ public class Trajectory : MonoBehaviour
         pointPrefab.SetActive(false);
     }
 
-    private void OnJumpStarted(float num, ISuperJump sj)
+    private void OnSimpleJumpStarted(float arg1, float arg2)
     {
         ClearTrajectory();
     }
 
-    private void OnJumpStarted(float num)
+    private void OnDashJumpDashed(float num)
     {
         ClearTrajectory();
     }
@@ -143,7 +162,10 @@ public class Trajectory : MonoBehaviour
         JumpController.ForceChanged -= OnTrajectoryChanged;
         DashSuperJump.DashJumpPreparing -= OnDashTrajectoryChanged;
         DashSuperJump.DashPreparingEnded -= ClearTrajectory;
-        JumpController.JumpStarted -= OnJumpStarted;
-        DashSuperJump.DashJumpDashed -= OnJumpStarted;
+        SimpleJump.SimpleJumpStarted -= OnSimpleJumpStarted;
+        JumpController.SimpleJumpCancelled -= OnSimpleJumpStarted;
+        DashSuperJump.DashJumpDashed -= OnDashJumpDashed;
+        SuperJumpButton.SuperJumpButtonHolded -= OnJumpButtonHolded;
+        SuperJumpButton.SuperJumpButtonReleased -= ClearTrajectory;
     }
 }

@@ -36,16 +36,6 @@ public class OnCompleteQuestEffect : MonoBehaviour
     private readonly Color _defaultColor = Color.white;
     private readonly Color _grayColor = new Color(0.3019608f, 0.3019608f, 0.3019608f, 1);
 
-    
-
-    private LevelMetaData _levelMetaData;
-
-    [Zenject.Inject]
-    public void Construct(LevelMetaData levelMetaData)
-    {
-        _levelMetaData = levelMetaData;
-    }
-
     private void OnEnable()
     {
         BaseQuest.IsReadyForComplete += OnReadyForComplete;
@@ -53,7 +43,7 @@ public class OnCompleteQuestEffect : MonoBehaviour
 
     private void OnReadyForComplete(BaseQuest quest)
     {
-        if (quest && _levelMetaData.GetLevelNumber() == quest.GetLevelNumber() && !(quest is CompleteQuest || quest is JumpCountQuest))
+        if (quest && SceneStatus.GetCurrentMetaData().GetLevelNumber() == quest.GetLevelNumber() && !(quest is CompleteQuest || quest is JumpCountQuest))
         {
             _taskGroup.SetActive(true);
             _desctiption.text = quest.GetDescription();

@@ -10,7 +10,7 @@ public class DashSuperJump : BaseJump, ISuperJump
     [SerializeField]
     private DashJumpData _jumpData;
 
-    public static event Action<ScriptableJumpData, PlayerTransformController> DashJumpPreparing;
+    public static event Action<ScriptableJumpData> DashJumpPreparing;
 
     private Action<Vector2, float> FingerUpDelegate;
 
@@ -24,9 +24,8 @@ public class DashSuperJump : BaseJump, ISuperJump
     public static event Action DashPreparingEnded;
     public static event Action<float> DashJumpDashed;
 
-    protected override void OnEnable()
+    private void OnEnable()
     {
-        base.OnEnable();
         FingerUpDelegate = (vec, num) => DoDash();
         InputHandler.FingerUp += FingerUpDelegate;
         InputHandler.FingerDown += PrepareForDash;
@@ -87,17 +86,17 @@ public class DashSuperJump : BaseJump, ISuperJump
             _isInPrepare = true;
             SetTimeScale(_jumpData.TimeScale);
 
-            StartCoroutine(PreparingForDash(_playerTransformController));
+            StartCoroutine(PreparingForDash());
             StartCoroutine(OffPrepareAfterDelay(_jumpData.SlowMoDuration));
             DashPreparingStarted?.Invoke(_jumpData.SlowMoDuration);
         }
     }
 
-    private IEnumerator PreparingForDash(PlayerTransformController playerTransformController)
+    private IEnumerator PreparingForDash()
     {
         while (_isInPrepare)
         {
-            DashJumpPreparing?.Invoke(_jumpData, playerTransformController);
+            DashJumpPreparing?.Invoke(_jumpData);
             yield return null;
         }
     }
@@ -115,9 +114,8 @@ public class DashSuperJump : BaseJump, ISuperJump
         Time.timeScale = value;
     }
 
-    protected override void OnDisable()
+    private void OnDisable()
     {
-        base.OnDisable();
         InputHandler.FingerUp -= FingerUpDelegate;
         InputHandler.FingerDown -= PrepareForDash;
     }

@@ -9,6 +9,6 @@ public class Collectable : BaseQuestItem
     protected override void SendEvent()
     {
         Collected?.Invoke(this);
-        Debug.Log($"Collectable for quest on level {_levelNumber} collected");
+        Debug.Log($"Collectable for quest on level {SceneStatus.GetCurrentLevelNumber()} collected");
     }
 }

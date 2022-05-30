@@ -10,7 +10,7 @@ public abstract class BaseJump : MonoBehaviour
 
     protected Coroutine _currentJump;
 
-    public static event Action JumpEnded;
+    public static event Action<BaseJump> JumpEnded;
 
     public bool IsInJump()
     {
@@ -22,11 +22,6 @@ public abstract class BaseJump : MonoBehaviour
     protected virtual void SetIsInJump(bool value)
     {
         _isInJump = value;
-    }
-
-    protected virtual void OnEnable()
-    {
-        PlayerTransformController.Collided += OnCollision;
     }
 
     protected virtual IEnumerator JumpCoroutine(
@@ -67,7 +62,7 @@ public abstract class BaseJump : MonoBehaviour
             yield return null;
         }
 
-        JumpEnded?.Invoke();
+        JumpEnded?.Invoke(this);
         SetIsInJump(false);
     }
 
@@ -76,18 +71,5 @@ public abstract class BaseJump : MonoBehaviour
         //исключаем из проверки все передаваемые слои
         int layerMask = ~layersToMask.Select(layer => (1 << layer)).Sum();
         return Physics.CheckBox(pos, size / 2, rot, layerMask);
-    }
-
-    protected virtual void OnCollision(Collision collision, PlayerTransformController playerTransformController)
-    {
-        //if (IsInJump())
-        //{
-        //    SetIsInJump(false);
-        //}
-    }
-
-    protected virtual void OnDisable()
-    {
-        PlayerTransformController.Collided -= OnCollision;
     }
 }

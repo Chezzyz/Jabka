@@ -4,9 +4,6 @@ using System.Collections;
 
 public class PlayerRotation : MonoBehaviour
 {
-    [SerializeField]
-    private float _sensitivity = 0.1f;
-
     private PlayerTransformController _playerTransformController;
     private float _originRotationY;
     private bool _canRotate = true;
@@ -21,7 +18,6 @@ public class PlayerRotation : MonoBehaviour
     {
         InputHandler.SwipeDeltaChanged += OnSwipeX;
         InputHandler.FingerDown += OnFingerDown;
-        SuperJumpPicker.SuperJumpMenuStateChanged += OnMenuStateChanged;
         Pause.PauseStateChanged += OnMenuStateChanged;
     }
 
@@ -56,18 +52,24 @@ public class PlayerRotation : MonoBehaviour
 
     private void OnSwipeX(Vector2 delta)
     {
-        //при движении пальца вправо, камера поворачивается влево и наоборот.
         if (_canRotate)
         {
-            _playerTransformController.SetRotationY(_originRotationY + (-1 * _sensitivity * delta.x));
+            Rotate(delta.x);
         }
+    }
+
+    private void Rotate(float deltaX)
+    {
+        float normalizedOffset = (deltaX / Screen.width) * 1000;
+        //при движении пальца вправо, камера поворачивается влево и наоборот.
+        float delta = -1 * SettingsHandler.GetHorizontalSensetivity() * normalizedOffset;
+        _playerTransformController.SetRotationY(_originRotationY + delta);
     }
 
     private void OnDisable()
     {
         InputHandler.SwipeDeltaChanged -= OnSwipeX;
         InputHandler.FingerDown -= OnFingerDown;
-        SuperJumpPicker.SuperJumpMenuStateChanged -= OnMenuStateChanged;
         Pause.PauseStateChanged -= OnMenuStateChanged;
     }
 }

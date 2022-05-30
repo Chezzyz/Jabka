@@ -8,9 +8,11 @@ public class VirtualCameraFX : MonoBehaviour
 {
     private CinemachineVirtualCamera _virtualCamera;
 
-    float defaultFoV;
+    private float _defaultFoV;
 
-    Tween currentFovTween;
+    private Tween _currentFovTween;
+
+    private Tween _onCompleteFovTween;
 
     private void Awake()
     {
@@ -19,20 +21,21 @@ public class VirtualCameraFX : MonoBehaviour
 
     private void OnEnable()
     {
-        defaultFoV = _virtualCamera.m_Lens.FieldOfView;
+        _defaultFoV = _virtualCamera.m_Lens.FieldOfView;
         SimpleJump.SimpleJumpStarted += OnSimpleJumpStarted;
+        JumpController.SimpleJumpCancelled += OnSimpleJumpStarted;
         LongSuperJump.LongJumpStarted += OnLongJumpStarted;
         DashSuperJump.DashPreparingStarted += OnDashPreparingStarted;
         DashSuperJump.DashJumpDashed += OnDashJumpDashed;
-
         JumpController.ForceChanged += OnForcedChanged;
     }
 
-    private void OnForcedChanged(ScriptableJumpData jumpData, PlayerTransformController playerTransform)
+    private void OnForcedChanged(ScriptableJumpData jumpData)
     {
-        if(jumpData is SimpleJumpData data)
+        if(jumpData is SimpleJumpData data && data.GetForcePercent() > 0)
         {
-            _virtualCamera.m_Lens.FieldOfView = defaultFoV + (data.GetForcePercent() * 10);
+            KillCurrentFovTween();
+            _virtualCamera.m_Lens.FieldOfView = _defaultFoV + (data.GetForcePercent() * 10);
         }
     }
 
@@ -54,29 +57,30 @@ public class VirtualCameraFX : MonoBehaviour
 
     private void OnSimpleJumpStarted(float forcePercent, float duration)
     {
-        FoVEffect(10f, duration, 0.3f);
+        if (forcePercent > 0)
+        {
+            FoVEffect(15f * forcePercent, duration * 0.75f, 0.2f);
+        }
     }
 
-    private void FoVEffect(float newFoV, float duration, float fovEffectPart)
+    private void FoVEffect(float offsetFoV, float duration, float fovEffectPart)
     {
-        currentFovTween = DOTween.To(() => _virtualCamera.m_Lens.FieldOfView, x => _virtualCamera.m_Lens.FieldOfView = x, defaultFoV + newFoV, duration * fovEffectPart);
-
-        currentFovTween.onComplete = () =>
-        {
-            DOTween.To(() => _virtualCamera.m_Lens.FieldOfView,
-                x => _virtualCamera.m_Lens.FieldOfView = x,
-                defaultFoV, duration * (1 - fovEffectPart));
-        };
+        _currentFovTween = DOTween.To(() => _virtualCamera.m_Lens.FieldOfView, x => _virtualCamera.m_Lens.FieldOfView = x, _defaultFoV + offsetFoV, duration * fovEffectPart);
+        _onCompleteFovTween = DOTween.To(() => _virtualCamera.m_Lens.FieldOfView,x => _virtualCamera.m_Lens.FieldOfView = x, _defaultFoV, duration * (1 - fovEffectPart)).Pause();
+        _currentFovTween.onComplete = () => _onCompleteFovTween.Play();
+        _currentFovTween.Play();
     }
 
     private void KillCurrentFovTween()
     {
-        currentFovTween.Kill();
+        _currentFovTween.Kill();
+        _onCompleteFovTween.Kill();
     }
 
     private void OnDisable()
     {
         SimpleJump.SimpleJumpStarted -= OnSimpleJumpStarted;
+        JumpController.SimpleJumpCancelled -= OnSimpleJumpStarted;
         LongSuperJump.LongJumpStarted -= OnLongJumpStarted;
         DashSuperJump.DashPreparingStarted -= OnDashPreparingStarted;
         DashSuperJump.DashJumpDashed -= OnDashJumpDashed;

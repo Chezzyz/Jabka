@@ -12,32 +12,18 @@ public class InputHandler : MonoBehaviour
 
     private bool _canSendEvents = true;
 
-    private System.Action<CompletePlace> _levelCompletedDelegate;
-
     private void OnEnable()
     {
         LeanTouch.OnFingerUpdate += OnFingerUpdate;
         LeanTouch.OnFingerDown += OnFingerDown;
         LeanTouch.OnFingerUp += OnFingerUp;
-        Pause.PauseStateChanged += OnSendingEventsStateChanged;
 
-        _levelCompletedDelegate = (place) => OnSendingEventsStateChanged(true);
-        CompletePlace.LevelCompleted += _levelCompletedDelegate;
+        Pause.PauseStateChanged += OnSendingEventsStateChanged;
+        CompletePlace.LevelCompleted += OnLevelCompleted;
+        SuperJumpsWheel.DragStateChanged += OnSendingEventsStateChanged;
 
         LevelOverview.OverviewEnded += OnOverviewEnded;
         SceneStatus.SceneChanged += OnSceneChanged;
-    }
-
-
-    private void OnDisable()
-    {
-        LeanTouch.OnFingerUpdate -= OnFingerUpdate;
-        LeanTouch.OnFingerDown -= OnFingerDown;
-        LeanTouch.OnFingerUp -= OnFingerUp;
-        Pause.PauseStateChanged -= OnSendingEventsStateChanged;
-        CompletePlace.LevelCompleted -= _levelCompletedDelegate;
-        LevelOverview.OverviewEnded -= OnOverviewEnded;
-        SceneStatus.SceneChanged -= OnSceneChanged;
     }
 
     private void OnOverviewEnded()
@@ -89,9 +75,29 @@ public class InputHandler : MonoBehaviour
 
     private void OnFingerUpdate(LeanFinger finger)
     {
-        if (_canSendEvents)
+        if (_canSendEvents && (finger.Index == -1 || finger.Index == 0) && finger.SwipeScreenDelta != Vector2.zero)
         {
             SwipeDeltaChanged?.Invoke(finger.SwipeScreenDelta);
         }
     }
+
+    private void OnLevelCompleted(CompletePlace _)
+    {
+        OnSendingEventsStateChanged(true);
+    }
+
+    private void OnDisable()
+    {
+        LeanTouch.OnFingerUpdate -= OnFingerUpdate;
+        LeanTouch.OnFingerDown -= OnFingerDown;
+        LeanTouch.OnFingerUp -= OnFingerUp;
+
+        Pause.PauseStateChanged -= OnSendingEventsStateChanged;
+        CompletePlace.LevelCompleted -= OnLevelCompleted;
+        SuperJumpsWheel.DragStateChanged -= OnSendingEventsStateChanged;
+
+        LevelOverview.OverviewEnded -= OnOverviewEnded;
+        SceneStatus.SceneChanged -= OnSceneChanged;
+    }
+
 }

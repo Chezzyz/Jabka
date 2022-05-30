@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class InterfaceSoundHandler : MonoBehaviour
-{
+public class InterfaceSoundHandler : BaseAudioHandler<InterfaceAudioSource>
+{ 
     [Header("Collectable Stage 1")]
     [SerializeField]
     private AudioClip _buttonSound;
@@ -28,38 +28,21 @@ public class InterfaceSoundHandler : MonoBehaviour
     [Range(0f, 1f)]
     private float _questCompletedSoundVolumeScale;
 
-
-    private AudioSource _audioSource;
-    private static InterfaceSoundHandler _singleton;
-
-    private void Awake()
+    protected override void Awake()
     {
-        if (_singleton == null)
-        {
-            _singleton = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+        base.Awake();
     }
-    
-    private void OnEnable()
+
+    protected override void OnEnable()
     {
-        SceneLoader.SceneLoaded += OnSceneLoaded;
+        base.OnEnable();
         OnCompleteQuestEffect.ReadyForCompleteViewSetted += OnReadyForComplete;
         LevelPreparation.QuestAppearStarted += OnQuestAppearStarted;
     }
 
-    private void OnSceneLoaded(string name)
+    protected override void OnSceneLoaded(string name)
     {
-        _audioSource = FindObjectOfType<CameraAudioSource>()?.GetComponent<AudioSource>();
-        if (_audioSource == null)
-        {
-            Debug.LogWarning("CameraAudioSource not found on scene");
-        }
+        base.OnSceneLoaded(name);
 
         //Некоторые кнопки могут не сразу загрузиться после загрузки сцены, поэтому ждем немного
         StartCoroutine(AddButtonsListenerAfterDelay(0.5f));
@@ -67,25 +50,19 @@ public class InterfaceSoundHandler : MonoBehaviour
 
     private void OnQuestAppearStarted()
     {
-        PlayClip(_questAppearSound, volumeScale: _questAppearSoundVolumeScale);
+        PlayOneShot(_questAppearSound, volumeScale: _questAppearSoundVolumeScale);
     }
 
     private void OnReadyForComplete()
     {
-        PlayClip(_questCompletedSound, volumeScale: _questCompletedSoundVolumeScale);
+        PlayOneShot(_questCompletedSound, volumeScale: _questCompletedSoundVolumeScale);
     }
 
     private IEnumerator AddButtonsListenerAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         List<Button> buttons = FindObjectsOfType<Button>(true).ToList();
-        buttons.ForEach(button => button.onClick.AddListener(() => PlayClip(_buttonSound, volumeScale: _buttonSoundVolumeScale)));
-    }
-
-    private void PlayClip(AudioClip clip, float pitch = 1f, float volumeScale = 1f)
-    {
-        _audioSource.pitch = pitch;
-        _audioSource.PlayOneShot(clip, volumeScale);
+        buttons.ForEach(button => button.onClick.AddListener(() => PlayOneShot(_buttonSound, volumeScale: _buttonSoundVolumeScale)));
     }
 
 }
