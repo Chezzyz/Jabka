@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Quests_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 2554cf8dd8505c34b80530975512fbba, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 9464627200
+    m_Localized: Complete level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20808682618880
+    m_Localized: Collect 3 lilies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20884620492800
+    m_Localized: Finish with 7 or less jumps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22654054744064
+    m_Localized: Complete level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22703165849600
+    m_Localized: Complete level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22736330211328
+    m_Localized: Complete level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22778554269696
+    m_Localized: Complete level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22676041285632
+    m_Localized: Collect 4 lilies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22713647415296
+    m_Localized: Collect 5 lilies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22750938972160
+    m_Localized: Collect 9 lilies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22761613475840
+    m_Localized: Find a hidden coin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22790247989248
+    m_Localized: Collect 8 lilies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22692273242112
+    m_Localized: Do a Super Jump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22725294997504
+    m_Localized: Do 3 Long Jumps in a row
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22802323390464
+    m_Localized: Finish with 17 or less jumps
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 1

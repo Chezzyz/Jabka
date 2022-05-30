@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
@@ -15,7 +17,8 @@ public class LevelView : MonoBehaviour
     private Button _startLevelButton;
     [SerializeField]
     private SceneLoader _sceneLoader;
-
+    [SerializeField]
+    private LocalizedStringTable _localizedStringTable;
 
     private UnityAction _lastLoadSceneListener;
 
@@ -41,7 +44,7 @@ public class LevelView : MonoBehaviour
     
     private void SetupLevelView(int levelNumber)
     {
-        _levelNumberText.text = $"Level {levelNumber}";
+        _levelNumberText.text = $"{_localizedStringTable.GetTable()["LEVEL"].LocalizedValue} {levelNumber}";
         LevelMetaData levelMetaData = SceneStatus.GetLevelMetaData(levelNumber);
 
         for (int questNumber = 1; questNumber <= _questViews.Count; questNumber++)

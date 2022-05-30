@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Move horizontally to rotate
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 75e5e6319698fb44abb3d1b767e3da1b, type: 2}
-  m_sharedMaterial: {fileID: 5406373525244072659, guid: 75e5e6319698fb44abb3d1b767e3da1b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 69b7846b7aeca43498c95ade625cf5f9, type: 2}
+  m_sharedMaterial: {fileID: -358379864701379672, guid: 69b7846b7aeca43498c95ade625cf5f9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -5
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

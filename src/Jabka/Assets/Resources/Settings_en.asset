@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Settings_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: a17afb8e3887479429a74baa162abe58, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 666368131072
+    m_Localized: Jump Sensetivity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 669912317952
+    m_Localized: Rotation Sensetivity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 672034635776
+    m_Localized: CREDITS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 674660270080
+    m_Localized: Vetrenko Alexander
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1169978212352
+    m_Localized: Saliakhov Denis
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1272377950208
+    m_Localized: Shlyaga Galina
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1427755941888
+    m_Localized: Ekimovskih Dmitry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2223079866368
+    m_Localized: Leave Feedback
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 1

@@ -63,6 +63,9 @@ MonoBehaviour:
   _completedSprite: {fileID: 21300000, guid: 98c07e884788e7247aed3b7d57de9fd6, type: 3}
   _completedStarSprite: {fileID: 21300000, guid: ef04f36b2dc8e95469cd2429efb166ce, type: 3}
   _desctiption: {fileID: 5342754374362602722}
+  _localizedTable:
+    m_TableReference:
+      m_TableCollectionName: GUID:2554cf8dd8505c34b80530975512fbba
   _currentImage: {fileID: 1692524382358468425}
   _currentStarImage: {fileID: 9169845864719750623}
   _isInMainMenu: 0
@@ -208,8 +211,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Complete level
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 75e5e6319698fb44abb3d1b767e3da1b, type: 2}
-  m_sharedMaterial: {fileID: 5406373525244072659, guid: 75e5e6319698fb44abb3d1b767e3da1b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 69b7846b7aeca43498c95ade625cf5f9, type: 2}
+  m_sharedMaterial: {fileID: -358379864701379672, guid: 69b7846b7aeca43498c95ade625cf5f9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -233,7 +236,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 68.6
+  m_fontSize: 67.35
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -243,7 +246,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -5
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

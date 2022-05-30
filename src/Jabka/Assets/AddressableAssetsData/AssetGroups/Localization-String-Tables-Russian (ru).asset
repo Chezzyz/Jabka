@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-String-Tables-Russian (ru)
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-String-Tables-Russian (ru)
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 354db1c01e38e0846ae0ac19797889eb
+  m_SerializeEntries:
+  - m_GUID: 278ac7627d7b49d47a18f3096ed288b6
+    m_Address: LevelStageNames_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+  - m_GUID: 03d4945aca42ced4880a1fa6c180ef05
+    m_Address: Quests_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    - Preload
+  - m_GUID: 38ce778fd91f6a740862997791d10b6d
+    m_Address: Settings_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+  - m_GUID: 834c193d57b0cdf40a89ff777dd0a8f3
+    m_Address: LevelStageNames_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+  - m_GUID: 291d5c30d4a284843ab9ef6f97f9308c
+    m_Address: Tutorials_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    - Preload
+  - m_GUID: 32b29e90227568543b71ea2d23a75c74
+    m_Address: Other_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    - Preload
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 8292ba130da897d49b3b27c99a7f06de, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 917288247aecaa04fa2cb7f8393f704b, type: 2}
+    - {fileID: 11400000, guid: e0ff41547c19d3548b6ec445ca1fb9a1, type: 2}
