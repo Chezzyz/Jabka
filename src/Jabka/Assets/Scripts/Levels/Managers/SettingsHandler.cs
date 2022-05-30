@@ -2,7 +2,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using System.Collections.Generic;
 
-public class SettingsHandler : GameHandler<SettingsHandler>
+public class SettingsHandler : BaseGameHandler<SettingsHandler>
 {
     [Header("Volume")]
     [SerializeField]
@@ -56,85 +56,133 @@ public class SettingsHandler : GameHandler<SettingsHandler>
     private void OnEnable()
     {
         SceneLoader.SceneLoaded += OnSceneLoaded;
+        SaveLoadSystem.SaveLoaded += OnSaveLoaded;
     }
 
-    private void OnSceneLoaded(string _)
+    private void OnSaveLoaded()
+    {
+        SetValues();
+    }
+
+    private void OnSceneLoaded(string name)
     {
         _volumeSprites = new List<Sprite>() { _volumeSpriteOff, _volumeSpriteLevel1, _volumeSpriteLevel2, _volumeSpriteLevel3 };
 
         _musicButton = FindObjectOfType<MusicButton>().GetComponent<Button>();
         _volumeButton = FindObjectOfType<VolumeButton>().GetComponent<Button>();
 
-        _musicButton.GetComponent<Image>().sprite = _musicIsOn ? _musicSpriteOn : _musicSpriteOff;
-        _volumeButton.GetComponent<Image>().sprite = _volumeSprites[_volumeLevel];
-
         _musicButton.onClick.AddListener(() => ChangeMusicState());
-        _volumeButton.onClick.AddListener(() => ChangeVolumeLevel());
+        _volumeButton.onClick.AddListener(() => IncrementVolumeLevel());
 
         _verticalSensSlider = FindObjectOfType<VerticalSensSlider>()?.GetComponent<Slider>();
         _horizontalSensSlider = FindObjectOfType<HorizontalSensSlider>()?.GetComponent<Slider>();
 
         if(_verticalSensSlider != null && _horizontalSensSlider != null)
         {
-            _verticalSensSlider.onValueChanged.AddListener(value => ChangeVerticalSensetivity(_verticalSensSlider.normalizedValue));
-            _horizontalSensSlider.onValueChanged.AddListener(value => ChangeHorizontalSensetivity(_horizontalSensSlider.normalizedValue));
+            _verticalSensSlider.onValueChanged.AddListener(value => SetVerticalSensetivity(_verticalSensSlider.normalizedValue));
+            _horizontalSensSlider.onValueChanged.AddListener(value => SetHorizontalSensetivity(_horizontalSensSlider.normalizedValue));
+        }
 
+        SetValues();
+    }
+
+    private void SetValues()
+    {
+        _musicButton.GetComponent<Image>().sprite = _musicIsOn ? _musicSpriteOn : _musicSpriteOff;
+        _volumeButton.GetComponent<Image>().sprite = _volumeSprites[_volumeLevel];
+
+        if (_verticalSensSlider != null && _horizontalSensSlider != null)
+        {
             _verticalSensSlider.value = Mathf.Lerp(_verticalSensSlider.minValue, _verticalSensSlider.maxValue, _verticalSensetivityCoef);
             _horizontalSensSlider.value = Mathf.Lerp(_horizontalSensSlider.minValue, _horizontalSensSlider.maxValue, _horizontalSensetivityCoef);
         }
     }
 
-    public static float GetVolumeCoef()
+    #region VolumeLevel
+    public static int GetVolumeLevel()
     {
-        return (float)((SettingsHandler)Instance)._volumeLevel / 3;
+        return Instance._volumeLevel;
     }
 
-    public static bool MusicIsOn()
+    public void SetVolumeLevel(int value)
     {
-        return ((SettingsHandler)Instance)._musicIsOn;
-    }
-
-    public static (float min, float max) GetVerticalSensetivityBounds()
-    {
-        float start = ((SettingsHandler)Instance)._verticalSensStart;
-        float endMin = ((SettingsHandler)Instance)._verticalSensEndMin;
-        float endMax = ((SettingsHandler)Instance)._verticalSensEndMax;
-        float coef = ((SettingsHandler)Instance)._verticalSensetivityCoef;
-
-        return (start, Mathf.Lerp(endMax, endMin, coef));
-    }
-
-    public static float GetHorizontalSensetivity()
-    {
-        float coef = ((SettingsHandler)Instance)._horizontalSensetivityCoef;
-        float min = ((SettingsHandler)Instance)._horizontalSensMin;
-        float max = ((SettingsHandler)Instance)._horizontalSensMax;
-
-        return Mathf.Lerp(min, max, coef);
-    }
-
-    private void ChangeMusicState()
-    {
-        _musicIsOn = !_musicIsOn;
-        _musicButton.GetComponent<Image>().sprite = _musicIsOn ? _musicSpriteOn : _musicSpriteOff;
-        MusicStateChanged?.Invoke();
-    }
-
-    private void ChangeVolumeLevel()
-    {
-        _volumeLevel = (_volumeLevel + 1) % 4;
-        _volumeButton.GetComponent<Image>().sprite = _volumeSprites[_volumeLevel];
+        _volumeLevel = value;
+        _volumeButton.GetComponent<Image>().sprite = _volumeSprites[value];
         VolumeLevelChanged?.Invoke(GetVolumeCoef());
     }
 
-    private void ChangeVerticalSensetivity(float value)
+    public static float GetVolumeCoef()
+    {
+        return ((float)Instance._volumeLevel) / 3;
+    }
+    #endregion
+
+    #region MusicIsOn
+    public static bool MusicIsOn()
+    {
+        return Instance._musicIsOn;
+    }
+
+    public void SetMusicIsOn(bool value)
+    {
+        _musicIsOn = value;
+        _musicButton.GetComponent<Image>().sprite = _musicIsOn ? _musicSpriteOn : _musicSpriteOff;
+        MusicStateChanged?.Invoke();
+    }
+    #endregion
+
+    #region VerticalSens
+
+    public static float GetVerticalSensCoef()
+    {
+        return Instance._verticalSensetivityCoef;
+    }
+
+    public void SetVerticalSensetivity(float value)
     {
         _verticalSensetivityCoef = value;
     }
 
-    private void ChangeHorizontalSensetivity(float value)
+    public static (float min, float max) GetVerticalSensetivityBounds()
+    {
+        float start = Instance._verticalSensStart;
+        float endMin = Instance._verticalSensEndMin;
+        float endMax = Instance._verticalSensEndMax;
+        float coef = Instance._verticalSensetivityCoef;
+
+        return (start, Mathf.Lerp(endMax, endMin, coef));
+    }
+    #endregion
+
+    #region HorizontalSens
+    public static float GetHorizontalSensCoef()
+    {
+        return Instance._horizontalSensetivityCoef;
+    }
+
+    public void SetHorizontalSensetivity(float value)
     {
         _horizontalSensetivityCoef = value;
+    }
+
+    public static float GetHorizontalSensetivity()
+    {
+        float coef = Instance._horizontalSensetivityCoef;
+        float min = Instance._horizontalSensMin;
+        float max = Instance._horizontalSensMax;
+
+        return Mathf.Lerp(min, max, coef);
+    }
+    #endregion
+
+    private void ChangeMusicState()
+    {
+        SetMusicIsOn(!_musicIsOn);
+    }
+
+    private void IncrementVolumeLevel()
+    {
+        SetVolumeLevel((_volumeLevel + 1) % 4);
     }
     
 }

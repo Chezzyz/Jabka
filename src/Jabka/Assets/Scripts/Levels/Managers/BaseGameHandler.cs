@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameHandler<T> : MonoBehaviour where T : GameHandler<T>
+public class BaseGameHandler<T> : MonoBehaviour where T : BaseGameHandler<T>
 {
-    public static GameHandler<T> Instance;
+    public static T Instance;
 
     protected virtual void Awake()
     {
@@ -15,7 +15,7 @@ public class GameHandler<T> : MonoBehaviour where T : GameHandler<T>
         }
         else
         {
-            Instance = this;
+            Instance = FindObjectOfType<T>()?.GetComponent<T>(); ;
         }
 
         DontDestroyOnLoad(gameObject);

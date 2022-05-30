@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bfa753f05bb0784391f88aec152d743, type: 3}
-  m_Name: Progress
+  m_Script: {fileID: 11500000, guid: b1714eeb39b216e40bc7a41d8daa9af3, type: 3}
+  m_Name: GameStateMap
   m_EditorClassIdentifier: 
-  _currentStage: 1
-  _currentLevel: 5
   _levelMetaDatas: {fileID: 11400000, guid: 35c7e93762dfe594f8b254b89e8b1626, type: 2}
+  _progressData: {fileID: 11400000, guid: d98e62965f0e0ae4e9db6fca8c4e7710, type: 2}
