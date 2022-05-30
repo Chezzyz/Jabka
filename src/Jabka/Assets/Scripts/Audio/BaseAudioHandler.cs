@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseAudioHandler<T> : GameHandler<BaseAudioHandler<T>> where T : MonoBehaviour
+public class BaseAudioHandler<T> : BaseGameHandler<BaseAudioHandler<T>> where T : MonoBehaviour
 {
     protected AudioSource _audioSource;
 
@@ -22,6 +22,7 @@ public class BaseAudioHandler<T> : GameHandler<BaseAudioHandler<T>> where T : Mo
     protected virtual void OnSceneLoaded(string name)
     {
         _audioSource = FindObjectOfType<T>()?.GetComponent<AudioSource>();
+        OnVolumeChanged(SettingsHandler.GetVolumeCoef());
         if (_audioSource == null && name != "MenuScene")
         {
             Debug.LogWarning(typeof(T) + " not found on scene");

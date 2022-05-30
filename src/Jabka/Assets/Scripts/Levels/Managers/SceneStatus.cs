@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using NaughtyAttributes;
 
-public class SceneStatus : GameHandler<SceneStatus>
+public class SceneStatus : BaseGameHandler<SceneStatus>
 {
     [SerializeField]
-    List<LevelMetaData> _levelMetaDatas;
+    LevelMetaDatas _levelMetaDatas;
 
     public static Action<int, int> SceneChanged;
 
@@ -65,7 +65,7 @@ public class SceneStatus : GameHandler<SceneStatus>
     private void InitLevelMetaDataMap()
     {
         _levelMetaDataMap = new Dictionary<int, LevelMetaData>();
-        _levelMetaDatas.ForEach(meta => _levelMetaDataMap.Add(meta.GetLevelNumber(), meta));
+        _levelMetaDatas.GetLevelMetaDatas().ForEach(meta => _levelMetaDataMap.Add(meta.GetLevelNumber(), meta));
     }
 
     private void OnSceneLoadStarted(float delay)
@@ -82,6 +82,7 @@ public class SceneStatus : GameHandler<SceneStatus>
     [Button]
     private void ClearQuests()
     {
-        _levelMetaDatas.ForEach(data => data.GetQuests().ForEach(quest => quest.SetIsCompleted(false)));
+        _levelMetaDatas.GetLevelMetaDatas().ForEach(data => data.GetQuests().ForEach(quest => quest.SetIsCompleted(false)));
+        Debug.Log("All quests reseted");
     }
 }
