@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using Lean.Touch;
 using UnityEngine;
 
 public class DashTutorial : BaseFingerTutorial
@@ -24,7 +24,7 @@ public class DashTutorial : BaseFingerTutorial
     private void OnEnable()
     {
         Construct(_canvasGroupSerializable, _animatorSerializable, _fadeDurationSerializable, _closeDurationSerializable);
-        InputHandler.FingerDown += OnFingerDown;
+        LeanTouch.OnFingerDown += OnFingerDown;
         DashSuperJump.DashJumpStarted += OnDashJumpStarted;
     }
 
@@ -45,7 +45,7 @@ public class DashTutorial : BaseFingerTutorial
         ShowTutorial();
     }
 
-    private void OnFingerDown(Vector2 pos)
+    private void OnFingerDown(LeanFinger _)
     {
         if (_isAbleToClose && !_isShowed)
         {
@@ -58,7 +58,7 @@ public class DashTutorial : BaseFingerTutorial
 
     private void OnDisable()
     {
-        InputHandler.FingerDown -= OnFingerDown;
+        LeanTouch.OnFingerDown -= OnFingerDown;
         DashSuperJump.DashJumpStarted -= OnDashJumpStarted;
     }
 }

@@ -1,5 +1,5 @@
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class CameraAudioSource : MonoBehaviour
+public class BackgroundAudioSource : MonoBehaviour
 {}

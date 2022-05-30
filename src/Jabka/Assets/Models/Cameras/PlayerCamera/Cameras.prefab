@@ -162,7 +162,9 @@ PrefabInstance:
       propertyPath: near clip plane
       value: 0.1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6884433891447519520, guid: b10ef3e2e73aafc418769025eb17d120, type: 3}
+    - {fileID: 9014751573973386056, guid: b10ef3e2e73aafc418769025eb17d120, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b10ef3e2e73aafc418769025eb17d120, type: 3}
 --- !u!4 &7255502054568682624 stripped
 Transform:

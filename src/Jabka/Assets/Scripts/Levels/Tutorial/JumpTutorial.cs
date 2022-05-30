@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using Lean.Touch;
 using UnityEngine;
 
 public class JumpTutorial : BaseFingerTutorial
@@ -22,10 +22,10 @@ public class JumpTutorial : BaseFingerTutorial
     private void OnEnable()
     {
         Construct(_canvasGroupSerializable, _animatorSerializable, _fadeDurationSerializable, _closeDurationSerializable);
-        InputHandler.FingerDown += OnFingerDown;
+        LeanTouch.OnFingerDown += OnFingerDown;
     }
 
-    private void OnFingerDown(Vector2 pos)
+    private void OnFingerDown(LeanFinger _)
     {
         if (!_isShowed)
         {
@@ -43,6 +43,6 @@ public class JumpTutorial : BaseFingerTutorial
 
     private void OnDisable()
     {
-        InputHandler.FingerDown -= OnFingerDown;
+        LeanTouch.OnFingerDown -= OnFingerDown;
     }
 }

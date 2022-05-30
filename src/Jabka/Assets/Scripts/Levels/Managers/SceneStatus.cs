@@ -5,14 +5,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using NaughtyAttributes;
 
-public class SceneStatus : MonoBehaviour
+public class SceneStatus : GameHandler<SceneStatus>
 {
     [SerializeField]
     List<LevelMetaData> _levelMetaDatas;
 
     public static Action<int, int> SceneChanged;
-
-    public static SceneStatus Instance;
 
     private static int _prevSceneIndex = -1;
     private static int _currentSceneIndex = -1;
@@ -31,19 +29,9 @@ public class SceneStatus : MonoBehaviour
         { "Level_1-5", 5 }
     };
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        else
-        {
-            Instance = this;
-        }
-        
-        DontDestroyOnLoad(gameObject);
+        base.Awake();
 
         InitLevelMetaDataMap();
     }
@@ -57,6 +45,11 @@ public class SceneStatus : MonoBehaviour
     public static int GetCurrentLevelNumber()
     {
         return _sceneToLevelNumberMap[SceneManager.GetActiveScene().name];
+    }
+
+    public static int GetCurrentStageNumber()
+    {
+        return GetCurrentLevelNumber() == 0 ? 0 : GetLevelMetaData(GetCurrentLevelNumber()).GetStageNumber();
     }
 
     public static LevelMetaData GetLevelMetaData(int levelNumber)

@@ -75,7 +75,7 @@ public class InputHandler : MonoBehaviour
 
     private void OnFingerUpdate(LeanFinger finger)
     {
-        if (_canSendEvents && (finger.Index == -1 || finger.Index == 1))
+        if (_canSendEvents && (finger.Index == -1 || finger.Index == 0) && finger.SwipeScreenDelta != Vector2.zero)
         {
             SwipeDeltaChanged?.Invoke(finger.SwipeScreenDelta);
         }

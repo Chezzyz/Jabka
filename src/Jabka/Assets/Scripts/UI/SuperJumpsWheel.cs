@@ -70,8 +70,10 @@ public class SuperJumpsWheel : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     private void RotateToNearest()
     {
-        transform.DOLocalRotate(new Vector3(0, 0, CalculateNearestButtonRotation(out var button)), _releaseDuration).OnUpdate(() => ChangeButtonsView());
-        button.Select();
+        transform
+            .DOLocalRotate(new Vector3(0, 0, CalculateNearestButtonRotation(out var button)), _releaseDuration)
+            .OnUpdate(() => ChangeButtonsView())
+            .OnComplete(() => button.Select());
     }
 
     private float CalculateNearestButtonRotation(out SuperJumpButton selectedButton)

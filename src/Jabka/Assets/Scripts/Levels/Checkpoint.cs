@@ -44,7 +44,7 @@ public class Checkpoint : MonoBehaviour
     public void SpawnPlayer()
     {
         _playerTransformController.SetPosition(transform.position + new Vector3(0, _heightForUp, 0));
-        _playerTransformController.SetRotation(transform.rotation.eulerAngles);
+        _playerTransformController.SetRotation(transform.localRotation.eulerAngles);
         PlayerSpawned?.Invoke(_playerTransformController);
     }
 

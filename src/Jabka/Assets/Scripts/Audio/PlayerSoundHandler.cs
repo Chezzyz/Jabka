@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSoundHandler : MonoBehaviour
+public class PlayerSoundHandler : BaseAudioHandler<PlayerAudioSource>
 {
     [Header("Low Force Jump")]
     [SerializeField]
@@ -57,39 +55,23 @@ public class PlayerSoundHandler : MonoBehaviour
     [SerializeField]
     private float _maxPitch;
 
-    private static PlayerSoundHandler _singleton;
-    private AudioSource _playerAudioSource;
-
-    private void Awake()
+    protected override void Awake()
     {
-        if(_singleton == null)
-        {
-            _singleton = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+        base.Awake();
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        SceneLoader.SceneLoaded += OnSceneLoaded;
+        base.OnEnable();
         SimpleJump.SimpleJumpStarted += OnSimpleJumpStarted;
         LongSuperJump.LongJumpStarted += OnLongJumpStarted;
         DashSuperJump.DashJumpStarted += OnDashJumpStarted;
         DashSuperJump.DashJumpDashed += OnDashJumpDashed;
     }
 
-    private void OnSceneLoaded(string name)
+    protected override void OnSceneLoaded(string name)
     {
-        _playerAudioSource = FindObjectOfType<PlayerAudioSource>()?.GetComponent<AudioSource>();
-        if(_playerAudioSource == null && name != "MenuScene")
-        {
-            Debug.LogWarning("PlayerAudioSource not found on scene");
-        }
+        base.OnSceneLoaded(name);
     }
 
     private void OnSimpleJumpStarted(float forcePercent, float duration)
@@ -102,39 +84,24 @@ public class PlayerSoundHandler : MonoBehaviour
 
     private void OnLongJumpStarted(float duration)
     {
-        PlayClip(_longJumpSound, volumeScale: _longJumpVolumeScale);
+        PlayOneShot(_longJumpSound, volumeScale: _longJumpVolumeScale);
     }
 
     private void OnDashJumpStarted()
     {
-        PlayClip(_dashJumpStartedSound, volumeScale: _dashJumpStartedVolumeScale);
+        PlayOneShot(_dashJumpStartedSound, volumeScale: _dashJumpStartedVolumeScale);
     }
 
     private void OnDashJumpDashed(float duration)
     {
-        PlayClip(_dashJumpDashedSound, 0.5f, _dashJumpDashedVolumeScale);
-        PlayClip(_dashJumpDashedSound2, 1f, _dashJumpDashedVolumeScale2);
-    }
-
-    private void PlayClip(AudioClip clip, float pitch = 1f, float volumeScale = 1f)
-    {
-        _playerAudioSource.pitch = pitch;
-        _playerAudioSource.PlayOneShot(clip, volumeScale);
+        PlayOneShot(_dashJumpDashedSound, 0.5f, _dashJumpDashedVolumeScale);
+        PlayOneShot(_dashJumpDashedSound2, 1f, _dashJumpDashedVolumeScale2);
     }
 
     private void PlayClipRandomPitch(AudioClip clip, float volumeScale = 1f)
     {
         float pitch = Random.Range(_minPitch, _maxPitch);
-        PlayClip(clip, pitch, volumeScale);
-    }
-
-    private void OnDisable()
-    {
-        SceneLoader.SceneLoaded -= OnSceneLoaded;
-        SimpleJump.SimpleJumpStarted -= OnSimpleJumpStarted;
-        LongSuperJump.LongJumpStarted -= OnLongJumpStarted;
-        DashSuperJump.DashJumpStarted -= OnDashJumpStarted;
-        DashSuperJump.DashJumpDashed -= OnDashJumpDashed;
+        PlayOneShot(clip, pitch, volumeScale);
     }
 
 }

@@ -3,24 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CheckpointHandler : MonoBehaviour
+public class CheckpointHandler : GameHandler<CheckpointHandler>
 {
-    private static CheckpointHandler _singleton;
 
     private static Checkpoint _lastCheckpoint;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (_singleton == null)
-        {
-            _singleton = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+        base.Awake();
     }
 
     private void OnEnable()

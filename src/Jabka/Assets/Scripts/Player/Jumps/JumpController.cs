@@ -6,11 +6,6 @@ using Zenject;
 [RequireComponent(typeof(Rigidbody))]
 public class JumpController : MonoBehaviour
 {
-    [SerializeField]
-    private float _minScreenHeightThreshold;
-    [SerializeField]
-    private float _maxScreenHeightThreshold;
-
     public static event System.Action<ScriptableJumpData> ForceChanged;
     public static event System.Action<ISuperJump> SuperJumpStarted;
     public static event System.Action<float, float> SimpleJumpCancelled;
@@ -59,7 +54,7 @@ public class JumpController : MonoBehaviour
     private void OnSwipeY(Vector2 delta)
     {
         //длина свайпа вниз в процентах от экрана, когда свайп сделан вниз delta приходит отрицательная
-        _currentForcePercent = CalculateForcePercent(-delta, _minScreenHeightThreshold, _maxScreenHeightThreshold);
+        _currentForcePercent = CalculateForcePercent(-delta);
 
         ForceChanged?.Invoke(GetSimpleJumpData(_currentForcePercent));
     }
@@ -75,17 +70,19 @@ public class JumpController : MonoBehaviour
         return scriptableJumpData;
     }
 
-    private float CalculateForcePercent(Vector3 delta, float minHeightTreshold, float maxHeightTreshold)
+    private float CalculateForcePercent(Vector3 delta)
     {
+        (float minPercent, float maxPercent) = SettingsHandler.GetVerticalSensetivityBounds(); 
+
         float deltaYPercent = delta.y / Screen.height;
 
-        if (deltaYPercent < minHeightTreshold)
+        if (deltaYPercent < minPercent)
         {
             return 0;
         }
         
-        deltaYPercent = Mathf.Clamp(deltaYPercent, minHeightTreshold, maxHeightTreshold);
-        float forcePercent = (deltaYPercent - minHeightTreshold) / (maxHeightTreshold - minHeightTreshold);
+        deltaYPercent = Mathf.Clamp(deltaYPercent, minPercent, maxPercent);
+        float forcePercent = (deltaYPercent - minPercent) / (maxPercent - minPercent);
         return forcePercent;
     }
 

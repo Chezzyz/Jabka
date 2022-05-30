@@ -1,4 +1,4 @@
-using System.Collections;
+using Lean.Touch;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +20,7 @@ public class RotationTutorial : BaseFingerTutorial
     private void OnEnable()
     {
         Construct(_canvasGroupSerializable, _animatorSerializable, _fadeDurationSerializable, _closeDurationSerializable);
-        InputHandler.FingerDown += OnFingerDown;
+        LeanTouch.OnFingerDown += OnFingerDown;
     }
 
     private void Start()
@@ -28,7 +28,7 @@ public class RotationTutorial : BaseFingerTutorial
         StartCoroutine(ShowTutorialAfterDelay(_delayToShowSerializable, _delayToCloseSerializable));
     }
 
-    private void OnFingerDown(Vector2 pos)
+    private void OnFingerDown(LeanFinger _)
     {
         if (_isAbleToClose)
         {
@@ -38,6 +38,6 @@ public class RotationTutorial : BaseFingerTutorial
 
     private void OnDisable()
     {
-        InputHandler.FingerDown -= OnFingerDown;
+        LeanTouch.OnFingerDown -= OnFingerDown;
     }
 }

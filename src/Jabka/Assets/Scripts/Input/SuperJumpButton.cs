@@ -102,8 +102,13 @@ public class SuperJumpButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public void OnPointerUp(PointerEventData eventData)
     {
         ((IPointerUpHandler)_parentWheel).OnPointerUp(eventData);
-        _currentImage.sprite = _defaultSprite;
-        if (_isClick && _isSelected && !_isLocked && eventData.hovered.Contains(gameObject))
+
+        if (!_isLocked)
+        {
+            _currentImage.sprite = _defaultSprite;
+        }
+        
+        if (_isClick && _isSelected && !_isLocked && !eventData.dragging)
         {
             SuperJumpButtonClicked?.Invoke();
         }

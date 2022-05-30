@@ -50,7 +50,7 @@ public class PlayerFX : MonoBehaviour
         InstantiateEffect(_dashCircles, transform.forward * 3, duration);
     }
 
-    private void OnJumpEnded()
+    private void OnJumpEnded(BaseJump _)
     {
         StartCoroutine(TurnOffTrail(_simpleJumpTrail, _simpleJumpTrail.time));
         StartCoroutine(TurnOffTrail(_poweredSimpleJumpTrail, _poweredSimpleJumpTrail.time));

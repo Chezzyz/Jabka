@@ -7,8 +7,6 @@ public class SuperJumpPicker : MonoBehaviour
     [SerializeField]
     private SuperJumpButton _defaultSuperJump;
 
-    public bool IsActive;
-
     private JumpController _jumpController;
 
     private void OnEnable()

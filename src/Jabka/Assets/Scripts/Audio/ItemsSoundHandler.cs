@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemsSoundHandler : MonoBehaviour
+public class ItemsSoundHandler : BaseAudioHandler<PlayerAudioSource>
 {
     [Header("Collectable Stage 1")]
     [SerializeField]
@@ -14,42 +14,39 @@ public class ItemsSoundHandler : MonoBehaviour
     [Range(0f, 1f)]
     private float _collectableSoundStage1Pitch;
 
-    private AudioSource _audioSource;
-    private static ItemsSoundHandler _singleton;
+    public static new ItemsSoundHandler Instance;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (_singleton == null)
-        {
-            _singleton = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        //Из-за конфликта с PlayerSoundHandler скрываем от GameHandler<>.Awake()
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
         }
+        else
+        {
+            Instance = this;
+        }
+
+        DontDestroyOnLoad(gameObject);
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         Collectable.Collected += OnCollected;
         Destination.Destinated += OnDestinated;
-        SceneLoader.SceneLoaded += OnSceneLoaded;
     }
 
-    private void OnSceneLoaded(string name)
+    protected override void OnSceneLoaded(string name)
     {
-        _audioSource = FindObjectOfType<PlayerAudioSource>()?.GetComponent<AudioSource>();
-        if (_audioSource == null && name != "MenuScene")
-        {
-            Debug.LogWarning("PlayerAudioSource not found on scene");
-        }
+        base.OnSceneLoaded(name);
     }
 
     private void OnCollected(Collectable _)
     {
-        PlayClip(_collectableSoundStage1, _collectableSoundStage1Pitch, _collectableSoundStage1VolumeScale);
+        PlayOneShot(_collectableSoundStage1, _collectableSoundStage1Pitch, _collectableSoundStage1VolumeScale);
     }
 
     private void OnDestinated(Destination _)
@@ -57,9 +54,4 @@ public class ItemsSoundHandler : MonoBehaviour
         OnCollected(null);
     }
 
-    private void PlayClip(AudioClip clip, float pitch = 1f, float volumeScale = 1f)
-    {
-        _audioSource.pitch = pitch;
-        _audioSource.PlayOneShot(clip, volumeScale);
-    }
 }

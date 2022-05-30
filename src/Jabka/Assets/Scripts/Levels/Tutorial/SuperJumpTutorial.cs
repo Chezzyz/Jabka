@@ -1,4 +1,4 @@
-using System.Collections;
+using Lean.Touch;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,15 +13,13 @@ public class SuperJumpTutorial : BaseFingerTutorial
     [SerializeField]
     private float _closeDurationSerializable;
     [SerializeField]
-    private float _delayToShowSerializable;
-    [SerializeField]
     private float _delayToCloseSerializable;
 
     private void OnEnable()
     {
         Construct(_canvasGroupSerializable, _animatorSerializable, _fadeDurationSerializable, _closeDurationSerializable);
         SuperJumpCollectable.SuperJumpCollected += OnSuperJumpCollected;
-        InputHandler.FingerDown += OnFingerDown;
+        LeanTouch.OnFingerDown += OnFingerDown;
     }
 
     private void OnSuperJumpCollected(SuperJumpCollectable jumpCollectable)
@@ -30,7 +28,7 @@ public class SuperJumpTutorial : BaseFingerTutorial
         StartCoroutine(AccessToEndAfterDelay(_delayToCloseSerializable));
     }
 
-    private void OnFingerDown(Vector2 pos)
+    private void OnFingerDown(LeanFinger _)
     {
         if (_isAbleToClose)
         {
@@ -41,6 +39,7 @@ public class SuperJumpTutorial : BaseFingerTutorial
     private void OnDisable()
     {
         SuperJumpCollectable.SuperJumpCollected -= OnSuperJumpCollected;
-        InputHandler.FingerDown -= OnFingerDown;
+        LeanTouch.OnFingerDown -= OnFingerDown;
     }
+
 }

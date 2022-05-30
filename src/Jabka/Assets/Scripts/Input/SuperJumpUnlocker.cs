@@ -60,7 +60,7 @@ public class SuperJumpUnlocker : MonoBehaviour
 
     private void UnlockLongSuperJump()
     {
-        _superJumpPicker.IsActive = true;
+        _superJumpPicker.gameObject.SetActive(true);
         SuperJumpUnlocked?.Invoke(_longSuperJump.GetComponent<ISuperJump>());
     }
 

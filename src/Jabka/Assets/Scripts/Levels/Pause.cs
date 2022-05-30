@@ -31,7 +31,7 @@ public class Pause : MonoBehaviour
 
     private void OnSceneLoaded(string _)
     {
-        PauseOff();
+        Time.timeScale = 1;
     }
 
     private void OnSceneLoadStarted(float _)
