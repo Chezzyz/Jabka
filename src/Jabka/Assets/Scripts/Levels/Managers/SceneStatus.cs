@@ -32,7 +32,6 @@ public class SceneStatus : BaseGameHandler<SceneStatus>
     protected override void Awake()
     {
         base.Awake();
-
         InitLevelMetaDataMap();
     }
 
@@ -60,6 +59,7 @@ public class SceneStatus : BaseGameHandler<SceneStatus>
     public static LevelMetaData GetCurrentMetaData()
     {
         return GetLevelMetaData(GetCurrentLevelNumber());
+        
     }
 
     private void InitLevelMetaDataMap()

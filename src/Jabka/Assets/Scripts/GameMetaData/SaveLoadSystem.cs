@@ -46,6 +46,7 @@ public class SaveLoadSystem : BaseGameHandler<SaveLoadSystem>
         SaveInts();
         SaveFloats();
         SaveBools();
+        SaveStrings();
         PlayerPrefs.Save();
     }
 
@@ -97,6 +98,22 @@ public class SaveLoadSystem : BaseGameHandler<SaveLoadSystem>
         PlayerPrefs.SetInt(key, value);
         Debug.Log($"Key {key} with value {value} saved");
     }
+
+    private void SaveStrings()
+    {
+        Dictionary<string, Func<string>> stringValuesMap = _gameStateMap.GetStringGameValuesMap();
+
+        stringValuesMap
+            .Keys
+            .ToList()
+            .ForEach(alias => SaveString(alias, stringValuesMap[alias].Invoke()));
+    }
+
+    private void SaveString(string key, string value)
+    {
+        PlayerPrefs.SetString(key, value);
+        Debug.Log($"Key {key} with value {value} saved");
+    }
     #endregion
 
     private void Load()
@@ -104,6 +121,7 @@ public class SaveLoadSystem : BaseGameHandler<SaveLoadSystem>
         LoadInts();
         LoadFloats();
         LoadBools();
+        LoadStrings();
         SaveLoaded?.Invoke();
     }
 
@@ -171,6 +189,30 @@ public class SaveLoadSystem : BaseGameHandler<SaveLoadSystem>
         if (PlayerPrefs.HasKey(key))
         {
             bool value = PlayerPrefs.GetInt(key) == 1;
+            action.Invoke(value);
+            Debug.Log($"Key {key} loaded with value {value}");
+        }
+        else
+        {
+            Debug.LogWarning($"Key {key} not found in PlayerPrefs");
+        }
+    }
+
+    private void LoadStrings()
+    {
+        Dictionary<string, Action<string>> stringMap = _gameStateMap.GetStringGameValueSettersMap();
+
+        stringMap
+            .Keys
+            .ToList()
+            .ForEach(alias => LoadString(alias, stringMap[alias]));
+    }
+
+    private void LoadString(string key, Action<string> action)
+    {
+        if (PlayerPrefs.HasKey(key))
+        {
+            string value = PlayerPrefs.GetString(key);
             action.Invoke(value);
             Debug.Log($"Key {key} loaded with value {value}");
         }

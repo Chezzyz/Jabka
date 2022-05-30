@@ -25,6 +25,8 @@ public class GameStateMap : ScriptableObject
 
     private static readonly string LEVEL_QUEST_PREFIX_ALIAS = "LevelQuest_";
 
+    private static readonly string LANGUAGE_ALIAS = "Language";
+
     public Dictionary<string, Func<int>> GetIntGameValuesMap()
     {
         return new Dictionary<string, Func<int>>
@@ -95,4 +97,19 @@ public class GameStateMap : ScriptableObject
         return boolsMap;
     }
 
+    public Dictionary<string, Func<string>> GetStringGameValuesMap()
+    {
+        return new Dictionary<string, Func<string>>
+        {
+            { LANGUAGE_ALIAS, () => LanguagePicker.Instance.GetLocale() }
+        };
+    }
+
+    public Dictionary<string, Action<string>> GetStringGameValueSettersMap()
+    {
+        return new Dictionary<string, Action<string>>
+        {
+            { LANGUAGE_ALIAS, (value) => LanguagePicker.Instance.SetLocale(value) }
+        };
+    }
 }

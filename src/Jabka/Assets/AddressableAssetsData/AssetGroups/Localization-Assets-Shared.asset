@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-Shared
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-Assets-Shared
+  m_Data:
+    m_SerializedData: []
+  m_GUID: d42737768cdf6e04b96ac363e528a76c
+  m_SerializeEntries:
+  - m_GUID: 692713ad22ba4824e971301a60c4a8c6
+    m_Address: Assets/Resources/New Table Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: 2554cf8dd8505c34b80530975512fbba
+    m_Address: Assets/Resources/Quests Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: a17afb8e3887479429a74baa162abe58
+    m_Address: Assets/Resources/Settings Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: f729ed9683b657f44958b3271e405f68
+    m_Address: Assets/Resources/Tutorials Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: 86ce8dc335d1e944aba41eee25dcee22
+    m_Address: Assets/Resources/Other Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 8292ba130da897d49b3b27c99a7f06de, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 231abbee8d21b0c4c8d6eecd1b5a74f1, type: 2}
+    - {fileID: 11400000, guid: 02a578cbcc71d4e458db1d588b689024, type: 2}

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 public class OnCompleteQuestEffect : MonoBehaviour
 {
@@ -31,6 +33,9 @@ public class OnCompleteQuestEffect : MonoBehaviour
     [SerializeField]
     private float _animationPunchScale;
 
+    [SerializeField]
+    private LocalizedStringTable _localizedStringTable;
+
     public static event System.Action ReadyForCompleteViewSetted;
 
     private readonly Color _defaultColor = Color.white;
@@ -46,7 +51,7 @@ public class OnCompleteQuestEffect : MonoBehaviour
         if (quest && SceneStatus.GetCurrentMetaData().GetLevelNumber() == quest.GetLevelNumber() && !(quest is CompleteQuest || quest is JumpCountQuest))
         {
             _taskGroup.SetActive(true);
-            _desctiption.text = quest.GetDescription();
+            _desctiption.text = _localizedStringTable.GetTable()[quest.GetId()].LocalizedValue;
             DoReadyForCompleteAnimation();
         }
     }

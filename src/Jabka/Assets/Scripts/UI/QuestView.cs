@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -12,6 +14,8 @@ public class QuestView : MonoBehaviour
     private Sprite _completedStarSprite;
     [SerializeField]
     private TextMeshProUGUI _desctiption;
+    [SerializeField]
+    private LocalizedStringTable _localizedTable;
     [SerializeField]
     private Image _currentImage;
     [SerializeField]
@@ -43,7 +47,8 @@ public class QuestView : MonoBehaviour
     public void SetUpView(BaseQuest quest)
     {
         _baseQuest = quest;
-        _desctiption.text = quest?.GetDescription();
+        _desctiption.text = _localizedTable.GetTable()[quest.GetId()].LocalizedValue;
+        
         if (quest && quest.IsCompleted())
         {
             SetCompletedView();
