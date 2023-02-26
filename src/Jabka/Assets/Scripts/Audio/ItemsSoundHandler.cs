@@ -1,57 +1,58 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemsSoundHandler : BaseAudioHandler<PlayerAudioSource>
+namespace Audio
 {
-    [Header("Collectable Stage 1")]
-    [SerializeField]
-    private AudioClip _collectableSoundStage1;
-    [SerializeField]
-    [Range(0f, 1f)]
-    private float _collectableSoundStage1VolumeScale;
-    [SerializeField]
-    [Range(0f, 1f)]
-    private float _collectableSoundStage1Pitch;
-
-    public static new ItemsSoundHandler Instance;
-
-    protected override void Awake()
+    public class ItemsSoundHandler : BaseAudioHandler<PlayerAudioSource>
     {
-        //Из-за конфликта с PlayerSoundHandler скрываем от GameHandler<>.Awake()
-        if (Instance != null)
+        [Header("Collectable Stage 1")]
+        [SerializeField]
+        private AudioClip _collectableSoundStage1;
+        [SerializeField]
+        [Range(0f, 1f)]
+        private float _collectableSoundStage1VolumeScale;
+        [SerializeField]
+        [Range(0f, 1f)]
+        private float _collectableSoundStage1Pitch;
+
+        public static new ItemsSoundHandler Instance;
+
+        protected override void Awake()
         {
-            Destroy(gameObject);
-            return;
+            //Из-за конфликта с PlayerSoundHandler скрываем от GameHandler<>.Awake()
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            else
+            {
+                Instance = this;
+            }
+
+            DontDestroyOnLoad(gameObject);
         }
-        else
+
+        protected override void OnEnable()
         {
-            Instance = this;
+            base.OnEnable();
+            Collectable.Collected += OnCollected;
+            Destination.Destinated += OnDestinated;
         }
 
-        DontDestroyOnLoad(gameObject);
-    }
+        protected override void OnSceneLoaded(string name)
+        {
+            base.OnSceneLoaded(name);
+        }
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        Collectable.Collected += OnCollected;
-        Destination.Destinated += OnDestinated;
-    }
+        private void OnCollected(Collectable _)
+        {
+            PlayOneShot(_collectableSoundStage1, _collectableSoundStage1Pitch, _collectableSoundStage1VolumeScale);
+        }
 
-    protected override void OnSceneLoaded(string name)
-    {
-        base.OnSceneLoaded(name);
-    }
+        private void OnDestinated(Destination _)
+        {
+            OnCollected(null);
+        }
 
-    private void OnCollected(Collectable _)
-    {
-        PlayOneShot(_collectableSoundStage1, _collectableSoundStage1Pitch, _collectableSoundStage1VolumeScale);
     }
-
-    private void OnDestinated(Destination _)
-    {
-        OnCollected(null);
-    }
-
 }

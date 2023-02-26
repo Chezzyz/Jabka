@@ -47,6 +47,10 @@ MonoBehaviour:
     m_Key: LEAVE_FEEDBACK
     m_Metadata:
       m_Items: []
+  - m_Id: 2360541593985024
+    m_Key: RESET
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

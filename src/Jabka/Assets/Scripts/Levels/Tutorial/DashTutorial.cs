@@ -38,11 +38,13 @@ public class DashTutorial : BaseFingerTutorial
 
     private IEnumerator SlowAndShowAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay);
-        Time.timeScale = _timeScale;
-        //Избавляемся от задержки чтобы timescale точно вернулся назад
         _isAbleToClose = true;
-        ShowTutorial();
+        yield return new WaitForSeconds(delay);
+        if (!_isShowed)
+        {
+            Time.timeScale = _timeScale;
+            ShowTutorial();
+        }
     }
 
     private void OnFingerDown(LeanFinger _)

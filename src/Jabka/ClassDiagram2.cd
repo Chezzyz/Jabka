@@ -1,0 +1,954 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AppMetrica" Collapsed="true">
+    <Position X="26" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAJQQCAAAQAAAAAAgAAAAgAABAIIYABAAAAACWg=</HashCode>
+      <FileName>Assets\AppMetrica\AppMetrica.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseYandexAppMetrica" Collapsed="true">
+    <Position X="6.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAgAAIAAQAghQAAAAAQAgEAEEAIAJAAgAIAgIAQAAAI=</HashCode>
+      <FileName>Assets\AppMetrica\BaseYandexAppMetrica.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="YandexAppMetricaAttribute" Collapsed="true">
+    <Position X="31.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAACAAAAAAAQAAAgCAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Assets\AppMetrica\Profile\YandexAppMetricaAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YandexAppMetricaBirthDateAttribute" Collapsed="true">
+    <Position X="33" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAgQAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\Profile\YandexAppMetricaBirthDateAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YandexAppMetricaBooleanAttribute" Collapsed="true">
+    <Position X="34.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAIAAAACAAAIAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\Profile\YandexAppMetricaBooleanAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YandexAppMetricaCounterAttribute" Collapsed="true">
+    <Position X="36.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAIAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\Profile\YandexAppMetricaCounterAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YandexAppMetricaGenderAttribute" Collapsed="true">
+    <Position X="27.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAIAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\Profile\YandexAppMetricaGenderAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YandexAppMetricaNameAttribute" Collapsed="true">
+    <Position X="29.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAIAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\Profile\YandexAppMetricaNameAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YandexAppMetricaNotificationsEnabledAttribute" Collapsed="true">
+    <Position X="31.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAIAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\Profile\YandexAppMetricaNotificationsEnabledAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YandexAppMetricaNumberAttribute" Collapsed="true">
+    <Position X="33" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAIAAAACAAAIAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\Profile\YandexAppMetricaNumberAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YandexAppMetricaStringAttribute" Collapsed="true">
+    <Position X="36.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAIAAAACAAAIAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\Profile\YandexAppMetricaStringAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YandexAppMetricaUserProfile" Collapsed="true">
+    <Position X="38.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAgAAAAAAAAAgAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\AppMetrica\Profile\YandexAppMetricaUserProfile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YandexAppMetricaAndroid" Collapsed="true">
+    <Position X="5.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAgAAIAAQAghQAIAAAYAgkAEEAQAIBAgAIAAIEQAAAI=</HashCode>
+      <FileName>Assets\AppMetrica\YandexAppMetricaAndroid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YandexAppMetricaExtensionsAndroid" Collapsed="true">
+    <Position X="26" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCAEAAQQAAAAAEAAAABAAAAAEAAAAAABAACACCgAABA=</HashCode>
+      <FileName>Assets\AppMetrica\YandexAppMetricaAndroid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YandexAppMetricaDeviceIDListenerAndroid" Collapsed="true">
+    <Position X="38.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABIAAAABAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\YandexAppMetricaAndroid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YandexAppMetricaDummy" Collapsed="true">
+    <Position X="7.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAgAAIAAQAghQAAAAAQAgEAEEAAAIAAgAIAAIAQAAAI=</HashCode>
+      <FileName>Assets\AppMetrica\YandexAppMetricaDummy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YandexAppMetricaErrorDetails" Collapsed="true">
+    <Position X="24.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAACAAAAgAEAAAAQAAAgAAAAAAACAAAIAAAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\YandexAppMetricaErrorDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YandexAppMetricaStackTraceItem" Collapsed="true">
+    <Position X="34.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAACSEAAAEAABAAAAAAAAAAAAAAAACAABBAAA=</HashCode>
+      <FileName>Assets\AppMetrica\YandexAppMetricaErrorDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CustomPlatformAnimation_Level5_1" Collapsed="true">
+    <Position X="36.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAEACgAAAAAAgAAAAAAABAAAAAAAAAAAAMAAAA=</HashCode>
+      <FileName>Assets\Models\Levels\Platforms\CustomAnimation\CustomPlatformAnimation_Level5_1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BackgroundAudioHandler" Collapsed="true">
+    <Position X="10.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIQACAQAAiBAAQgAAEAAIAAEAsAEACEA=</HashCode>
+      <FileName>Assets\Scripts\Audio\BackgroundAudioHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BackgroundAudioSource" Collapsed="true">
+    <Position X="27.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Audio\BackgroundAudioSource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseAudioHandler&lt;T&gt;" Collapsed="true">
+    <Position X="13.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAGAAAAAAAAAAAgAgAAAAACkA=</HashCode>
+      <FileName>Assets\Scripts\Audio\BaseAudioHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InterfaceAudioSource" Collapsed="true">
+    <Position X="38.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Audio\InterfaceAudioSource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InterfaceSoundHandler" Collapsed="true">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAgACIAAAAAAAAAQgCAAAAAAAIQACCEA=</HashCode>
+      <FileName>Assets\Scripts\Audio\InterfaceSoundHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemsSoundHandler" Collapsed="true">
+    <Position X="15" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAQAAAAAAAAACAAACAAAAIAAAAAAAQAAAEAAACEA=</HashCode>
+      <FileName>Assets\Scripts\Audio\ItemsSoundHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerAudioSource" Collapsed="true">
+    <Position X="24.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Audio\PlayerAudioSource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerSoundHandler" Collapsed="true">
+    <Position X="17.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQIAAAAAAAAAAkACQAIAMAEAIBAAAAAYAACQABAACEA=</HashCode>
+      <FileName>Assets\Scripts\Audio\PlayerSoundHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LevelOverview" Collapsed="true">
+    <Position X="36.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAYAABgAAAAAAAABAgAAAAEAAAIAAAgAAEACAE=</HashCode>
+      <FileName>Assets\Scripts\Camera\LevelOverview.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LevelOverviewData" Collapsed="true">
+    <Position X="38.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Camera\LevelOverviewData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VirtualCameraController" Collapsed="true">
+    <Position X="36.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAIAAAAAAAACAQ=</HashCode>
+      <FileName>Assets\Scripts\Camera\VirtualCameraController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WinCamera" Collapsed="true">
+    <Position X="26" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAIAAAAAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\Camera\WinCamera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppMetricaEvents" Collapsed="true">
+    <Position X="6" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAJAAAAAAAAAAAQCIAAAgAAABAIQAAAAAAACEQ=</HashCode>
+      <FileName>Assets\Scripts\DevTools\AppMetricaEvents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimeScaler" Collapsed="true">
+    <Position X="29.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\DevTools\TimeScaler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Blit" Collapsed="true">
+    <Position X="29.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAgAAAAAAAAACAQEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\FX\Blit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerFX" Collapsed="true">
+    <Position X="29.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEABAAAAAAAAAAAAIAAAQEAAAFAAAAFIAAAAgAAACAA=</HashCode>
+      <FileName>Assets\Scripts\FX\PlayerFX.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScreenFX" Collapsed="true">
+    <Position X="31.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAIAAAAACIAAAAAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\FX\ScreenFX.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VirtualCameraFX" Collapsed="true">
+    <Position X="38.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAQAAAAAAAAQAAAAgAIBAAgIAIAAAAAEAADEA=</HashCode>
+      <FileName>Assets\Scripts\FX\VirtualCameraFX.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WinParticles" Collapsed="true">
+    <Position X="27.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAgAAAAAIAAAAAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\FX\WinParticles.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameCurves" Collapsed="true">
+    <Position X="27.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACEAAAAAAAAQAAAAAAAgAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GameMetaData\GameCurves.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameStateMap" Collapsed="true">
+    <Position X="29.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAgAABAMAAAABAAAEFAAAAAAgAAAAIAQAgFFAAAAI=</HashCode>
+      <FileName>Assets\Scripts\GameMetaData\GameStateMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LevelMetaData" Collapsed="true">
+    <Position X="33" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAABAAAgAAACAAAAIAAAAAAAAgAQAAAAIQAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\GameMetaData\LevelMetaData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LevelMetaDatas" Collapsed="true">
+    <Position X="34.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GameMetaData\LevelMetaDatas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProgressData" Collapsed="true">
+    <Position X="38.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABCBEAAAAAAAAAAAAABAAAAAAAAAAAABEAAAAgAABA=</HashCode>
+      <FileName>Assets\Scripts\GameMetaData\ProgressData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SaveLoadSystem" Collapsed="true">
+    <Position X="8.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgJAAACIAAAACAGHAQAABRgAYAAACAAAgIABBCEA=</HashCode>
+      <FileName>Assets\Scripts\GameMetaData\SaveLoadSystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerAnimation" Collapsed="true">
+    <Position X="36.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GameplayView\PlayerAnimation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Trajectory" Collapsed="true">
+    <Position X="31.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAQgAAAEAAABAAAIAAABACYABKAQgABSAA=</HashCode>
+      <FileName>Assets\Scripts\GameplayView\Trajectory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrajectoryAnimation" Collapsed="true">
+    <Position X="33" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAABAAAAIAAAAAAAADAA=</HashCode>
+      <FileName>Assets\Scripts\GameplayView\TrajectoryAnimation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WinWindowView" Collapsed="true">
+    <Position X="29.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQCAAAAAAAAAEAAAAAAAAARAgAAIAAIAAAAARAACAA=</HashCode>
+      <FileName>Assets\Scripts\GameplayView\WinWindowView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExitHandler" Collapsed="true">
+    <Position X="24.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAABAAAAACAAAAAAAAAAAAAAAIAAAAQAAACAA=</HashCode>
+      <FileName>Assets\Scripts\Input\ExitHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputHandler" Collapsed="true">
+    <Position X="36.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEIAAASgAAAAAABAAASBgAgAAAIAAAAAAACCAA=</HashCode>
+      <FileName>Assets\Scripts\Input\InputHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerCamera" Collapsed="true">
+    <Position X="26" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgBAAAQAAAAgAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Input\PlayerCamera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SuperJumpButton" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="38.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAiAKAAgBCAIBAQAAIBAAADBAIABAgAIwAAIQkAACKA=</HashCode>
+      <FileName>Assets\Scripts\Input\SuperJumpButton.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SuperJumpPicker" Collapsed="true">
+    <Position X="24.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAASAAIAAAAAAAAAAAAAAAAAAIAAAAAAAACIA=</HashCode>
+      <FileName>Assets\Scripts\Input\SuperJumpPicker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SuperJumpUnlocker" Collapsed="true">
+    <Position X="27.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAIAAAAAACAAQAQAAAAAAAAAIAAAAASIAAAEAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\Input\SuperJumpUnlocker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DevToolsInstaller" Collapsed="true">
+    <Position X="38.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAgAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Installers\DevToolsInstaller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LevelInstaller" Collapsed="true">
+    <Position X="31.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Installers\LevelInstaller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerData" Collapsed="true">
+    <Position X="27.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Installers\PlayerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerInstaller" Collapsed="true">
+    <Position X="31.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAABAAAAACEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Installers\PlayerInstaller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Checkpoint" Collapsed="true">
+    <Position X="31.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAIAgCAMAgAMAAEACAAAAAAYQgIgAAAACQA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Checkpoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FallZone" Collapsed="true">
+    <Position X="26" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gEQAAAAAAAAAgAAAAAAAAAAAAAAQAIAAAAIAAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\FallZone.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseGameHandler&lt;T&gt;" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Managers\BaseGameHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CheckpointHandler" Collapsed="true">
+    <Position X="21.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgIAAAAAAAAAAAAgAAAAAAAAAAQAAAAAAAACEA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Managers\CheckpointHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReloadOnDead" Collapsed="true">
+    <Position X="26" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACEAAAAAAAAAAAAAAAIAAAAAQAJAAAAAAAACAQ=</HashCode>
+      <FileName>Assets\Scripts\Levels\Managers\ReloadOnDead.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SceneLoader" Collapsed="true">
+    <Position X="27.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAECAACACBQAAAQAQQAYQAAAAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Managers\SceneLoader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SceneStatus" Collapsed="true">
+    <Position X="1.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYKAAAAAAAAAAAGAAABAAAAgAQAgAAAAgACAgBACEA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Managers\SceneStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SettingsHandler" Collapsed="true">
+    <Position X="3.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BgARBABEEAgAAgBKADAAAzJXAgCAIAAEAGAAAAwJKEA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Managers\SettingsHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pause" Collapsed="true">
+    <Position X="34.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAgACAABAAACAAAAAAAAAAAAAAAIAAAAAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Pause.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseQuest" Collapsed="true">
+    <Position X="5.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAICIAPAAACAAgAAAJAIABAAAgIACAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Quests\BaseQuest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseQuestItem" Collapsed="true">
+    <Position X="4" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAABAI=</HashCode>
+      <FileName>Assets\Scripts\Levels\Quests\BaseQuestItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Collectable" Collapsed="true">
+    <Position X="3" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Quests\Collectables\Collectable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CollectableAnimator" Collapsed="true">
+    <Position X="33" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IECACAAEAKAAAAAAAAAAAAAgAAEBAAAoAAAAAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Quests\Collectables\CollectableAnimator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CollectablesQuest" Collapsed="true">
+    <Position X="7.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\Scripts\Levels\Quests\Collectables\CollectablesQuest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SuperJumpCollectable" Collapsed="true">
+    <Position X="5.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAQAAAAAAAAAAAAAAAAgAAAAAAAABAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Quests\Collectables\SuperJumpCollectable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CompletePlace" Collapsed="true">
+    <Position X="7.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Quests\Complete\CompletePlace.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CompleteQuest" Collapsed="true">
+    <Position X="9.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Quests\Complete\CompleteQuest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Destination" Collapsed="true">
+    <Position X="0.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Quests\Destination\Destination.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DestinationQuest" Collapsed="true">
+    <Position X="0.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Quests\Destination\DestinationQuest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DoSuperJumpQuest" Collapsed="true">
+    <Position X="3" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAACAAAAQAAAAgAAAQBIAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\Scripts\Levels\Quests\Special\DoSuperJumpQuest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JumpCountQuest" Collapsed="true">
+    <Position X="5.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAACAAAAAIAAAgAAAAAIAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\Scripts\Levels\Quests\Special\JumpCountQuest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseFingerTutorial" Collapsed="true">
+    <Position X="6.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEQAAAAAAAgAAAACAAAAABAAAAAAIAICAAAACABIA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Tutorial\BaseFingerTutorial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DashJumpTutorial" Collapsed="true">
+    <Position X="1" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAIAACCIAACABEACCAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Tutorial\DashJumpTutorial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DashTutorial" Collapsed="true">
+    <Position X="3.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAgAAAAAAAAAAAAIAAAAAIAACAIAACAJEACCCA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Tutorial\DashTutorial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JumpTutorial" Collapsed="true">
+    <Position X="5.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAIAACAIAACAJEACCAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Tutorial\JumpTutorial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RotationTutorial" Collapsed="true">
+    <Position X="7.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAAAAAAAAAAAAAAAAIAACAIAACABEACCAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Tutorial\RotationTutorial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SuperJumpTrajectoryTutorial" Collapsed="true">
+    <Position X="10" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAgAAAAAIAAAAIAACAJEACCAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Tutorial\SuperJumpTrajectoryTutorial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SuperJumpTutorial" Collapsed="true">
+    <Position X="12.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAIAAACIAACABEACCAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Tutorial\SuperJumpTutorial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Activable" Collapsed="true">
+    <Position X="24.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAACAI=</HashCode>
+      <FileName>Assets\Scripts\Platforms\Activable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenericPlatformMove" Collapsed="true">
+    <Position X="31.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAEASAAAAAABhCEAAAAABAAAACIAAAIAAAAGAA=</HashCode>
+      <FileName>Assets\Scripts\Platforms\GenericPlatformMove.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoveOnButton" Collapsed="true">
+    <Position X="27.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAgAAAAAEAAAAAABAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Platforms\MoveOnButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoveOnTouch" Collapsed="true">
+    <Position X="29.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Platforms\MoveOnTouch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerParenting" Collapsed="true">
+    <Position X="33" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Platforms\PlayerParenting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseJump" Collapsed="true">
+    <Position X="13" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAgAIAAAgAAAIEgAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Assets\Scripts\Player\Jumps\BaseJump.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DashSuperJump" Collapsed="true">
+    <Position X="15.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAEAAACgBIQAIIAAAACAIAAAKIAAIAAEgQCBA=</HashCode>
+      <FileName>Assets\Scripts\Player\Jumps\DashSuperJump.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="JumpController" Collapsed="true">
+    <Position X="29.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QggAAIAAAAIEgAAAAAAAAAACAAIAAAAIAQIAAABBiAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Jumps\JumpController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DashJumpData" Collapsed="true">
+    <Position X="0.5" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAQUAAAAAACAAAAhAABIAAAAAIAAAAAAAAABEABAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Jumps\JumpDatas\DashJumpData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScriptableJumpData" Collapsed="true">
+    <Position X="1.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Assets\Scripts\Player\Jumps\JumpDatas\ScriptableJumpData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleJumpData" Collapsed="true">
+    <Position X="2.75" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAIAAAAAACAABAABAAgAAIAAAACAAAgAIASAAAIEAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Jumps\JumpDatas\SimpleJumpData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LongSuperJump" Collapsed="true">
+    <Position X="10.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAACAAAAAAAACAAAAAIAAAAAAAAAABA=</HashCode>
+      <FileName>Assets\Scripts\Player\Jumps\LongSuperJump.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SimpleJump" Collapsed="true">
+    <Position X="13" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAIAAAAAAAAAAgEAAAAAAAACAAAAACAAQMAEAAAABA=</HashCode>
+      <FileName>Assets\Scripts\Player\Jumps\SimpleJump.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerAnimations" Collapsed="true">
+    <Position X="38.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAACAAAAAAAAAIBAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\Player\PlayerAnimations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerRotation" Collapsed="true">
+    <Position X="34.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAkAQAAAAAAAAAEAQAAAAIAAIAAAACCAA=</HashCode>
+      <FileName>Assets\Scripts\Player\PlayerRotation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerTransformController" Collapsed="true">
+    <Position X="36.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIEACCEAAYAAAAAABMAAAAAAlkIAAAACSQACAA=</HashCode>
+      <FileName>Assets\Scripts\Player\PlayerTransformController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CollectableCountHandler" Collapsed="true">
+    <Position X="34.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IgAAAIAAACAAEAAAAAAAAAQACAAAAAEIAAAAAAAACAQ=</HashCode>
+      <FileName>Assets\Scripts\UI\CollectableCountHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HorizontalSensSlider" Collapsed="true">
+    <Position X="33" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\HorizontalSensSlider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HUDHandler" Collapsed="true">
+    <Position X="34.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAIAACQAAAAAAAAAAAAAgAAAAAIAAAAAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\UI\HUDHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InvertedMaskImage" Collapsed="true">
+    <Position X="24.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\InvertedMaskImage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LanguagePicker" Collapsed="true">
+    <Position X="19.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQDAhEQAACAAAAAAAAAAAAAACAAgAAAAAAAAAACQAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\LanguagePicker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LevelPreparation" Collapsed="true">
+    <Position X="24.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAUgAEIAAAAAAIAAAAAAAAAAAAAAAAIEAAAQAAACgA=</HashCode>
+      <FileName>Assets\Scripts\UI\LevelPreparation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LevelView" Collapsed="true">
+    <Position X="26" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAASiAADAAYAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\LevelView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicButton" Collapsed="true">
+    <Position X="31.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\MusicButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnCompleteQuestEffect" Collapsed="true">
+    <Position X="33" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AhAAAICAAAABIABGAAAQAAAEAAIAAIAIAAAIoAAACCA=</HashCode>
+      <FileName>Assets\Scripts\UI\OnCompleteQuestEffect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuestView" Collapsed="true">
+    <Position X="24.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABIAAICAAAAhAAAGAAAAAAAIAQIAIIAIACGIIAAACGA=</HashCode>
+      <FileName>Assets\Scripts\UI\QuestView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SceneTransitionAnimator" Collapsed="true">
+    <Position X="29.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAAABABBBEACAAAAAAAAAAJAAAAAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\UI\SceneTransitionAnimator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StagePage" Collapsed="true">
+    <Position X="33" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\StagePage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StageView" Collapsed="true">
+    <Position X="34.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAEABKIEAAAAAAAgAIAQAggIAAAABAhgAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\UI\StageView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StarsCountHandler" Collapsed="true">
+    <Position X="36.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEACAAAAAAAAAAAAAAAAAAAAAIACAgAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\UI\StarsCountHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SuperJumpsWheel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAjAAAAAAChIAQBAIIBABAAAAiABABAASACAAAAiACA=</HashCode>
+      <FileName>Assets\Scripts\UI\SuperJumpsWheel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="VerticalSensSlider" Collapsed="true">
+    <Position X="34.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\VerticalSensSlider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VolumeButton" Collapsed="true">
+    <Position X="24.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\VolumeButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YMMJSONUtils.JObject" Collapsed="true">
+    <Position X="26" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IBoDgAAASARACBoEiAYQQRRAAggQIsKgAAGAABCQEAA=</HashCode>
+      <FileName>Assets\AppMetrica\YMMJSONUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YMMJSONUtils.JSONEncoder" Collapsed="true">
+    <Position X="27.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgBYgBABgCAIAAAAAAAAAAAAAAAAAAAEAAAIAAAg=</HashCode>
+      <FileName>Assets\AppMetrica\YMMJSONUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="YandexAppMetricaUserProfileUpdate" Collapsed="true">
+    <Position X="33" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIQAAAAAAAAAAAAAAAAAAAAiAAAAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\Profile\YandexAppMetricaUserProfileUpdate.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="YandexAppMetricaConfig" Collapsed="true">
+    <Position X="26" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAQQQAAAAAAAAIAgAQAAgCABAAAAAAAAAABEgA=</HashCode>
+      <FileName>Assets\AppMetrica\YandexAppMetricaConfig.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="YandexAppMetricaPreloadInfo" Collapsed="true">
+    <Position X="27.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\YandexAppMetricaConfig.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="YandexAppMetricaRevenue" Collapsed="true">
+    <Position X="31.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EEAAAAAAAQAAAAAAAAAQAAAACAAAAAAAACAAgAAAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\YandexAppMetricaRevenue.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="YandexAppMetricaReceipt" Collapsed="true">
+    <Position X="29.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAABAAAAAAAAAAAAE=</HashCode>
+      <FileName>Assets\AppMetrica\YandexAppMetricaRevenue.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="JumpData" Collapsed="true">
+    <Position X="24.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAACAAAAAACAAABAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\Player\Jumps\JumpDatas\ScriptableJumpData.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="IYandexAppMetrica" Collapsed="true">
+    <Position X="26" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAgAAIAAQAghQAAAAAQAgEAEEAAAJAAgAIAgIAQAAAI=</HashCode>
+      <FileName>Assets\AppMetrica\IYandexAppMetrica.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ISuperJump" Collapsed="true">
+    <Position X="24.25" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAIAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Jumps\ISuperJump.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="YandexAppMetricaRequestDeviceIDError" Collapsed="true">
+    <Position X="29.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABACAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\YandexAppMetricaError.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="YandexAppMetricaRequestTrackingStatus" Collapsed="true">
+    <Position X="31.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAQAAQAAAAAAAAAAAIAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\YandexAppMetricaRequestTrackingStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="YMMJSONUtils.JObjectKind" Collapsed="true">
+    <Position X="27.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAACAAgQEAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\YMMJSONUtils.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="YMMJSONUtils.IntegerSize" Collapsed="true">
+    <Position X="26" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QgAAAAAAIAAAAAABAAAAAAAAIAAAAAAAEEAAAAAAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\YMMJSONUtils.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="YMMJSONUtils.FloatSize" Collapsed="true">
+    <Position X="24.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\YMMJSONUtils.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="ConfigUpdateHandler" Collapsed="true">
+    <Position X="24.25" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\AppMetrica\IYandexAppMetrica.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

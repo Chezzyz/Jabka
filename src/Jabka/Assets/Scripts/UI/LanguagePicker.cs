@@ -16,9 +16,9 @@ public class LanguagePicker : BaseGameHandler<LanguagePicker>
     private Locale _enLocale;
 
     [SerializeField]
-    private Button _ruButton;
+    private List<Button> _ruButtons;
     [SerializeField]
-    private Button _enButton;
+    private List<Button> _enButtons;
 
     private bool _fromSave;
     
@@ -26,22 +26,22 @@ public class LanguagePicker : BaseGameHandler<LanguagePicker>
     {
         if (_fromSave)
         {
-            _languageCanvas.gameObject.SetActive(false);
+            _languageCanvas?.gameObject.SetActive(false);
         }
-        _ruButton.onClick.AddListener(OnRuButtonClicked);
-        _enButton.onClick.AddListener(OnEnButtonClicked);
+        _ruButtons.ForEach(button => button.onClick.AddListener(OnRuButtonClicked));
+        _enButtons.ForEach(button => button.onClick.AddListener(OnEnButtonClicked));
     }
 
     private void OnRuButtonClicked()
     {
         SetLocale(_ruLocale);
-        _languageCanvas.gameObject.SetActive(false);
+        _languageCanvas?.gameObject.SetActive(false);
     }
 
     private void OnEnButtonClicked()
     {
         SetLocale(_enLocale);
-        _languageCanvas.gameObject.SetActive(false);
+        _languageCanvas?.gameObject.SetActive(false);
     }
 
     private void SetLocale(Locale locale)
@@ -49,7 +49,7 @@ public class LanguagePicker : BaseGameHandler<LanguagePicker>
         LocalizationSettings.SelectedLocale = locale;
     }
 
-    public void SetLocale(string locale)
+    public void SetLocaleFromSave(string locale)
     {
         if(locale == "Russian (ru)")
         {
@@ -64,6 +64,6 @@ public class LanguagePicker : BaseGameHandler<LanguagePicker>
 
     public string GetLocale()
     {
-        return LocalizationSettings.SelectedLocale.LocaleName;
+        return LocalizationSettings.SelectedLocale.name;
     }
 }

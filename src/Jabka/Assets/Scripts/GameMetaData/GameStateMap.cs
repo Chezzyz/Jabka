@@ -109,7 +109,7 @@ public class GameStateMap : ScriptableObject
     {
         return new Dictionary<string, Action<string>>
         {
-            { LANGUAGE_ALIAS, (value) => LanguagePicker.Instance.SetLocale(value) }
+            { LANGUAGE_ALIAS, (value) => LanguagePicker.Instance.SetLocaleFromSave(value) }
         };
     }
 }

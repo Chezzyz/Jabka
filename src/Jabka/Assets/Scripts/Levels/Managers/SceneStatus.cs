@@ -80,7 +80,7 @@ public class SceneStatus : BaseGameHandler<SceneStatus>
     }
 
     [Button]
-    private void ClearQuests()
+    public void ClearQuests()
     {
         _levelMetaDatas.GetLevelMetaDatas().ForEach(data => data.GetQuests().ForEach(quest => quest.SetIsCompleted(false)));
         Debug.Log("All quests reseted");

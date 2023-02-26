@@ -1,56 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseAudioHandler<T> : BaseGameHandler<BaseAudioHandler<T>> where T : MonoBehaviour
+namespace Audio
 {
-    protected AudioSource _audioSource;
-
-    protected float _volumeScale;
-
-    protected override void Awake()
+    public class BaseAudioHandler<T> : BaseGameHandler<BaseAudioHandler<T>> where T : MonoBehaviour
     {
-        base.Awake();
-    }
+        protected AudioSource _audioSource;
 
-    protected virtual void OnEnable()
-    {
-        SceneLoader.SceneLoaded += OnSceneLoaded;
-        SettingsHandler.VolumeLevelChanged += OnVolumeChanged;
-    }
+        protected float _volumeScale;
 
-    protected virtual void OnSceneLoaded(string name)
-    {
-        _audioSource = FindObjectOfType<T>()?.GetComponent<AudioSource>();
-        OnVolumeChanged(SettingsHandler.GetVolumeCoef());
-        if (_audioSource == null && name != "MenuScene")
+        protected virtual void OnEnable()
         {
-            Debug.LogWarning(typeof(T) + " not found on scene");
+            SceneLoader.SceneLoaded += OnSceneLoaded;
+            SettingsHandler.VolumeLevelChanged += OnVolumeChanged;
         }
-    }
 
-    protected virtual void OnVolumeChanged(float coef)
-    {
-        if (_audioSource != null && !(this is BackgroundAudioHandler && !SettingsHandler.MusicIsOn()))
+        protected virtual void OnSceneLoaded(string sceneName)
         {
-            _audioSource.volume = coef;
+            _audioSource = FindObjectOfType<T>()?.GetComponent<AudioSource>();
+            OnVolumeChanged(SettingsHandler.GetVolumeCoef());
+            if (_audioSource == null && sceneName != "MenuScene")
+            {
+                Debug.LogWarning(typeof(T) + " not found on scene");
+            }
         }
+
+        protected virtual void OnVolumeChanged(float coef)
+        {
+            if (_audioSource != null && !(this is BackgroundAudioHandler && !SettingsHandler.MusicIsOn()))
+            {
+                _audioSource.volume = coef;
+            }
+        }
+
+        protected virtual void PlayClip(AudioClip clip, float pitch = 1f, float volumeScale = 1f)
+        {
+            _audioSource.pitch = pitch;
+            _audioSource.volume = SettingsHandler.MusicIsOn() ? volumeScale * SettingsHandler.GetVolumeCoef() : 0;
+            _audioSource.clip = clip;
+            _audioSource.Play();
+
+            _volumeScale = volumeScale;
+        }
+
+        protected virtual void PlayOneShot(AudioClip clip, float pitch = 1f, float volumeScale = 1f)
+        {
+            _audioSource.pitch = pitch;
+            _audioSource.PlayOneShot(clip, volumeScale * SettingsHandler.GetVolumeCoef());
+        }
+
     }
-
-    protected virtual void PlayClip(AudioClip clip, float pitch = 1f, float volumeScale = 1f)
-    {
-        _audioSource.pitch = pitch;
-        _audioSource.volume = SettingsHandler.MusicIsOn() ? volumeScale * SettingsHandler.GetVolumeCoef() : 0;
-        _audioSource.clip = clip;
-        _audioSource.Play();
-
-        _volumeScale = volumeScale;
-    }
-
-    protected virtual void PlayOneShot(AudioClip clip, float pitch = 1f, float volumeScale = 1f)
-    {
-        _audioSource.pitch = pitch;
-        _audioSource.PlayOneShot(clip, volumeScale * SettingsHandler.GetVolumeCoef());
-    }
-
 }

@@ -11,6 +11,7 @@ public class GameCurves : ScriptableObject
 
     [SerializeField]
     private AnimationCurve _dashSimplePartJumpCurve;
+
     [SerializeField]
     private AnimationCurve _dashDashPartLengthJumpCurve;
 

@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 666368131072
-    m_Localized: Jump Sensetivity
+    m_Localized: Jump Sensitivity
     m_Metadata:
       m_Items: []
   - m_Id: 669912317952
-    m_Localized: Rotation Sensetivity
+    m_Localized: Rotation Sensitivity
     m_Metadata:
       m_Items: []
   - m_Id: 672034635776
@@ -48,6 +48,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2223079866368
     m_Localized: Leave Feedback
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2360541593985024
+    m_Localized: Reset
     m_Metadata:
       m_Items: []
   references:

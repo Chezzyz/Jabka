@@ -13,6 +13,8 @@ public abstract class BaseFingerTutorial : MonoBehaviour
 
     private float _closeDuration;
 
+    public static event System.Action<bool> TutorialStateChanged;
+
     protected bool _isAbleToClose;
 
     protected void Construct(CanvasGroup canvasGroup, Animator animator, float fadeDuration, float closeDuration)
@@ -45,5 +47,10 @@ public abstract class BaseFingerTutorial : MonoBehaviour
         yield return new WaitForSeconds(delay);
         ShowTutorial();
         StartCoroutine(AccessToEndAfterDelay(accessDelay));
+    }
+
+    protected void SendChangedStateEvent(bool value)
+    {
+        TutorialStateChanged?.Invoke(value);
     }
 }

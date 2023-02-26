@@ -1,23 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-
 
 [CreateAssetMenu(fileName = "JumpData", menuName = "ScriptableObjects/Jumps/JumpData", order = 1)]
 public class ScriptableJumpData : ScriptableObject
 {
     [SerializeField]
     protected JumpData _jumpData;
-    //это прикол
-    [SerializeField]
-    private AnimationCurve curve;
+    
     public JumpData GetJumpData()
     {
         return _jumpData;
     }
 }
 
-[System.Serializable]
+[Serializable]
 public struct JumpData
 {
     public float Height;
