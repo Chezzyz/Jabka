@@ -12,6 +12,8 @@ public class SuperJumpUnlocker : MonoBehaviour
     [SerializeField]
     private SuperJumpButton _dashSuperJump;
     [SerializeField]
+    private SuperJumpButton _highSuperJump;
+    [SerializeField]
     private SuperJumpPicker _superJumpPicker;
 
     public static event System.Action<ISuperJump> SuperJumpUnlocked;
@@ -38,8 +40,11 @@ public class SuperJumpUnlocker : MonoBehaviour
         }
         if ((stage == 1 && level > 4) || stage > 1)
         {
-            UnlockLongSuperJump();
             UnlockDashSuperJump();
+        }
+        if ((stage == 2 && level > 4) || stage > 2)
+        {
+            UnlockHighSuperJump();
         }
         SuperJumpsUnlocked?.Invoke();
     }
@@ -55,6 +60,9 @@ public class SuperJumpUnlocker : MonoBehaviour
             case "Dash":
                 UnlockDashSuperJump();
                 break;
+            case "High":
+                UnlockHighSuperJump();
+                break;
         }
     }
 
@@ -67,6 +75,11 @@ public class SuperJumpUnlocker : MonoBehaviour
     private void UnlockDashSuperJump()
     {
         SuperJumpUnlocked?.Invoke(_dashSuperJump.GetComponent<ISuperJump>());
+    }
+    
+    private void UnlockHighSuperJump()
+    {
+        SuperJumpUnlocked?.Invoke(_highSuperJump.GetComponent<ISuperJump>());
     }
 
     private void OnDisable()

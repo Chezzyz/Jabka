@@ -27,6 +27,10 @@ MonoBehaviour:
     m_Key: COMING_SOON
     m_Metadata:
       m_Items: []
+  - m_Id: 106073075931979776
+    m_Key: STAGE_2
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

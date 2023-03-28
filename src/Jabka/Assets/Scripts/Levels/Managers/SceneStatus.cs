@@ -26,7 +26,12 @@ public class SceneStatus : BaseGameHandler<SceneStatus>
         { "Level_1-2", 2 },
         { "Level_1-3", 3 },
         { "Level_1-4", 4 },
-        { "Level_1-5", 5 }
+        { "Level_1-5", 5 },
+        { "Level_2-1", 6 },
+        { "Level_2-2", 7 },
+        { "Level_2-3", 8 },
+        { "Level_2-4", 9 },
+        { "Level_2-5", 10 },
     };
 
     protected override void Awake()

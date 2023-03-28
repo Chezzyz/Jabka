@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e385b2ab6962d4dbf6d05b3fb828b2, type: 3}
+  m_Name: Level_2-1
+  m_EditorClassIdentifier: 
+  _stageNumber: 2
+  _levelNumber: 6
+  _levelName: 
+  _scene: Level_2-1
+  _levelQuests:
+  - {fileID: 11400000, guid: 3314c026fd2b2a549bf8160f9ff732ca, type: 2}
+  - {fileID: 11400000, guid: 2c4c8c60724d25f45b6d71377d678f69, type: 2}
+  - {fileID: 11400000, guid: 5ed77cb6763aa5a4dbc84f89afa29f01, type: 2}

@@ -97,7 +97,7 @@ public class StageView : MonoBehaviour
         int currentProgressLevel = _progressData.GetCurrentLevel();
         int stageNumber = pageIndex + 1;
 
-        for (int i = 0 + pageIndex * _countOfLevelsInStage; i < _countOfLevelsInStage + pageIndex * _countOfLevelsInStage; i++)
+        for (int i = 0; i < _countOfLevelsInStage; i++)
         {
             if (stageNumber > currentProgressStage)
             {
@@ -105,7 +105,7 @@ public class StageView : MonoBehaviour
             }
             if (stageNumber == currentProgressStage)
             {
-                int levelNumber = i + 1;
+                int levelNumber = i + pageIndex * _countOfLevelsInStage + 1;
                 if (levelNumber <= currentProgressLevel)
                 {
                     SetButtonState(stageButtons[i], true, levelNumber == currentProgressLevel ? _currentLevelSprite : _completedLevelSprite);

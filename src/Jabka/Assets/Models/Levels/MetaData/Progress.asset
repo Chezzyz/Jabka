@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfa753f05bb0784391f88aec152d743, type: 3}
   m_Name: Progress
   m_EditorClassIdentifier: 
-  _currentStage: 1
-  _currentLevel: 5
+  _currentStage: 2
+  _currentLevel: 9
   _levelMetaDatas: {fileID: 11400000, guid: 35c7e93762dfe594f8b254b89e8b1626, type: 2}

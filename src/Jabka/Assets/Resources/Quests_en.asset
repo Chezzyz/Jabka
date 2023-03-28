@@ -78,5 +78,53 @@ MonoBehaviour:
     m_Localized: Finish with 17 or less jumps
     m_Metadata:
       m_Items: []
+  - m_Id: 105764751638306816
+    m_Localized: Complete level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105764791500972032
+    m_Localized: Collect 7 lilies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105764819854467072
+    m_Localized: Use a teleport
+    m_Metadata:
+      m_Items: []
+  - m_Id: 106777424505118720
+    m_Localized: Complete level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 106777447783505920
+    m_Localized: Collect 5 lilies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 106777494512246784
+    m_Localized: Use a teleport
+    m_Metadata:
+      m_Items: []
+  - m_Id: 106867616582770688
+    m_Localized: Complete level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 106867645758349312
+    m_Localized: Collect 5 lilies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 106867663122767872
+    m_Localized: Use a teleport
+    m_Metadata:
+      m_Items: []
+  - m_Id: 108653779345776640
+    m_Localized: Complete level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 108653781795250176
+    m_Localized: Collect 5 lilies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 108653783309393920
+    m_Localized: Do a High Super Jump
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

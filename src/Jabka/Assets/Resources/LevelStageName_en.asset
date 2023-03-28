@@ -30,5 +30,9 @@ MonoBehaviour:
     m_Localized: More Coming Soon
     m_Metadata:
       m_Items: []
+  - m_Id: 106073075931979776
+    m_Localized: Space
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

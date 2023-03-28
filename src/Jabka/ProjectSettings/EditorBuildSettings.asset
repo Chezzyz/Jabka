@@ -23,6 +23,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage1/Level5/Level_1-5.unity
     guid: 07a914e8d0c0b0143870b6f72819e0b0
+  - enabled: 1
+    path: Assets/Scenes/Stage2/Level6/Level_2-1.unity
+    guid: a5f8a7b512264734bb9ab69ad42d9390
+  - enabled: 1
+    path: Assets/Scenes/Stage2/Level7/Level_2-2.unity
+    guid: 95ffef1b87e24d841a2e0da6472b3797
+  - enabled: 1
+    path: Assets/Scenes/Stage2/Level8/Level_2-3.unity
+    guid: 50e1a95dcd25adb4e817240814c7a81c
+  - enabled: 1
+    path: Assets/Scenes/Stage2/Level9/Level_2-4.unity
+    guid: b3a5058f94b4f5e4daff42f68b3a4407
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 8783458ada586a440b0a7c238c92c8e7, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: d3e31dea8ee5c50448aa4eb28828e108, type: 2}
