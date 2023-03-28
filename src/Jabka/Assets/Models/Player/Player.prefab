@@ -136,8 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e6438cfe2dfdc47a331240e3a0e676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minScreenHeightThreshold: 0.01
-  _maxScreenHeightThreshold: 0.3
 --- !u!114 &5805664738659154302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +153,7 @@ MonoBehaviour:
   _longJumpCircles: {fileID: 5087192215475051834}
   _jumpDust: {fileID: 198121459679799664, guid: 05f7c156786bd024e8da3bb1a4b8aa09, type: 3}
   _dashCircles: {fileID: 198701760564810788, guid: 2cfd9cf3b1dc4ad489f9d2a7574d2463, type: 3}
+  _highJump: {fileID: 19832912, guid: 96d8221c1bb8b404fb8cd7080f372017, type: 3}
 --- !u!114 &7893858288097892471
 MonoBehaviour:
   m_ObjectHideFlags: 0

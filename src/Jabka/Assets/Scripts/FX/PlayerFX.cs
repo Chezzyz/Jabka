@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Player.Jumps;
 using UnityEngine;
 
 public class PlayerFX : MonoBehaviour
@@ -19,12 +20,21 @@ public class PlayerFX : MonoBehaviour
     [SerializeField]
     private ParticleSystem _dashCircles;
 
+    [SerializeField] 
+    private ParticleSystem _highJump;
+    
     private void OnEnable()
     {
         SimpleJump.SimpleJumpStarted += OnSimpleJumpStarted;
         LongSuperJump.LongJumpStarted += OnLongJumpStarted;
         DashSuperJump.DashJumpDashed += OnDashed;
+        HighSuperJump.HighJumpStarted += OnHighJumpStarted; 
         BaseJump.JumpEnded += OnJumpEnded;
+    }
+
+    private void OnHighJumpStarted(float obj)
+    {
+        InstantiateEffect(_highJump, Vector3.zero, 2f);
     }
 
     private void OnLongJumpStarted(float obj)
@@ -74,6 +84,7 @@ public class PlayerFX : MonoBehaviour
         SimpleJump.SimpleJumpStarted -= OnSimpleJumpStarted;
         LongSuperJump.LongJumpStarted -= OnLongJumpStarted;
         DashSuperJump.DashJumpDashed -= OnDashed;
+        HighSuperJump.HighJumpStarted -= OnHighJumpStarted; 
         BaseJump.JumpEnded -= OnJumpEnded;
     }
 }
