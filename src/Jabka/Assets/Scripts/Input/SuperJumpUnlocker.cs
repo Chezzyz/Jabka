@@ -42,7 +42,7 @@ public class SuperJumpUnlocker : MonoBehaviour
         {
             UnlockDashSuperJump();
         }
-        if ((stage == 2 && level > 4) || stage > 2)
+        if ((stage == 2 && level > 9) || stage > 2)
         {
             UnlockHighSuperJump();
         }
